@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TabsPageRoutingModule } from './tabs-routing.module';
+import { VerifyEmailPageRoutingModule } from './verify-email-routing.module';
 
-import { TabsPage } from './tabs.page';
+import { VerifyEmailPage } from './verify-email.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TabsPageRoutingModule
+    VerifyEmailPageRoutingModule
   ],
-  declarations: [TabsPage]
+  declarations: [VerifyEmailPage]
 })
-export class TabsPageModule {}
+export class VerifyEmailPageModule {}

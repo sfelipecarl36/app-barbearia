@@ -7,6 +7,10 @@ import { environment } from '../environments/environment';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
+import { USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';
+import { SETTINGS as AUTH_SETTINGS } from '@angular/fire/compat/auth';
+import { PERSISTENCE } from '@angular/fire/compat/auth';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,7 +18,10 @@ import { AppRoutingModule } from './app-routing.module';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  {provide: AUTH_SETTINGS, useValue: { appVerificationDisabledForTesting: true } },
+  { provide: USE_DEVICE_LANGUAGE, useValue: true },
+  { provide: PERSISTENCE, useValue: 'session' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

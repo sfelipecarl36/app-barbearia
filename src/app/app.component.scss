@@ -1,1 +1,112 @@
 *{--ion-color-primary: #FB9400}
+
+ion-content{
+
+    .black2{
+        width: 100vw;
+        height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #181A20;
+        background-size: cover;
+        background-repeat: repeat-y;
+    }
+    
+    .black{
+        background-color: rgba(10, 10, 10, 0.8);
+        background-image: url('/assets/back.jpg');
+        background-size: cover;
+        background-repeat: repeat-y;
+        background-blend-mode: color;
+        width: 100vw;
+        height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        .entrar {
+            position: relative;
+            width: 80vw;
+        }
+        .logo{
+            background-image: url('/assets/logo.png');
+            background-repeat: no-repeat;
+            min-width: 220px;
+            min-height: 220px;
+            background-size: cover;
+            background-position: center;
+            margin: 30px 0px
+            
+        }
+        ion-button{
+          margin: 10px 0px;
+      }
+      ion-button:hover{
+        --ion-color-primary: #fff;
+        color: #FB9400;
+    }
+      ion-button.white{
+        --ion-color-primary: #fff;
+        color: #FB9400;
+    }
+    ion-button.white:hover{
+      --ion-color-primary: #FB9400;
+      color: #fff;
+  }
+    }
+    .spacebetween{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80vw;
+  
+        p{
+            color: #b3b3b3;
+            font-size: 12px;
+        }
+    }
+    h2{font-weight: 600;color: white;}
+    p.register{color:#0D99FF!important}
+    
+    .form{
+        width: 75vw;
+    }
+    
+    ion-input{
+        border-radius: 4px;
+        color:#000000;
+        background-color: #ffffff;
+        --padding-start: 15px;
+        max-height: 40px;
+        
+    }  
+  
+    ion-item > ion-label {
+        flex: content;
+    }
+    
+    ion-item {
+        --padding-start: 0px;
+        --padding-end: 0px;
+        --inner-padding-end: 0px;
+      }
+  
+      @media screen and (min-width: 768px) {
+        div.form{
+            width: 40vw;
+        }
+  
+        div.spacebetween{
+            width: 40vw;
+        }
+  
+        h2.entrar{
+            width: 40vw !important;
+        }
+    }
+    
+   
+  }

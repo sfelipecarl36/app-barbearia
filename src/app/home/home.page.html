@@ -1,10 +1,42 @@
-<ion-content scroll-y="false" [fullscreen]>
+<ion-content *ngIf="auth.user | async as user" scroll-y="false" fullscreen>
   <div class="black">
-    <div class="logo"></div>
-    <div class="form">
-      <ion-button expand="block" (click)="entrar()" shape="round" Strong>Entrar</ion-button>
-      <ion-button expand="block" (click)="register()" shape="round" Strong class="white">Cadastrar-se</ion-button>
+
+
+    <div class="containertop">
+      <ion-icon name="person"></ion-icon>
+    <h2 class="entrar">Olá, {{user.displayName}}</h2>
     </div>
+    <div class="containerslide">
+    <h3>Recomendados</h3>
+    <ion-slides pager="false" [options]="slideOpts" >
+        
+      <ion-slide class="sliderecomendado">
+        <div class="recomendado">
+          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
+            <div class="inforecomendado">
+              <h2>R$30,00</h2>
+              <h4>Corte Degradê</h4>
+            </div>
+            
+        </div>
+      </ion-slide>
+
+      <ion-slide class="sliderecomendado">
+        <div class="recomendado">
+          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
+            <div class="inforecomendado">
+              <h2>R$30,00</h2>
+              <h4>Corte Degradê</h4>
+            </div>
+            
+        </div>
+      </ion-slide>
+
+    </ion-slides>
+
+  </div>
+
+
     </div>
 
 </ion-content>
