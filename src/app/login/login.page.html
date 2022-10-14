@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" defaultHref="home" text=""></ion-back-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content scroll-y="false" fullscreen>
+  <div class="black">
+    <h2 class="entrar">Crie sua conta ou Entre</h2>
+    <div class="form">
+      <ion-item expand="full" lines="none" color="transparent">
+        <!--<ion-label position="stacked">E-mail</ion-label>-->
+        <ion-input type="email" placeholder="E-mail" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item lines="none" color="transparent">
+        <!--<ion-label position="stacked">Senha</ion-label>-->
+        <ion-input type="password" placeholder="Senha" [(ngModel)]="senha"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button expand="block"  shape="round" Strong>Login</ion-button>
+    </div>
+
+    <hr>
+    <div class="spacebetween">
+      <p (click)="alerta('Não Clicável !')">Esqueceu a senha?</p>
+      <p class="register" [routerLink]="['/register']">Cadastrar</p>
+    </div>
+  </div>
+
+</ion-content>

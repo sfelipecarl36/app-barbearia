@@ -1,0 +1,109 @@
+ion-toolbar{
+    --background: transparent !important;
+    --ion-color-base: transparent !important;
+    --border-style: none !important;
+}
+
+ion-content{
+    
+    .black{
+        background-color: #181A20;
+        background-size: cover;
+        background-repeat: repeat-y;
+        width: 100vw;
+        height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        
+        .entrar {
+            position: relative;
+            width: 80vw;
+        }
+        .logo{
+            background-image: url('/assets/logo.png');
+            background-repeat: no-repeat;
+            min-width: 220px;
+            min-height: 220px;
+            background-size: cover;
+            background-position: center;
+            margin: 30px 0px
+            
+        }
+        ion-button{
+          margin: 10px auto;
+          width: 50%;
+      }
+      ion-button:hover{
+        --ion-color-primary: #fff;
+        color: #FB9400;
+    }
+      ion-button.white{
+        --ion-color-primary: #fff;
+        color: #FB9400;
+    }
+    ion-button.white:hover{
+      --ion-color-primary: #FB9400;
+      color: #fff;
+  }
+    }
+    .spacebetween{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80vw;
+  
+        p{
+            color: #b3b3b3;
+            font-size: 12px;
+            margin: 0 2px;
+        }
+    }
+    h2{font-weight: Bold;color: white;font-size: 28px;}
+    p.register{color:#FB9400!important}
+    
+    .form{
+        width: 85vw;
+
+    }
+
+    hr{width: 70%; height: 1px;background-color: #353535}
+    
+    ion-input{
+        border-radius: 12px;
+        color:#9E9E9E;
+        background-color: #242731;
+        --padding-start: 15px;
+        max-height: 50px;
+        min-height: 50px;
+        margin-top: 17px;
+        
+    }  
+  
+    ion-item > ion-label {
+        flex: content;
+    }
+    
+    ion-item {
+        --padding-start: 0px;
+        --padding-end: 0px;
+        --inner-padding-end: 0px;
+      }
+  
+      @media screen and (min-width: 768px) {
+        div.form{
+            width: 40vw;
+        }
+  
+        div.spacebetween{
+            width: 40vw;
+        }
+  
+        h2.entrar{
+            width: 40vw !important;
+        }
+    }
+    
+   
+  }
