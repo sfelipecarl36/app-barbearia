@@ -1,7 +1,7 @@
 <ion-content *ngIf="auth.user | async as user" scroll-x="false" fullscreen>
   <div class="black">
 
-<div class="containertop">
+<div class="containertop" [routerLink]="['/perfil']">
     <div class="containertopchildren">
       <ion-icon class="topo" name="person"></ion-icon>
     <h2 class="entrar">Olá, {{user.displayName}}</h2>
@@ -46,9 +46,19 @@
             
         </div>
       </ion-slide>
+      <ion-slide class="sliderecomendado">
+        <div class="recomendado">
+          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
+            <div class="inforecomendado">
+              <h2>R$30,00</h2>
+              <h4>Corte Degradê</h4>
+            </div>
+            
+        </div>
+      </ion-slide>
 
     </ion-slides>
-
+    
     <ion-slides pager="false" [options]="slideOpts2" >
         
       <ion-slide class="servico">
@@ -88,7 +98,7 @@
 
   <div class="caixa">
     <div class="containertop">
-      <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"><p> </p></div>
+      <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
       <div class="info_upedido">
         <h6>Corte Simples</h6>
         <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>Guilherme Souza</p></div>
@@ -100,6 +110,14 @@
       </div>
       
     </div>
+  </div>
+
+  <hr><br><br>
+
+  <div class="container"><h5>Nossos Barbeiros</h5></div>
+  <div class="containerbarbeiros">
+  <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
+  <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
   </div>
 
     </div>

@@ -1,0 +1,126 @@
+<ion-content *ngIf="auth.user | async as user" scroll-x="false" fullscreen>
+  <div class="black">
+
+<div class="containertop">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="home" text=""></ion-back-button>
+    <h2 class="entrar">Novo Serviço</h2>
+    </div>
+    <!-- <div class="containertopchildren2">
+      <ion-icon name="notifications"></ion-icon>
+    </div> -->
+  </div>    
+
+  <hr><br><br>
+
+  <div class="container">
+    <h4>Escolha seu Barbeiro</h4>
+  </div>
+  <!-- <div class="container">
+    <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
+    <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
+    </div> -->
+
+    <div class="container">
+    <ion-slides pager="false" [options]="slideOpts">
+      <ion-radio-group allow-empty-selection="false" name="radio-group" #radioGroup>
+      
+      <ion-item color="none" lines="none">
+      <ion-slide class="profissional">
+        <ion-radio class="profissional" value="1" mode="md" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></ion-radio>
+        <p>Guilherme</p>
+      </ion-slide></ion-item>
+
+    <ion-item color="none" lines="none">
+      <ion-slide class="profissional">
+        <ion-radio class="profissional" value="2" mode="md" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></ion-radio>
+        <p>Guilherme</p>
+      </ion-slide></ion-item>
+
+    </ion-radio-group>
+    </ion-slides>
+  </div>
+
+  <hr><br><br>
+  <div class="container">
+  <h4>Selecione o Serviço:</h4>
+  </div>
+
+  <div class="container">
+  <ion-list>
+    <ion-item class="item item-trns text-center">
+      <ion-select interface="popover" placeholder="Serviço" (ionChange)="handleChange($event)"
+      (ionCancel)="pushLog('ionCancel fired')"
+      (ionDismiss)="pushLog('')">
+
+        <ion-select-option value="10">Corte Simples</ion-select-option>
+        <ion-select-option value="30">Degradê</ion-select-option>
+        <ion-select-option value="50">Desgracê</ion-select-option>
+        <ion-select-option value="35">Navalhado</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</div>
+<div class="container">
+  
+  <h4 *ngFor="let log of logs" style="margin-left: 3px;">{{ log }}</h4>
+</div>
+
+<div class="container">
+  <h4>Escolha o Período:</h4>
+  </div>
+
+  <div class="caixa">
+    <!-- <h5>Outubro 2022</h5> -->
+  
+  <!-- <ion-grid>
+    <ion-radio-group allow-empty-selection="false" name="radio-group" (ionChange)="radioGroupChange($event)" #radioGroup>
+
+    <ion-row>
+
+      <ion-col>
+        <ion-radio class="dia" value="1" mode="md">9</ion-radio>
+      </ion-col>
+
+      <ion-col>
+        <ion-radio class="dia" value="2" mode="md">10</ion-radio>
+      </ion-col>
+
+      <ion-col>
+        <ion-radio class="dia" value="3" mode="md">11</ion-radio>
+      </ion-col>
+
+      <ion-col>
+        <ion-radio class="dia" value="4" mode="md">12</ion-radio>
+      </ion-col>
+
+      <ion-col>
+        <ion-radio class="dia" value="5" mode="md">13</ion-radio>
+      </ion-col>
+
+      <ion-col>
+        <ion-radio class="dia" value="6" mode="md">14</ion-radio>
+      </ion-col>
+
+      <ion-col>
+        <ion-radio class="dia" value="7" mode="md">15</ion-radio>
+      </ion-col>
+    
+    </ion-row>
+
+</ion-radio-group>
+</ion-grid> -->
+
+<ion-datetime
+  value="2022-10-10T00:00:00"
+  min="2022-10-15T00:00:00"
+  max="2022-11-01T23:59:59"
+></ion-datetime>
+
+  </div>
+
+<ion-button expand="block" shape="round" Strong>Confirmar</ion-button>
+
+
+</div>
+</ion-content>

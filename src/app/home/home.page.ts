@@ -12,10 +12,10 @@ import firebase from 'firebase/compat/app';
 export class HomePage {
 
   slideOpts = {
-    slidesPerView: 1.055,
+    slidesPerView: 1.12,
     coverflowEffect: {
-      rotate: 0,
-      stretch: 0,
+      rotate: -50,
+      stretch: 1,
       depth: 0,
       modifier: 0,
       slideShadows: false,

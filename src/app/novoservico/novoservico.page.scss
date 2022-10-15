@@ -9,6 +9,14 @@ ion-icon{
     font-size: 22px;
 }
 
+ion-radio-group{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: none;
+}
+
 ion-content{
 
     .black{
@@ -16,17 +24,17 @@ ion-content{
         background-size: cover;
         width: 100vw;
         min-height: 100vh;
-        padding-top: 50px;
+        padding-top: 30px;
+        padding-bottom: 15px;
         display: flex;
         flex-direction: column;
         align-items: center;
         
         .caixa{
             width: 90vw;
-            padding: 15px;
+            padding: 8px;
             margin: 10px 0px;
             border-radius: 20px;
-            background: rgb(33,37,45);
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
         }
 
@@ -62,6 +70,20 @@ ion-content{
             width: 90%;
         }
 
+        ion-slide.profissional{
+            margin-inline: 0px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            p{
+                font-size: 13px;
+                margin:0px;
+                font-weight: 600;
+            }
+        }
+
         .containertop{
             display: flex;
             flex-direction: row;
@@ -90,6 +112,7 @@ ion-content{
             ion-icon.topo{
                 margin-right: 10px;
             }
+            
         }
 
         .containerslide{
@@ -114,20 +137,6 @@ ion-content{
                     transform: rotate(-90deg) !important;
                 }
             }
-
-            ion-slide.servico{
-                margin-inline: 0px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-
-                p{
-                    font-size: 13px;
-                    margin:8px;
-                    font-weight: 600;
-                }
-            }
             
             .recomendado{
                 background: rgb(251,148,0);
@@ -146,13 +155,13 @@ ion-content{
                 h2{
                     color: white;
                     margin: 2px 0px;
-                    font-size: 30px !important;
+                    font-size: 35px !important;
                     font-weight: 600;
                 }
 
                 h4{
                     color: black;
-                    font-size: 20px;
+                    font-size: 22px;
                     margin: 2px 0px;
                     font-weight: 600;
                 }
@@ -238,7 +247,6 @@ ion-content{
         align-items: center;
         justify-content: center;
         width: 90vw;
-        margin: 5px 0px;
   
         p{
             color: #b3b3b3;
@@ -248,7 +256,8 @@ ion-content{
     }
     h2{font-weight: 600;color: white;font-size: 20px;}
     h3{color: white;font-size: 24px;text-align: left;margin-bottom:15px;}
-    h5{color: white;font-size: 18px;margin-right: 4px;margin-left: 3px;font-weight: 500;}
+    h4{color: white;font-size: 14px;text-align: left;margin-bottom: 15px;margin-top:12px;font-weight: 500;}
+    h5{color: white;font-size: 18px;margin-right: 3px;font-weight: 600;}
     h6{color: white;font-size: 16px;text-align: left;margin-bottom:3px;margin-left: 10px;font-weight: 600;}
     p.register{color:#FB9400!important}
     
@@ -256,10 +265,55 @@ ion-content{
         width: 90vw;
     }
 
+    ion-item{
+        border-color: rgba(0, 0, 0, 0);
+	    background-color: rgba(0, 0, 0, 0);
+	    color: white; 
+    }
+
+    ion-select{
+        background-color: #262933;
+        width: 150px;
+        height: 100%;
+        padding: 0px 10px; 
+        --color:white;
+    }
+
+
+    ion-radio.profissional{
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        margin: 0px 10px;
+        margin-bottom: 10px;
+        background-size: cover;
+        --mark: none;
+        transition-duration:200ms;
+    }
+
+    ion-datetime{
+        background: none;
+    }
+
+    ion-radio.dia{
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin: 5px 10px;
+        background-size: cover;
+        --mark: none;
+        transition-duration:200ms;
+    }
+
+    ion-radio::part(mark){
+        display: none;
+    }
+
     .imgbarbeiro_c{
         border-radius: 50%;
         width: 80px;
         height: 80px;
+        margin: 15px 10px;
         background-size: cover;
     }
 
@@ -293,7 +347,7 @@ ion-content{
         }
     }
 
-    hr{width: 90%; height: 1px;background-color: #353535;margin: 15px 0px;z-index: 98;}
+    hr{width: 90%; height: 1px;background-color: #353535;margin: 10px 0px;z-index: 98;}
 
     ion-slide{
         margin-bottom: 10px;
