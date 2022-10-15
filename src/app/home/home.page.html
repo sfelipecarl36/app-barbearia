@@ -1,15 +1,30 @@
-<ion-content *ngIf="auth.user | async as user" scroll-y="false" fullscreen>
+<ion-content *ngIf="auth.user | async as user" scroll-x="false" fullscreen>
   <div class="black">
 
-
-    <div class="containertop">
-      <ion-icon name="person"></ion-icon>
+<div class="containertop">
+    <div class="containertopchildren">
+      <ion-icon class="topo" name="person"></ion-icon>
     <h2 class="entrar">Olá, {{user.displayName}}</h2>
     </div>
+    <div class="containertopchildren2">
+      <ion-icon name="notifications"></ion-icon>
+    </div>
+  </div>    
     <div class="containerslide">
     <h3>Recomendados</h3>
     <ion-slides pager="false" [options]="slideOpts" >
         
+      <ion-slide class="sliderecomendado">
+        <div class="recomendado">
+          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
+            <div class="inforecomendado">
+              <h2>R$30,00</h2>
+              <h4>Corte Degradê</h4>
+            </div>
+
+        </div>
+      </ion-slide>
+
       <ion-slide class="sliderecomendado">
         <div class="recomendado">
           <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
@@ -34,8 +49,58 @@
 
     </ion-slides>
 
+    <ion-slides pager="false" [options]="slideOpts2" >
+        
+      <ion-slide class="servico">
+        <div class="box" style="background-color: #33291C;">
+          <ion-icon name="cut"></ion-icon>
+        </div>
+        <p>Cortes</p>
+      </ion-slide>
+      <ion-slide class="servico">
+        <div class="box" style="background-color: #33291C;">
+          <ion-icon name="cut"></ion-icon>
+        </div>
+        <p>Cortes</p>
+      </ion-slide>
+      <ion-slide class="servico">
+        <div class="box" style="background-color: #33291C;">
+          <ion-icon name="cut"></ion-icon>
+        </div>
+        <p>Cortes</p>
+      </ion-slide>
+      <ion-slide class="servico">
+        <div class="box" style="background-color: #33291C;">
+          <ion-icon name="cut"></ion-icon>
+        </div>
+        <p>Cortes</p>
+      </ion-slide>
+      
+    </ion-slides>
   </div>
 
+  <hr><br><br>
+
+  <div class="spacebetween">
+    <h5>Último Agendamento</h5>
+    <ion-button expand="block" class="transp" shape="round" [routerLink]="['/novoservico']" Strong>Agendar Serviço</ion-button>
+  </div>
+
+  <div class="caixa">
+    <div class="containertop">
+      <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"><p> </p></div>
+      <div class="info_upedido">
+        <h6>Corte Simples</h6>
+        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>Guilherme Souza</p></div>
+        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>13/10/2022 09h00</p></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">Andamento</p></div>
+      </div>
+      <div class="containerlaranja">
+        
+      </div>
+      
+    </div>
+  </div>
 
     </div>
 

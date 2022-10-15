@@ -43,6 +43,7 @@ ion-content{
         }
         ion-button{
           margin: 10px 0px;
+          min-height: 30px;
       }
       ion-button:hover{
         --ion-color-primary: #fff;
@@ -72,7 +73,12 @@ ion-content{
     p.register{color:#0D99FF!important}
     
     .form{
-        width: 75vw;
+        width: 70vw;
+    }
+
+    img.barbeiro{
+        border-radius: 18px;
+        width: 95px;
     }
     
     ion-input{

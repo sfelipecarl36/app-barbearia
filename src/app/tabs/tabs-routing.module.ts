@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ChildrenOutletContexts } from '@angular/router';
+import { HomePage } from '../home/home.page';
 import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
