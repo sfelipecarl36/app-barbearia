@@ -19,11 +19,6 @@ ion-radio-group{
 
 ion-content{
 
-    #iconperfil{
-        font-size: 120px;
-        color: white;
-    }
-
     .black{
         background: linear-gradient(#181A20, #1e2027);
         background-size: cover;
@@ -37,13 +32,9 @@ ion-content{
         
         .caixa{
             width: 90vw;
-            padding: 15px;
+            padding: 8px;
             margin: 10px 0px;
             border-radius: 20px;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
         }
 
@@ -103,7 +94,6 @@ ion-content{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                width: 75%;
                 
             }
 
@@ -344,15 +334,15 @@ ion-content{
             justify-content: left;
             align-items: center;
             margin-left: 5px;
-            margin-top: 6px;
-            margin-bottom: 6px;
+            margin-top: 3px;
+            margin-bottom: 3px;
 
             ion-icon{
                 margin: 0px 5px;
-                font-size: 22px;
+                font-size: 18px;
             }
             p{
-                font-size: 15px;
+                font-size: 12px;
             }
         }
     }

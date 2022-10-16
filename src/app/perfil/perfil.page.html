@@ -1,11 +1,34 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content *ngIf="auth.user | async as user" scroll-x="false" fullscreen>
+  <div class="black">
 
-<ion-content>
-<h1>perfil</h1>
-<ion-button expand="block" shape="round" (click)="logout()" Strong>Sair</ion-button>
-<ion-button expand="block" shape="round" [routerLink]="['/home']" Strong> Home</ion-button>
+<div class="containertop">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="home" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Perfil</h2>
+    </div>
+    <div class="containertopchildren2" [routerLink]="['/novoservico']">
+      <ion-button expand="block" shape="round" color="danger" (click)="logout()" Strong>Sair</ion-button>
+    </div>
+  </div>    
+
+  <ion-icon id="iconperfil" name="person-circle-outline"></ion-icon>
+
+  <div class="caixa">
+      <div class="info_upedido">
+        <div class="info_upedido-dado"><ion-icon class="laranja" name="cut"></ion-icon><p>Serviço Favorito:</p></div>
+        <div class="info_upedido-dado"><ion-icon class="laranja" name="clipboard"></ion-icon><p>Histórico</p></div>
+        <div class="info_upedido-dado"><ion-icon class="laranja" name="person"></ion-icon><p>Barbeiro Favorito:</p></div>
+      </div>
+      <div class="info_upedido">
+        <div class="info_upedido-dado"><p>Guilherme Souza</p></div>
+        <div class="info_upedido-dado"><p>13/10/2022 09h00</p></div>
+        <div class="info_upedido-dado"><p>Kassio Chagas</p></div>
+      </div>
+    </div>
+
+    <ion-button expand="block" shape="round" Strong>Editar Perfil</ion-button>
+
+
+</div>
+
 </ion-content>

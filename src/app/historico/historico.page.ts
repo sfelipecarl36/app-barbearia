@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
+  selector: 'app-historico',
+  templateUrl: './historico.page.html',
+  styleUrls: ['./historico.page.scss'],
 })
-export class PerfilPage implements OnInit {
+export class HistoricoPage implements OnInit {
 
   constructor(
     private router: Router,
@@ -20,8 +20,4 @@ export class PerfilPage implements OnInit {
   ngOnInit() {
   }
 
-  logout() {
-    this.auth.signOut();
-    this.router.navigateByUrl('inicio');
-  }
 }

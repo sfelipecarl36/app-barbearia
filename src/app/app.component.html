@@ -1,16 +1,10 @@
-<ion-app *ngIf="auth.user | async as user; else showLogin">
+<ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
 
-<!-- <ion-content scroll-y="false" fullscreen *ngIf="auth.user | async as user; else showLogin">
-    <div class="black2">
-      <h2 class="entrar">Olá, {{ user.displayName }}</h2>
-      <div class="form">
-        <ion-button expand="block" shape="round" [routerLink]="['/perfil']" Strong>Perfil</ion-button>
-      </div>  
-      <hr>
-    </div>
-  </ion-content> -->
+<!-- <ion-app *ngIf="auth.user | async as user; else showLogin">
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>
 
 <ng-template #showLogin>
   <ion-content scroll-y="false" [fullscreen]>
@@ -18,8 +12,8 @@
       <div class="logo"></div>
       <div class="form">
         <ion-button expand="block" shape="round"  (click)="login()" Strong>Entrar com Google</ion-button>
-        <!-- <ion-button expand="block" (click)="register()" shape="round" Strong class="white">Cadastrar-se</ion-button> -->
+        <ion-button expand="block" [routerLink]="['/register']" shape="round" Strong class="white">Cadastrar-se</ion-button>
       </div>
       </div>
   </ion-content>
-</ng-template>
+</ng-template> -->

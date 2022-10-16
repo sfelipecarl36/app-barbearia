@@ -5,6 +5,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 
+import { Observable } from 'rxjs/Observable';
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { USE_DEVICE_LANGUAGE } from '@angular/fire/compat/auth';

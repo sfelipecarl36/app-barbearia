@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  selector: 'app-inicio',
+  templateUrl: './inicio.page.html',
+  styleUrls: ['./inicio.page.scss'],
 })
-export class AppComponent {
+export class InicioPage implements OnInit {
+
   constructor(public auth: AngularFireAuth) {}
   login() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
@@ -17,4 +19,9 @@ export class AppComponent {
   logout() {
     this.auth.signOut();
   }
+
+  ngOnInit() {
+  }
+  
+
 }

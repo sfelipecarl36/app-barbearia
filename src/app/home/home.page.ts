@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
@@ -191,16 +192,16 @@ export class HomePage {
     }
   }
 
+  servicos: any
+
   constructor(
     private router: Router,
-    public auth: AngularFireAuth
-  ) {}
-
-  entrar(){
-    this.router.navigateByUrl('login');
-  }
-  register(){
-    this.router.navigateByUrl('register');
+    public auth: AngularFireAuth,
+    public firestore: AngularFirestore
+  ) 
+  
+  {
+    this.servicos = firestore.collection('servicos').valueChanges();
   }
 
 }

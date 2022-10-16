@@ -14,8 +14,18 @@ const routes: Routes = [
       },
 
       {
+        path: 'historico',
+        loadChildren: () => import('../historico/historico.module').then( m => m.HistoricoPageModule)
+      },
+
+      {
         path: 'perfil',
         loadChildren: () => import('../perfil/perfil.module').then( m => m.PerfilPageModule)
+      },
+
+      {
+        path: 'historico',
+        loadChildren: () => import('../historico/historico.module').then( m => m.HistoricoPageModule)
       },
 
       {

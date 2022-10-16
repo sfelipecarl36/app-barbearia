@@ -1,10 +1,10 @@
-<ion-content *ngIf="auth.user | async as user" scroll-x="false" fullscreen>
+<ion-content scroll-x="false" fullscreen *ngIf="auth.user | async as user">
   <div class="black">
 
 <div class="containertop" [routerLink]="['/perfil']">
-    <div class="containertopchildren">
+    <div class="containertopchildren"> 
       <ion-icon class="topo" name="person"></ion-icon>
-    <h2 class="entrar">Olá, {{user.displayName}}</h2>
+    <h2 class="entrar">Olá, </h2>
     </div>
     <div class="containertopchildren2">
       <ion-icon name="notifications"></ion-icon>
@@ -14,46 +14,13 @@
     <h3>Recomendados</h3>
     <ion-slides pager="false" [options]="slideOpts" >
         
-      <ion-slide class="sliderecomendado">
+      <ion-slide class="sliderecomendado" *ngFor="let servico of servicos | async">
         <div class="recomendado">
-          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
+          <div class="imgrecomendado" style="background-image: url('{{servico.img}}');"></div>
             <div class="inforecomendado">
-              <h2>R$30,00</h2>
-              <h4>Corte Degradê</h4>
+              <h2>R${{servico.preco}}</h2>
+              <h4>{{servico.nome}}</h4>
             </div>
-
-        </div>
-      </ion-slide>
-
-      <ion-slide class="sliderecomendado">
-        <div class="recomendado">
-          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
-            <div class="inforecomendado">
-              <h2>R$30,00</h2>
-              <h4>Corte Degradê</h4>
-            </div>
-            
-        </div>
-      </ion-slide>
-
-      <ion-slide class="sliderecomendado">
-        <div class="recomendado">
-          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
-            <div class="inforecomendado">
-              <h2>R$30,00</h2>
-              <h4>Corte Degradê</h4>
-            </div>
-            
-        </div>
-      </ion-slide>
-      <ion-slide class="sliderecomendado">
-        <div class="recomendado">
-          <div class="imgrecomendado" style="background-image: url('https://3.bp.blogspot.com/-lbitStAJO2I/W2NLp83yuOI/AAAAAAABJIM/u95t9Mlhw6wSIoBcoXdAlAJGN_A6cNKpwCLcBGAs/s1600/corte-de-cabelo-masculino-degrade%2B%25282%2529.jpg');"></div>
-            <div class="inforecomendado">
-              <h2>R$30,00</h2>
-              <h4>Corte Degradê</h4>
-            </div>
-            
         </div>
       </ion-slide>
 
