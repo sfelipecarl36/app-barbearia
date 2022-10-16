@@ -1,10 +1,11 @@
-<ion-content scroll-x="false" fullscreen *ngIf="auth.user | async as user">
+<ion-content scroll-x="false" fullscreen *ngIf="auth.user | async as user; else showLogin">
   <div class="black">
 
 <div class="containertop" [routerLink]="['/perfil']">
     <div class="containertopchildren"> 
       <ion-icon class="topo" name="person"></ion-icon>
-    <h2 class="entrar">Olá, </h2>
+    <h2 class="entrar" *ngIf="auth.user | async as user">Olá, {{user.displayName}}</h2>
+    <!-- <h2 class="entrar" *ngFor="let userDado of users | async">Olá, {{userDado.nome}}</h2> -->
     </div>
     <div class="containertopchildren2">
       <ion-icon name="notifications"></ion-icon>
@@ -90,3 +91,8 @@
     </div>
 
 </ion-content>
+
+
+<ng-template #showLogin>
+  <!-- <meta http-equiv="refresh" content="0; url=inicio"> -->
+</ng-template>

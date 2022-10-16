@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
+import { Router } from "@angular/router";
+import { AuthenticationService } from "../shared/authentication-service";
+import { getAuth, UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
 
 @Component({
   selector: 'app-novoservico',
@@ -111,10 +111,20 @@ export class NovoservicoPage implements OnInit {
     this.pushLog('Valor: R$' + e.detail.value);
   }
 
+
   constructor(
     private router: Router,
-    public auth: AngularFireAuth
-  ) { }
+    public auth: AngularFireAuth,
+    private authService: AuthenticationService
+  ) { 
+    async function isUserAuthenticated() {
+      const auth = getAuth();
+      if (!(await this.user.auth.isAccessTokenAvailable())) {
+        // No token available, not logged in
+        this.router.navigateByUrl('inicio');
+      }
+    }
+  }
 
   ngOnInit() {
   }

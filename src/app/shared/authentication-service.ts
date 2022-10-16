@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import * as auth from 'firebase/auth';
-import { User } from './auth';
+import { User } from './user';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
@@ -60,8 +60,8 @@ export class AuthenticationService {
   }
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return user !== null && user.emailVerified !== false ? true : false;
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== 'null' ? true : false;
   }
   // Returns true when user's email is verified
   get isEmailVerified(): boolean {
@@ -78,7 +78,7 @@ export class AuthenticationService {
       .signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
       })
@@ -102,7 +102,6 @@ export class AuthenticationService {
       merge: true,
     });
   }
-  
   // Sign-out
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
@@ -110,5 +109,4 @@ export class AuthenticationService {
       this.router.navigate(['login']);
     });
   }
-  
 }

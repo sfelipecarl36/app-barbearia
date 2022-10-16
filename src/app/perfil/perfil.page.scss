@@ -19,9 +19,20 @@ ion-radio-group{
 
 ion-content{
 
+    #fotoperfil{
+        min-width: 100px;
+        min-height: 100px;
+        color: white;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border-radius: 50%;
+        margin: 10px 0px;
+    }
+
     #iconperfil{
         font-size: 120px;
         color: white;
+        margin: 10px 0px;
     }
 
     .black{

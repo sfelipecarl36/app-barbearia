@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthenticationService } from "../shared/authentication-service";
 import firebase from 'firebase/compat/app';
 
 @Component({
@@ -193,15 +194,26 @@ export class HomePage {
   }
 
   servicos: any
+  users: any
 
   constructor(
     private router: Router,
     public auth: AngularFireAuth,
+    private authService: AuthenticationService,
     public firestore: AngularFirestore
   ) 
   
   {
     this.servicos = firestore.collection('servicos').valueChanges();
+    this.users = firestore.collection('users'),ref => ref.
+    where('uid', '==', 'sbOalHFM0oekw86YZbsDjyXTt6j2').valueChanges().subscribe( x=> {
+      if(x.length===1){
+        console.log('deu certo');
+      }
+      else{
+        console.log('deu merda');
+      }
+    } )
   }
 
 }

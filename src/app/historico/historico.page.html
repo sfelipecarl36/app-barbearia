@@ -13,42 +13,17 @@
 
   <hr><br><br>
 
-  <div class="caixa">
+  <div class="caixa" *ngFor="let pedido of pedidos | async">
     <div class="containertop">
       <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
       <div class="info_upedido">
-        <h6>Corte Simples</h6>
-        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>Guilherme Souza</p></div>
-        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>13/10/2022 09h00</p></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">Andamento</p></div>
+        <h6>{{pedido.nome}}</h6>
+        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>{{pedido.profissional}}</p></div>
+        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{pedido.data}}</p></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{pedido.status}}</p></div>
       </div>
   </div>
 </div>
-
-  <div class="caixa">
-    <div class="containertop">
-      <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
-      <div class="info_upedido">
-        <h6>Corte Simples</h6>
-        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>Guilherme Souza</p></div>
-        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>13/10/2022 09h00</p></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">Andamento</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="caixa">
-    <div class="containertop">
-      <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
-      <div class="info_upedido">
-        <h6>Corte Simples</h6>
-        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>Guilherme Souza</p></div>
-        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>13/10/2022 09h00</p></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">Andamento</p></div>
-      </div>
-    </div>
-  </div>
-
 
 </div>
 </ion-content>

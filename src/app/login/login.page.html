@@ -10,14 +10,14 @@
     <div class="form">
       <ion-item expand="full" lines="none" color="transparent">
         <!--<ion-label position="stacked">E-mail</ion-label>-->
-        <ion-input type="email" placeholder="E-mail" [(ngModel)]="email"></ion-input>
+        <ion-input type="email" placeholder="E-mail" #email></ion-input>
       </ion-item>
       <ion-item lines="none" color="transparent">
         <!--<ion-label position="stacked">Senha</ion-label>-->
-        <ion-input type="password" placeholder="Senha" [(ngModel)]="senha"></ion-input>
+        <ion-input type="password" placeholder="Senha" #senha></ion-input>
       </ion-item>
       <br>
-      <ion-button expand="block" shape="round" (click)="logarEmail()" Strong>Login</ion-button>
+      <ion-button expand="block" type="submit" shape="round" (click)="logIn(email, senha)" Strong>Login</ion-button>
     </div>
 
     <hr>

@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication-service";
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FirebaseAuthentication } from '@ionic-native/firebase-authentication';
+
 import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
 
 
@@ -13,8 +13,6 @@ import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  email: string
-  senha: string
   error: any;
   constructor(
     public authService: AuthenticationService,
@@ -23,13 +21,14 @@ export class LoginPage implements OnInit {
   ) {}
   ngOnInit() {}
 
-  logIn(email, password) {
+  logarEmail(email, password) {
     this.authService.SignIn(email.value, password.value)
       .then((res) => {
         if(this.authService.isEmailVerified) {
-          this.router.navigate(['dashboard']);          
+          this.router.navigate(['home']);          
         } else {
-          window.alert('Email is not verified')
+          this.router.navigate(['home']);          
+          window.alert('Email is not verified');
           return false;
         }
       }).catch((error) => {
@@ -37,15 +36,24 @@ export class LoginPage implements OnInit {
       })
   }
 
+  logIn(email, password) {
+    this.authService.SignIn(email.value, password.value)
+      .then((res) => {
+      this.router.navigate(['home']);          
+      }).catch((error) => {
+        window.alert(error.message)
+      })
+  }
+
 
   
-  logarEmail(){
-  const auth = getAuth();
-  signInWithEmailAndPassword(auth, this.email, this.senha).then(() => {
-    this.router.navigate(['home']);
-  })
+  // logarEmail(){
+  // const auth = getAuth();
+  // this.authService.SignIn(this.email, this.senha).then(() => {
+  //   this.router.navigate(['home']);
+  // }).catch((error: any) => console.error(error));
 
-  }
+  // }
 
   // loginEmail() {
   //   this.firebaseAuthentication.signInWithEmailAndPassword(this.email, this.senha)

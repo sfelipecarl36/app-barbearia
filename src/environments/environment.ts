@@ -1,3 +1,5 @@
+import { initializeApp } from "firebase/app";
+
 export const environment = {
   production: true,
   firebase: { 
@@ -8,4 +10,4 @@ export const environment = {
     messagingSenderId: "640141645138",
     appId: "1:640141645138:web:f38bb14bddec8900fad68b"
  }
-};
+}

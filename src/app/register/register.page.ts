@@ -30,14 +30,6 @@ export class RegisterPage implements OnInit {
   ) { }
   ngOnInit(){}
 
-  signUp(email, password){
-      this.authService.RegisterUser(email.value, password.value)      
-      .then((res) => {
-        // Do something here
-      }).catch((error) => {
-        window.alert(error.message)
-      })
-  }
   SendVerificationMail() {
     return this.ngFireAuth.auth.currentUser.sendEmailVerification()
     .then(() => {
@@ -48,13 +40,21 @@ export class RegisterPage implements OnInit {
     registrarEmail(){
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, this.email, this.senha).then( newUser => {
-      this.afs.collection('dadosUsers').doc(newUser.user.uid).set({ nome: this.nome, celular: this.celular, ativo: true});
+      this.afs.collection('users').doc(newUser.user.uid).set({ nome: this.nome, celular: this.celular, foto: 'url',ativo: true, uid: newUser.user.uid});
       // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
       this.router.navigateByUrl('home');
     })
-
     }
     
-
+    signUp(email, password){
+      this.authService.RegisterUser(email.value, password.value)
+      .then((res) => {
+        // Do something here
+        this.authService.SendVerificationMail()
+        this.router.navigate(['verify-email']);
+      }).catch((error) => {
+        window.alert(error.message)
+      })
+  }
 
 }

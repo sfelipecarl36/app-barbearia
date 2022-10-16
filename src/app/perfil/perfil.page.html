@@ -1,4 +1,4 @@
-<ion-content *ngIf="auth.user | async as user" scroll-x="false" fullscreen>
+<ion-content scroll-x="false" fullscreen>
   <div class="black">
 
 <div class="containertop">
@@ -7,11 +7,11 @@
     <h2 class="entrar">Perfil</h2>
     </div>
     <div class="containertopchildren2" [routerLink]="['/novoservico']">
-      <ion-button expand="block" shape="round" color="danger" (click)="logout()" Strong>Sair</ion-button>
+      <ion-button expand="block" shape="round" color="danger" (click)="authService.SignOut()" Strong>Sair</ion-button>
     </div>
-  </div>    
-
-  <ion-icon id="iconperfil" name="person-circle-outline"></ion-icon>
+  </div>
+  <div id="fotoperfil"  *ngIf="auth.user | async as user" name="person-circle-outline" style="background-image: url({{user.photoURL}});"></div>
+  <!-- <ion-icon id="iconperfil"  *ngIf="auth.user | async as user" name="person-circle-outline"></ion-icon> -->
 
   <div class="caixa">
       <div class="info_upedido">
