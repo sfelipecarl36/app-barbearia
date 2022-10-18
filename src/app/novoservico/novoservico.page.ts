@@ -113,6 +113,7 @@ export class NovoservicoPage implements OnInit {
   }
 
   servicos: any
+  profissionais: any
 
   constructor(
     private router: Router,
@@ -122,6 +123,7 @@ export class NovoservicoPage implements OnInit {
   ) { 
 
     this.servicos = firestore.collection('servicos').valueChanges();
+    this.profissionais = firestore.collection('profissionais').valueChanges();
 
     async function isUserAuthenticated() {
       const auth = getAuth();

@@ -21,20 +21,14 @@
     <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
     </div> -->
 
-    <div class="container">
+    <div class="container" *ngFor="let profissional of profissionais | async">
     <ion-slides pager="false" [options]="slideOpts">
       <ion-radio-group allow-empty-selection="false" name="radio-group" #radioGroup>
       
       <ion-item color="none" lines="none">
       <ion-slide class="profissional">
-        <ion-radio class="profissional" value="1" mode="md" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></ion-radio>
-        <p>Guilherme</p>
-      </ion-slide></ion-item>
-
-    <ion-item color="none" lines="none">
-      <ion-slide class="profissional">
-        <ion-radio class="profissional" value="2" mode="md" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></ion-radio>
-        <p>Guilherme</p>
+        <ion-radio class="profissional" value="{{profissional.id}}" mode="md" style="background-image: url('{{profissional.img}}');"></ion-radio>
+        <p>{{profissional.nome}}</p>
       </ion-slide></ion-item>
 
     </ion-radio-group>

@@ -196,6 +196,7 @@ export class HomePage {
 
   servicos: any
   users: any
+  tiposervicos: any
 
   constructor(
     private router: Router,
@@ -213,10 +214,8 @@ export class HomePage {
       this.router.navigateByUrl('inicio');
     })
 
-    // this.users = firestore.collection('users', ref => ref.
-    // where('uid', '==', authService.userData.uid)).valueChanges();
-    
     this.servicos = firestore.collection('servicos').valueChanges();
+    this.tiposervicos = firestore.collection('tiposervicos').valueChanges();
 
   }
 

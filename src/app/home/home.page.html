@@ -1,10 +1,9 @@
-<ion-content scroll-x="false" fullscreen *ngIf="auth.user | async as user; else showLogin">
+<ion-content scroll-x="false" fullscreen>
   <div class="black">
 
 <div class="containertop" [routerLink]="['/perfil']">
     <div class="containertopchildren"> 
       <ion-icon class="topo" name="person"></ion-icon>
-    <!-- <h2 class="entrar" *ngIf="auth.user | async as user">Olá, {{user.displayName}}</h2> -->
     <h2 class="entrar" id="nome" *ngFor="let user of users | async">Olá, {{user.nome}}</h2>
     </div>
     <div class="containertopchildren2">
@@ -29,29 +28,11 @@
     
     <ion-slides pager="false" [options]="slideOpts2" >
         
-      <ion-slide class="servico">
+      <ion-slide class="servico" *ngFor="let tiposervico of tiposervicos | async">
         <div class="box" style="background-color: #33291C;">
-          <ion-icon name="cut"></ion-icon>
+          <ion-icon name="{{tiposervico.icon}}"></ion-icon>
         </div>
-        <p>Cortes</p>
-      </ion-slide>
-      <ion-slide class="servico">
-        <div class="box" style="background-color: #33291C;">
-          <ion-icon name="cut"></ion-icon>
-        </div>
-        <p>Cortes</p>
-      </ion-slide>
-      <ion-slide class="servico">
-        <div class="box" style="background-color: #33291C;">
-          <ion-icon name="cut"></ion-icon>
-        </div>
-        <p>Cortes</p>
-      </ion-slide>
-      <ion-slide class="servico">
-        <div class="box" style="background-color: #33291C;">
-          <ion-icon name="cut"></ion-icon>
-        </div>
-        <p>Cortes</p>
+        <p>{{tiposervico.nome}}</p>
       </ion-slide>
       
     </ion-slides>
