@@ -1,4 +1,4 @@
-<ion-content scroll-x="false" fullscreen>
+<ion-content scroll-x="false" *ngFor="let user of users | async" fullscreen>
   <div class="black">
 
 <div class="containertop">
@@ -6,22 +6,23 @@
       <ion-back-button defaultHref="home" mode="md" text=""></ion-back-button>
     <h2 class="entrar">Perfil</h2>
     </div>
-    <div class="containertopchildren2" [routerLink]="['/novoservico']">
-      <ion-button expand="block" shape="round" color="danger" (click)="authService.SignOut()" Strong>Sair</ion-button>
+    <div class="containertopchildren2">
+      <ion-button expand="block" shape="round" color="danger" (click)="logout()" Strong>Sair</ion-button>
     </div>
   </div>
-  <div id="fotoperfil"  *ngIf="auth.user | async as user" name="person-circle-outline" style="background-image: url({{user.photoURL}});"></div>
-  <!-- <ion-icon id="iconperfil"  *ngIf="auth.user | async as user" name="person-circle-outline"></ion-icon> -->
+  <!-- <div id="fotoperfil"  *ngIf="auth.user | async as user" name="person-circle-outline" style="background-image: url('{{user.photoURL}}');"></div> -->
+  <ion-icon id="iconperfil"  *ngIf="auth.user | async as user" name="person-circle-outline"></ion-icon>
+  <h3>{{user.nome}}</h3>
 
   <div class="caixa">
       <div class="info_upedido">
+        <div class="info_upedido-dado"><ion-icon class="laranja" name="phone-portrait-outline"></ion-icon><p>Celular:</p></div>
         <div class="info_upedido-dado"><ion-icon class="laranja" name="cut"></ion-icon><p>Serviço Favorito:</p></div>
-        <div class="info_upedido-dado"><ion-icon class="laranja" name="clipboard"></ion-icon><p>Histórico</p></div>
         <div class="info_upedido-dado"><ion-icon class="laranja" name="person"></ion-icon><p>Barbeiro Favorito:</p></div>
       </div>
       <div class="info_upedido">
-        <div class="info_upedido-dado"><p>Guilherme Souza</p></div>
-        <div class="info_upedido-dado"><p>13/10/2022 09h00</p></div>
+        <div class="info_upedido-dado"><p>{{user.celular}}</p></div>
+        <div class="info_upedido-dado"><p>Corte Simples</p></div>
         <div class="info_upedido-dado"><p>Kassio Chagas</p></div>
       </div>
     </div>

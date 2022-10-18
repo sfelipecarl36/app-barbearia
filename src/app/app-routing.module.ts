@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [SecureInnerPagesGuard],
+    // canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'login',
@@ -38,28 +38,28 @@ const routes: Routes = [
   {
     path: 'verify-email',
     loadChildren: () => import('./verify-email/verify-email.module').then( m => m.VerifyEmailPageModule),
-    canActivate: [SecureInnerPagesGuard],
+    // canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   {
     path: 'novoservico',
     loadChildren: () => import('./novoservico/novoservico.module').then( m => m.NovoservicoPageModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'historico',
     loadChildren: () => import('./historico/historico.module').then( m => m.HistoricoPageModule),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 
   {
     path: 'user-profile',
     loadChildren: () => import('./components/user-profile/user-profile.component').then( m => m.UserProfileComponent),
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
   
   {

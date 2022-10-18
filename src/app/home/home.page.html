@@ -4,8 +4,8 @@
 <div class="containertop" [routerLink]="['/perfil']">
     <div class="containertopchildren"> 
       <ion-icon class="topo" name="person"></ion-icon>
-    <h2 class="entrar" *ngIf="auth.user | async as user">Olá, {{user.displayName}}</h2>
-    <!-- <h2 class="entrar" *ngFor="let userDado of users | async">Olá, {{userDado.nome}}</h2> -->
+    <!-- <h2 class="entrar" *ngIf="auth.user | async as user">Olá, {{user.displayName}}</h2> -->
+    <h2 class="entrar" id="nome" *ngFor="let user of users | async">Olá, {{user.nome}}</h2>
     </div>
     <div class="containertopchildren2">
       <ion-icon name="notifications"></ion-icon>

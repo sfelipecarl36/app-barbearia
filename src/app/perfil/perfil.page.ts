@@ -13,12 +13,27 @@ import { Router } from '@angular/router';
 })
 export class PerfilPage implements OnInit {
 
+  users: any
+
   constructor(
     private router: Router,
+    public firestore: AngularFirestore,
     private authService: AuthenticationService,
     public auth: AngularFireAuth
-  ) { }
+  ) { 
+    authService.ngFireAuth.currentUser.then( user => {
+      this.users = firestore.collection('users', ref => ref.
+      where('uid', '==', user.uid)).valueChanges();
+    }).catch( error => {
+      this.router.navigateByUrl('inicio');
+    })
+   }
 
   ngOnInit() {
   }
+
+  logout(){
+    this.authService.SignOut()
+  }
+
   }

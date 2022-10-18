@@ -53,10 +53,7 @@
       (ionCancel)="pushLog('ionCancel fired')"
       (ionDismiss)="pushLog('')">
 
-        <ion-select-option value="10">Corte Simples</ion-select-option>
-        <ion-select-option value="30">Degradê</ion-select-option>
-        <ion-select-option value="50">Desgracê</ion-select-option>
-        <ion-select-option value="35">Navalhado</ion-select-option>
+        <ion-select-option *ngFor="let servico of servicos | async" value="{{servico.preco}}">{{servico.nome}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>

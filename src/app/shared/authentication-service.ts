@@ -30,8 +30,10 @@ export class AuthenticationService {
     });
   }
   // Login in with email/password
-  SignIn(email, password) {
-    return this.ngFireAuth.signInWithEmailAndPassword(email, password);
+  async SignIn(email, password) {
+    const user = await this.ngFireAuth.signInWithEmailAndPassword(email, password);
+    console.log(user.user.uid);
+    return user;
   }
   // Register user with email/password
   RegisterUser(email, password) {
@@ -106,7 +108,7 @@ export class AuthenticationService {
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['login']);
+      this.router.navigate(['inicio']);
     });
   }
 }

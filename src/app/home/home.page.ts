@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthenticationService } from "../shared/authentication-service";
 import firebase from 'firebase/compat/app';
+import { user } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -204,16 +205,27 @@ export class HomePage {
   ) 
   
   {
+    
+    authService.ngFireAuth.currentUser.then( user => {
+      this.users = firestore.collection('users', ref => ref.
+      where('uid', '==', user.uid)).valueChanges();
+    }).catch( error => {
+      this.router.navigateByUrl('inicio');
+    })
+
+    // this.users = firestore.collection('users', ref => ref.
+    // where('uid', '==', authService.userData.uid)).valueChanges();
+    
     this.servicos = firestore.collection('servicos').valueChanges();
-    this.users = firestore.collection('users'),ref => ref.
-    where('uid', '==', 'sbOalHFM0oekw86YZbsDjyXTt6j2').valueChanges().subscribe( x=> {
-      if(x.length===1){
-        console.log('deu certo');
-      }
-      else{
-        console.log('deu merda');
-      }
-    } )
+
   }
 
+
+  // async getNome(){
+  //   return await this.firestore.collection('users', ref => ref.
+  //   where('uid', '==', this.authService.userData.uid)).get();
+  // }
+
 }
+
+

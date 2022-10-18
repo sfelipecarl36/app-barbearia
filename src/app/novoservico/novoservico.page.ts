@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication-service";
 import { getAuth, UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-novoservico',
@@ -111,12 +112,17 @@ export class NovoservicoPage implements OnInit {
     this.pushLog('Valor: R$' + e.detail.value);
   }
 
+  servicos: any
 
   constructor(
     private router: Router,
     public auth: AngularFireAuth,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private firestore: AngularFirestore
   ) { 
+
+    this.servicos = firestore.collection('servicos').valueChanges();
+
     async function isUserAuthenticated() {
       const auth = getAuth();
       if (!(await this.user.auth.isAccessTokenAvailable())) {

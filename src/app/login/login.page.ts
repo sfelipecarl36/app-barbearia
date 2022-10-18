@@ -4,7 +4,7 @@ import { AuthenticationService } from "../shared/authentication-service";
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-import { getAuth, signInWithEmailAndPassword  } from "firebase/auth";
+import { getAuth, setPersistence ,signInWithEmailAndPassword, browserSessionPersistence   } from "firebase/auth";
 
 
 @Component({
@@ -38,7 +38,10 @@ export class LoginPage implements OnInit {
 
   logIn(email, password) {
     this.authService.SignIn(email.value, password.value)
-      .then((res) => {
+      .then( user => {
+      this.authService.SetUserData(user.user)
+      setPersistence(getAuth(), browserSessionPersistence)
+
       this.router.navigate(['home']);          
       }).catch((error) => {
         window.alert(error.message)
