@@ -1,0 +1,63 @@
+<ion-content scroll-x="false" fullscreen>
+  <div class="black">
+
+<div class="containertop">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="novoservico" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Revisar Serviço</h2>
+    </div>
+  </div>
+
+  <div class="caixa">
+      <div class="info_upedido">
+        <div class="info_upedido-dado"><h6>Serviço</h6></div>
+        <div class="info_upedido-dado"><h6>Barbeiro</h6></div>
+        <div class="info_upedido-dado"><h6>Data</h6></div>
+        <div class="info_upedido-dado"><h6>Horário</h6></div>
+      </div>
+      <div class="info_upedido">
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.nome}}</p></div>
+        <div class="info_upedido-dado" *ngFor="let prof of profissional | async"><p>{{prof.nome}}</p></div>
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{dataehora}}</p></div>
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{hora}}</p></div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="caixa2">
+      <div class="info_upedido2">
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><h6>{{serv.nome}}</h6></div>
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.preco}}</p></div>
+      </div>
+
+      <hr>
+
+      <div class="info_upedido2">
+        <div class="info_upedido-dado"><h6>Total</h6></div>
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.preco}}</p></div>
+      </div>
+
+    </div>
+    <hr>
+
+    
+      
+        <div class="caixa">
+          <div class="info_upedido2">
+          <h6>Pagamento</h6>
+          <ion-select interface="popover" placeholder="Escolha" #pagamento>
+            <ion-icon *ngFor="let pag of pagamentos | async" value="{{pag.id}}" name="{{pag.icon}}"></ion-icon>
+            <ion-select-option *ngFor="let pag of pagamentos | async" value="{{pag.id}}"><ion-icon name="{{pag.icon}}"></ion-icon>{{pag.nome}}</ion-select-option>
+          </ion-select>
+        </div>
+        </div>
+
+    <hr>
+
+    <ion-button expand="block" shape="round" Strong (click)="confirmarServico(pagamento)">Agendar Serviço</ion-button>
+
+
+</div>
+
+</ion-content>

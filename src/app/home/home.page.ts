@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthenticationService } from "../shared/authentication-service";
-import firebase from 'firebase/compat/app';
-import { user } from '@angular/fire/auth';
+
 
 @Component({
   selector: 'app-home',
@@ -197,6 +196,7 @@ export class HomePage {
   servicos: any
   users: any
   tiposervicos: any
+  profissionais: any
 
   constructor(
     private router: Router,
@@ -207,7 +207,7 @@ export class HomePage {
   
   {
     
-    authService.ngFireAuth.currentUser.then( user => {
+    this.authService.ngFireAuth.currentUser.then( user => {
       this.users = firestore.collection('users', ref => ref.
       where('uid', '==', user.uid)).valueChanges();
     }).catch( error => {
@@ -216,6 +216,7 @@ export class HomePage {
 
     this.servicos = firestore.collection('servicos').valueChanges();
     this.tiposervicos = firestore.collection('tiposervicos').valueChanges();
+    this.profissionais = firestore.collection('profissionais').valueChanges();
 
   }
 

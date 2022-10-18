@@ -21,14 +21,17 @@
     <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
     </div> -->
 
-    <div class="container" *ngFor="let profissional of profissionais | async">
+    <div class="container" *ngFor="let prof of profissionais | async">
     <ion-slides pager="false" [options]="slideOpts">
-      <ion-radio-group allow-empty-selection="false" name="radio-group" #radioGroup>
+
+      <ion-radio-group 
+      [(ngModel)]="profissional"
+      (ionChange)="checkValue($event)">
       
       <ion-item color="none" lines="none">
       <ion-slide class="profissional">
-        <ion-radio class="profissional" value="{{profissional.id}}" mode="md" style="background-image: url('{{profissional.img}}');"></ion-radio>
-        <p>{{profissional.nome}}</p>
+        <ion-radio class="profissional" value="{{prof.id}}" mode="md" style="background-image: url('{{prof.img}}');"></ion-radio>
+        <p>{{prof.nome}}</p>
       </ion-slide></ion-item>
 
     </ion-radio-group>
@@ -43,11 +46,11 @@
   <div class="container">
   <ion-list>
     <ion-item class="item item-trns text-center">
-      <ion-select interface="popover" placeholder="Serviço" (ionChange)="handleChange($event)"
+      <ion-select interface="popover" placeholder="Serviço" #servico (ionChange)="handleChange($event)"
       (ionCancel)="pushLog('ionCancel fired')"
       (ionDismiss)="pushLog('')">
 
-        <ion-select-option *ngFor="let servico of servicos | async" value="{{servico.preco}}">{{servico.nome}}</ion-select-option>
+        <ion-select-option *ngFor="let serv of servicos | async" value="{{serv.id}}">{{serv.nome}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
@@ -102,15 +105,15 @@
 </ion-radio-group>
 </ion-grid> -->
 
-<ion-datetime
-  value="2022-10-10T00:00:00"
-  min="2022-10-15T00:00:00"
-  max="2022-11-01T23:59:59"
+<ion-datetime #dataehora displayFormat="DD/MM/YYYY HH:mm"
+value="2022-04-21T00:00"
+  min="2022-10-01T00:00:00"
+  max="2022-10-31T23:59:59"
 ></ion-datetime>
 
   </div>
 
-<ion-button expand="block" shape="round" Strong>Confirmar</ion-button>
+<ion-button expand="block" shape="round" (click)="revisarServico(servico, dataehora)" Strong>Confirmar</ion-button>
 
 
 </div>

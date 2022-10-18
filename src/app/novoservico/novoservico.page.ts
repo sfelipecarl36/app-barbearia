@@ -102,6 +102,17 @@ export class NovoservicoPage implements OnInit {
     }
   }
 
+  // isWeekday = (dateString: string) => {
+  //   const date = new Date(dateString);
+  //   const utcDay = date.getUTCDay();
+
+  //   /**
+  //    * Date will be enabled if it is not
+  //    * Sunday or Saturday
+  //    */
+  //   return utcDay !== 0 && utcDay !== 6;
+  // };
+
   logs: string[] = [];
 
   pushLog(msg) {
@@ -114,6 +125,10 @@ export class NovoservicoPage implements OnInit {
 
   servicos: any
   profissionais: any
+  now: any
+  datetime: any
+
+  profissional: any
 
   constructor(
     private router: Router,
@@ -124,17 +139,26 @@ export class NovoservicoPage implements OnInit {
 
     this.servicos = firestore.collection('servicos').valueChanges();
     this.profissionais = firestore.collection('profissionais').valueChanges();
-
-    async function isUserAuthenticated() {
-      const auth = getAuth();
-      if (!(await this.user.auth.isAccessTokenAvailable())) {
-        // No token available, not logged in
-        this.router.navigateByUrl('inicio');
-      }
-    }
+    console.log(this.profissional)
   }
 
   ngOnInit() {
   }
+
+  checkValue(event) { 
+    console.log(event.detail.value)
+    this.profissional = event.detail.value
+  }
+
+  revisarServico(servico, dataehora) {
+    const now = new Date(dataehora.value).toLocaleDateString();
+    const nowtime = new Date(dataehora.value).toLocaleTimeString();
+    const datetime = now
+    const time = nowtime
+    this.router.navigate(['confirmaservico'],{
+      queryParams: [this.profissional,servico.value, datetime, time]
+    })
+  }
+
 
 }

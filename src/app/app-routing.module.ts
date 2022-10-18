@@ -23,50 +23,46 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    // canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-    // canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule),
-    // canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'verify-email',
     loadChildren: () => import('./verify-email/verify-email.module').then( m => m.VerifyEmailPageModule),
-    // canActivate: [SecureInnerPagesGuard],
   },
   {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
-    // canActivate: [AuthGuard],
   },
   {
     path: 'novoservico',
     loadChildren: () => import('./novoservico/novoservico.module').then( m => m.NovoservicoPageModule),
-    // canActivate: [AuthGuard]
   },
   {
     path: 'historico',
     loadChildren: () => import('./historico/historico.module').then( m => m.HistoricoPageModule),
-    // canActivate: [AuthGuard],
   },
 
   {
     path: 'user-profile',
     loadChildren: () => import('./components/user-profile/user-profile.component').then( m => m.UserProfileComponent),
-    // canActivate: [AuthGuard],
   },
   
   {
     path: 'inicio',
     loadChildren: () => import('./inicio/inicio.module').then( m => m.InicioPageModule),
-    // canActivate: [SecureInnerPagesGuard],
+  },
+  {
+    path: 'confirmaservico',
+    loadChildren: () => import('./confirmaservico/confirmaservico.module').then( m => m.ConfirmaservicoPageModule)
   }
+
 
 
 

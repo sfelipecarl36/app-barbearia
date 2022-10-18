@@ -19,25 +19,21 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () => import('../home/home.module').then( m => m.HomePageModule),
-        // canActivate: [SecureInnerPagesGuard]
       },
 
       {
         path: 'historico',
         loadChildren: () => import('../historico/historico.module').then( m => m.HistoricoPageModule),
-        // canActivate: [AuthGuard]
       },
 
       {
         path: 'perfil',
         loadChildren: () => import('../perfil/perfil.module').then( m => m.PerfilPageModule),
-        // canActivate: [AuthGuard]
       },
 
       {
         path: 'novoservico',
         loadChildren: () => import('../novoservico/novoservico.module').then( m => m.NovoservicoPageModule),
-        // canActivate: [AuthGuard]
       }
     ]
 

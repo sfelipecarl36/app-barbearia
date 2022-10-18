@@ -65,8 +65,7 @@
 
   <div class="container"><h5>Nossos Barbeiros</h5></div>
   <div class="containerbarbeiros">
-  <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
-  <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
+  <div class="imgbarbeiro_c" *ngFor="let prof of profissionais | async" style="background-image: url('{{prof.img}}');"></div>
   </div>
 
     </div>
