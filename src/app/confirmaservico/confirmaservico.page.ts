@@ -52,7 +52,7 @@ export class ConfirmaservicoPage implements OnInit {
       this.prof = params[0]
       this.serv = params[1]
       this.dataehora = params[2]
-      this.hora = params[3]
+      this.hora = params[3].substring(0,5)
       });
 
 
@@ -70,7 +70,7 @@ export class ConfirmaservicoPage implements OnInit {
   confirmarServico(pagamento){
     
     this.authService.ngFireAuth.currentUser.then( user => {
-    this.agendamentos.add({ data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid});
+    this.agendamentos.add({ status: "Em Andamento", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid});
     this.router.navigateByUrl('historico');
     })
     }

@@ -1,4 +1,4 @@
-<ion-content *ngIf="auth.user | async as user" scroll-x="false" fullscreen>
+<ion-content scroll-x="false" fullscreen>
   <div class="black">
 
 <div class="containertop">
@@ -15,12 +15,12 @@
 
   <div class="caixa" *ngFor="let agendamento of agendamentos | async">
     <div class="containertop">
-      <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
+      <div class="imgbarbeiro" style="background-image: url('https://pps.whatsapp.net/v/t61.24694-24/300114361_478393103821072_8546788573862140292_n.jpg?ccb=11-4&oh=01_AdT_nYWRpVPbntxFLRX1zKLIoEq1FQLUkc-Tf0eUZFRzaw&oe=635E4A91');"></div>
       <div class="info_upedido">
-        <h6>{{pedido.nome}}</h6>
-        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>{{pedido.profissional}}</p></div>
-        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{pedido.data}}</p></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{pedido.status}}</p></div>
+        <h6>{{agendamento.servico}}</h6>
+        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>{{agendamento.profissional}}</p></div>
+        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{agendamento.data}} {{agendamento.hora}}</p></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{agendamento.status}}</p></div>
       </div>
   </div>
 </div>

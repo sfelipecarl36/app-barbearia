@@ -47,7 +47,7 @@
           <div class="info_upedido2">
           <h6>Pagamento</h6>
           <ion-select interface="popover" placeholder="Escolha" #pagamento>
-            <ion-icon *ngFor="let pag of pagamentos | async" value="{{pag.id}}" name="{{pag.icon}}"></ion-icon>
+            <ion-icon *ngFor="let pag of pagamentos | async" value="{{pag.nome}}" name="{{pag.icon}}"></ion-icon>
             <ion-select-option *ngFor="let pag of pagamentos | async" value="{{pag.id}}"><ion-icon name="{{pag.icon}}"></ion-icon>{{pag.nome}}</ion-select-option>
           </ion-select>
         </div>
