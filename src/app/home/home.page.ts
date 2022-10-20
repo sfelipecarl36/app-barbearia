@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -11,7 +12,7 @@ import { AuthenticationService } from "../shared/authentication-service";
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   slideOpts = {
     slidesPerView: 1.12,
@@ -197,9 +198,12 @@ export class HomePage {
   users: any
   tiposervicos: any
   profissionais: any
+  agend: import("@angular/fire/compat/firestore").AngularFirestoreCollection<unknown>;
+  agendamentos: Observable<unknown[]>;
 
   constructor(
     private router: Router,
+    private loadingCtrl: LoadingController,
     public auth: AngularFireAuth,
     private authService: AuthenticationService,
     public firestore: AngularFirestore
@@ -207,18 +211,44 @@ export class HomePage {
   
   {
     
+    
     this.authService.ngFireAuth.currentUser.then( user => {
       this.users = firestore.collection('users', ref => ref.
       where('uid', '==', user.uid)).valueChanges();
+
+      this.agend = this.firestore.collection('agendamentos', ref => ref.limit(1).
+      where('user', '==', user.uid));
+
+      this.agendamentos = this.agend.valueChanges()
+      this.profissionais =  this.firestore.collection('profissionais').valueChanges();
+      this.tiposervicos =  this.firestore.collection('tiposervicos').valueChanges();
+      this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100).orderBy('id', 'desc')).valueChanges();
+
     }).catch( error => {
       this.router.navigateByUrl('inicio');
     })
 
-    this.servicos = firestore.collection('servicos').valueChanges();
-    this.tiposervicos = firestore.collection('tiposervicos').valueChanges();
-    this.profissionais = firestore.collection('profissionais').valueChanges();
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Carregando...',
+      duration: 2000,
+      spinner: 'circles',
+    });
+
+    loading.present();
+  }
+
+  ngOnInit(){
 
   }
+
+  ionViewDidEnter(){
+    this.showLoading()
+  }
+  
+
 
 
   // async getNome(){

@@ -21,10 +21,10 @@
     <div class="imgbarbeiro_c" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
     </div> -->
 
-    <div class="container" *ngFor="let prof of profissionais | async">
+    <div class="container">
     <ion-slides pager="false" [options]="slideOpts">
 
-      <ion-radio-group 
+      <ion-radio-group *ngFor="let prof of profissionais | async"
       [(ngModel)]="profissional"
       (ionChange)="checkValue($event)">
       
@@ -46,9 +46,7 @@
   <div class="container">
   <ion-list>
     <ion-item class="item item-trns text-center">
-      <ion-select interface="popover" placeholder="Serviço" #servico (ionChange)="handleChange($event)"
-      (ionCancel)="pushLog('ionCancel fired')"
-      (ionDismiss)="pushLog('')">
+      <ion-select interface="popover" placeholder="Serviço" #servico>
 
         <ion-select-option *ngFor="let serv of servicos | async" value="{{serv.id}}">{{serv.nome}}</ion-select-option>
       </ion-select>
@@ -108,7 +106,7 @@
 <ion-datetime #dataehora displayFormat="DD/MM/YYYY HH:mm"
 value="2022-04-21T00:00"
   min="2022-10-01T00:00:00"
-  max="2022-10-31T23:59:59"
+  max="2022-11-31T23:59:59"
 ></ion-datetime>
 
   </div>

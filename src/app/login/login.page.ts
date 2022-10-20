@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from "../shared/authentication-service";
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
   error: any;
   constructor(
     public authService: AuthenticationService,
+    private loadingCtrl: LoadingController,
     public router: Router,
     public firestore: AngularFirestore
   ) {}
@@ -36,7 +38,18 @@ export class LoginPage implements OnInit {
       })
   }
 
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Entrando...',
+      duration: 3000,
+      spinner: 'circles',
+    });
+
+    loading.present();
+  }
+
   logIn(email, password) {
+    this.showLoading()
     this.authService.SignIn(email.value, password.value)
       .then( user => {
       this.authService.SetUserData(user.user)

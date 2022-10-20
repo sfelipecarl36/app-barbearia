@@ -45,27 +45,31 @@
     <ion-button expand="block" class="transp" shape="round" [routerLink]="['/novoservico']" Strong>Agendar Serviço</ion-button>
   </div>
 
-  <div class="caixa">
-    <div class="containertop">
-      <div class="imgbarbeiro" style="background-image: url('https://blog.beautyclass.tv/wp-content/uploads/2019/11/2687385.jpg');"></div>
+  <div class="caixa" *ngIf="(agendamentos | async)?.length ; else noagendamento">
+    <div class="containertop" *ngFor="let agendamento of agendamentos | async">
+      <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
       <div class="info_upedido">
-        <h6>Corte Simples</h6>
-        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>Guilherme Souza</p></div>
-        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>13/10/2022 09h00</p></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">Andamento</p></div>
+        <span *ngFor="let serv of servicos | async"><h6 *ngIf="serv.id==agendamento.servico">{{serv.nome}}</h6></span>
+        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><span *ngFor="let prof of profissionais | async"><p *ngIf="prof.id==agendamento.profissional">{{prof.nome}}</p></span></div>
+        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{agendamento.data}} {{agendamento.hora}}</p></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{agendamento.status}}</p></div>
       </div>
-      <div class="containerlaranja">
-        
-      </div>
-      
-    </div>
   </div>
+</div>
+
+<ng-template #noagendamento>
+  <div class="caixa"><h2>Não há Agendamentos</h2></div>
+  </ng-template>
+
+
 
   <hr><br><br>
 
   <div class="container"><h5>Nossos Barbeiros</h5></div>
-  <div class="containerbarbeiros">
-  <div class="imgbarbeiro_c" *ngFor="let prof of profissionais | async" style="background-image: url('{{prof.img}}');"></div>
+  <div class="containerbarbeiros" *ngFor="let prof of profissionais | async">
+  <div class="imgbarbeiro_c" style="background-image: url('{{prof.img}}');">
+  </div>
+  <h3>{{prof.nome}}</h3>
   </div>
 
     </div>

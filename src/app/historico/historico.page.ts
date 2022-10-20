@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthenticationService } from "../shared/authentication-service";
+import { TouchSequence } from 'selenium-webdriver';
 
 
 @Component({
@@ -16,6 +17,10 @@ export class HistoricoPage {
   profissionais: any;
   agendamentos: any;
   agend: any;
+  nomeprof: any
+  servicos: any;
+  barbeiro: any;
+  
 
   constructor(
     private router: Router,
@@ -26,21 +31,55 @@ export class HistoricoPage {
 
     this.authService.ngFireAuth.currentUser.then( user => {
 
-      this.agend = firestore.collection('agendamentos', ref => ref.
+      this.agend = this.firestore.collection('agendamentos', ref => ref.limit(15).
       where('user', '==', user.uid));
 
-      this.agendamentos = this.agend.valueChanges();
-      
-      // this.agendamentos.then( agenda => {
-      //   this.profissionais = firestore.collection('profissionais', ref => ref.
-      //   where('id', '==', agenda.profissional)).valueChanges();
-      // })
+      this.agendamentos = this.agend.valueChanges()
+      this.profissionais =  this.firestore.collection('profissionais').valueChanges();
+      this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100).orderBy('id', 'desc')).valueChanges();
+
+    //   interface agenda {
+    //     profissional: any
+    //     servico: any
+    //     data: any
+    //     hora: any
+    //     status: any
+    // }
+    
+            
+    //            this.agendamentos
+    //             .subscribe((res: agenda[]) => {
+    //                 console.log(res);
+    //                 res.forEach((item) => {
+
+    //                 interface prof {
+    //                     nome: any
+    //                     img: any
+    //                 }
+
+    //                 this.profissionais = this.firestore.collection('profissionais', ref => ref.
+    //                   where('id', '==', item.profissional)).valueChanges().subscribe( x => {
+    //                     this.nomeprof = x.nome
+    //                   })
+                      
+    //                   console.log('Barbeiro: '+item.profissional);
+    //                   console.log('Serviço: '+item.servico);
+                      
+    //                   this.servicos = this.firestore.collection('servicos', ref => ref.
+    //                   where('id', '==', item.servico))
+    //                 });
+    //             });
+    
+          
+          // console.log(this.profissionais)
 
     }).catch( error => {
-      // this.router.navigateByUrl('inicio');
-      console.log('Deu erro!')
+      this.router.navigateByUrl('inicio');
+      // console.log('Deu erro!')
     })
 
+
+    
   }
 
 }

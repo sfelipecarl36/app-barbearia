@@ -7,23 +7,28 @@
     <h2 class="entrar">Histórico</h2>
     </div>
     <div class="containertopchildren2" [routerLink]="['/novoservico']">
-      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-icon id="iconaddservico" name="add-circle-outline"></ion-icon>
     </div>
   </div>    
 
   <hr><br><br>
-
+  <div *ngIf="(agendamentos | async)?.length ; else noagendamento">
   <div class="caixa" *ngFor="let agendamento of agendamentos | async">
-    <div class="containertop">
-      <div class="imgbarbeiro" style="background-image: url('https://pps.whatsapp.net/v/t61.24694-24/300114361_478393103821072_8546788573862140292_n.jpg?ccb=11-4&oh=01_AdT_nYWRpVPbntxFLRX1zKLIoEq1FQLUkc-Tf0eUZFRzaw&oe=635E4A91');"></div>
+    <div class="containertop"  >
+      <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
       <div class="info_upedido">
-        <h6>{{agendamento.servico}}</h6>
-        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><p>{{agendamento.profissional}}</p></div>
+        <span *ngFor="let serv of servicos | async"><h6 *ngIf="serv.id==agendamento.servico">{{serv.nome}}</h6></span>
+        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><span *ngFor="let prof of profissionais | async"><p *ngIf="prof.id==agendamento.profissional">{{prof.nome}}</p></span></div>
         <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{agendamento.data}} {{agendamento.hora}}</p></div>
         <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{agendamento.status}}</p></div>
       </div>
   </div>
 </div>
+</div>
+
+<ng-template #noagendamento>
+  <div class="caixa"><h6>Não há Agendamentos</h6></div>
+  </ng-template>
 
 </div>
 </ion-content>

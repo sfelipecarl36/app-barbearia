@@ -19,6 +19,11 @@ ion-radio-group{
 
 ion-content{
 
+    #iconaddservico{
+        font-size: 30px;
+        color:#FB9400;
+    }
+
     .black{
         background: linear-gradient(#181A20, #1e2027);
         background-size: cover;
@@ -32,7 +37,7 @@ ion-content{
         
         .caixa{
             width: 90vw;
-            padding: 8px;
+            padding: 10px;
             margin: 10px 0px;
             border-radius: 20px;
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
@@ -319,8 +324,9 @@ ion-content{
 
     .imgbarbeiro{
         border-radius: 18px;
-        width: 95px;
-        height: 95px;
+        width: 90px;
+        height: 90px;
+        margin-right: 5px;
         background-size: cover;
     }
     .info_upedido{

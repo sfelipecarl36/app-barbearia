@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthenticationService } from '../shared/authentication-service';
@@ -25,8 +26,12 @@ export class ConfirmaservicoPage implements OnInit {
   agendamentos: any;
   prof: any;
   serv: any;
+  handlerMessage: string;
+  roleMessage: string;
+  pag_var: any;
 
   constructor(
+    private alertController: AlertController,
     private router: Router,
     public firestore: AngularFirestore,
     private authService: AuthenticationService,
@@ -62,9 +67,31 @@ export class ConfirmaservicoPage implements OnInit {
     }).catch( error => {
       this.router.navigateByUrl('inicio');
     })
+    
    }
 
-  ngOnInit() {
+   async presentAlert(pagamento) {
+    const alert = await this.alertController.create({
+      header: 'Proceder com Agendamento?',
+      buttons: [
+        {
+          text: 'Cancelar',
+        },
+        {
+          text: 'Sim',
+          handler: data => {
+              this.confirmarServico(pagamento)
+            }
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+
+  ngOnInit(){
+
   }
 
   confirmarServico(pagamento){
