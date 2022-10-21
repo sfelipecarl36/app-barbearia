@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from "../shared/authentication-service";
 import { getAuth, UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -26,6 +27,7 @@ export class RegisterPage implements OnInit {
   constructor(
     public authService: AuthenticationService,
     public router: Router,
+    private loadingCtrl: LoadingController,
     public afs: AngularFirestore
   ) { }
   ngOnInit(){}
@@ -37,11 +39,22 @@ export class RegisterPage implements OnInit {
     })
   }
 
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Cadastrando...',
+      duration: 3500,
+      spinner: 'circles',
+    });
+
+    loading.present();
+  }
+
     registrarEmail(){
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, this.email, this.senha).then( newUser => {
       this.afs.collection('users').doc(newUser.user.uid).set({ nome: this.nome, celular: this.celular, foto: 'url',ativo: true, uid: newUser.user.uid});
       // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
+      this.showLoading()
       this.router.navigateByUrl('home');
     })
     }

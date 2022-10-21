@@ -11,7 +11,7 @@
     </div>
   </div>    
 
-  <hr><br><br>
+  <hr>
   <div *ngIf="(agendamentos | async)?.length ; else noagendamento">
   <div class="caixa" *ngFor="let agendamento of agendamentos | async">
     <div class="containertop"  >

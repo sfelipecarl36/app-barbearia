@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication-service";
 import { getAuth, UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
@@ -132,6 +133,7 @@ export class NovoservicoPage implements OnInit {
 
   constructor(
     private router: Router,
+    private loadingCtrl: LoadingController,
     public auth: AngularFireAuth,
     private authService: AuthenticationService,
     private firestore: AngularFirestore
@@ -140,6 +142,20 @@ export class NovoservicoPage implements OnInit {
     this.servicos = firestore.collection('servicos').valueChanges();
     this.profissionais = firestore.collection('profissionais').valueChanges();
     console.log(this.profissional)
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Carregando...',
+      duration: 450,
+      spinner: 'circles',
+    });
+
+    loading.present();
+  }
+
+  ionViewWillEnter(){
+    this.showLoading()
   }
 
   ngOnInit() {

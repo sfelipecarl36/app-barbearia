@@ -27,6 +27,7 @@
     "angularfire2": "^5.4.2",
     "firebase": "^9.12.1",
     "gradle": "^1.2.4",
+    "ionic-rating-component": "^1.2.1",
     "ionicons": "^6.0.3",
     "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",

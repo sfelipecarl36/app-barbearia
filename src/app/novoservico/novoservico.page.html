@@ -24,7 +24,7 @@
     <div class="container">
     <ion-slides pager="false" [options]="slideOpts">
 
-      <ion-radio-group *ngFor="let prof of profissionais | async"
+      <ion-radio-group *ngFor="let prof of profissionais | async" required
       [(ngModel)]="profissional"
       (ionChange)="checkValue($event)">
       
@@ -38,15 +38,15 @@
     </ion-slides>
   </div>
 
-  <hr><br><br>
+  <hr><br>
   <div class="container">
   <h4>Selecione o Serviço:</h4>
   </div>
 
   <div class="container">
-  <ion-list>
+  <ion-list color="transparent" lines="none">
     <ion-item class="item item-trns text-center">
-      <ion-select interface="popover" placeholder="Serviço" #servico>
+      <ion-select interface="popover" placeholder="Serviço" required #servico>
 
         <ion-select-option *ngFor="let serv of servicos | async" value="{{serv.id}}">{{serv.nome}}</ion-select-option>
       </ion-select>
@@ -103,7 +103,7 @@
 </ion-radio-group>
 </ion-grid> -->
 
-<ion-datetime #dataehora displayFormat="DD/MM/YYYY HH:mm"
+<ion-datetime #dataehora displayFormat="DD/MM/YYYY HH:mm" required
 value="2022-04-21T00:00"
   min="2022-10-01T00:00:00"
   max="2022-11-31T23:59:59"

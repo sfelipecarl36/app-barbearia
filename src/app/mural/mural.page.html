@@ -1,0 +1,32 @@
+<ion-content scroll-x="false" fullscreen>
+  <div class="black">
+
+<div class="containertop">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="home" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Mural Barbearia</h2>
+    </div>
+    <div class="containertopchildren2" [routerLink]="['/novomural']">
+      <ion-icon id="iconaddservico" name="add-circle-outline"></ion-icon>
+    </div>
+  </div>    
+
+  <hr>
+  <div *ngIf="(murais | async)?.length ; else nomural">
+  <div class="caixa" *ngFor="let mural of murais | async">
+    <div class="containertop">
+      <ion-icon id="iconperfil" name="person-circle-outline"></ion-icon>
+      <div class="info_upedido">
+        <span *ngFor="let user of users | async"><h6 *ngIf="user.uid==mural.user">{{user.nome}}</h6></span>
+        <div class="info_upedido-dado"><ion-icon id="icontexto" name="chatbubble-outline"></ion-icon><p>{{mural.texto}}</p></div>
+      </div>
+  </div>
+</div>
+</div>
+
+<ng-template #nomural>
+  <div class="caixa"><h6>Não há Postagens Aqui</h6></div>
+  </ng-template>
+
+</div>
+</ion-content>

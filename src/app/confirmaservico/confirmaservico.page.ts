@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthenticationService } from '../shared/authentication-service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-confirmaservico',
@@ -32,6 +33,7 @@ export class ConfirmaservicoPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
+    private toastController: ToastController,
     private router: Router,
     public firestore: AngularFirestore,
     private authService: AuthenticationService,
@@ -70,6 +72,16 @@ export class ConfirmaservicoPage implements OnInit {
     
    }
 
+   async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Agendamento concluído!',
+      duration: 1500,
+      position: position
+    });
+
+    await toast.present();
+  }
+
    async presentAlert(pagamento) {
     const alert = await this.alertController.create({
       header: 'Proceder com Agendamento?',
@@ -99,6 +111,7 @@ export class ConfirmaservicoPage implements OnInit {
     this.authService.ngFireAuth.currentUser.then( user => {
     this.agendamentos.add({ status: "Em Andamento", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid});
     this.router.navigateByUrl('historico');
+    this.presentToast('middle')
     })
     }
     

@@ -57,6 +57,7 @@ export class LoginPage implements OnInit {
 
       this.router.navigate(['home']);          
       }).catch((error) => {
+        this.loadingCtrl.dismiss()
         window.alert(error.message)
       })
   }

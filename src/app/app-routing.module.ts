@@ -61,7 +61,15 @@ const routes: Routes = [
   {
     path: 'confirmaservico',
     loadChildren: () => import('./confirmaservico/confirmaservico.module').then( m => m.ConfirmaservicoPageModule)
+  },  {
+    path: 'mural',
+    loadChildren: () => import('./mural/mural.module').then( m => m.MuralPageModule)
+  },
+  {
+    path: 'novomural',
+    loadChildren: () => import('./novomural/novomural.module').then( m => m.NovomuralPageModule)
   }
+
 
 
 

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { LoadingController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthenticationService } from "../shared/authentication-service";
@@ -25,9 +25,12 @@ export class HistoricoPage {
   constructor(
     private router: Router,
     public firestore: AngularFirestore,
+    private loadingCtrl: LoadingController,
     private authService: AuthenticationService,
     public auth: AngularFireAuth
   ) { 
+
+    
 
     this.authService.ngFireAuth.currentUser.then( user => {
 
@@ -80,6 +83,20 @@ export class HistoricoPage {
 
 
     
+  }
+
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Entrando...',
+      duration: 1800,
+      spinner: 'circles',
+    });
+
+    loading.present();
+  }
+
+  ionViewDidLoad(){
+    this.showLoading()
   }
 
 }

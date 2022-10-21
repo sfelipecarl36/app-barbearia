@@ -6,7 +6,6 @@ ion-back-button{
 
 ion-icon{
     color: white;
-    font-size: 22px;
 }
 
 ion-radio-group{
@@ -18,6 +17,28 @@ ion-radio-group{
 }
 
 ion-content{
+
+    #iconaddservico{
+        font-size: 30px;
+        color:#FB9400;
+    }
+
+    #iconperfil{
+        font-size: 80px;
+        color: white;
+        margin: 10px 0px;
+        min-width: 50px;
+        max-width: 52px;
+    }
+
+    #icontexto{
+        font-size: 40px;
+        color: white;
+        margin: 10px 0px;
+        margin-right: 10px;
+        min-width: 20px;
+        max-width: 20px;
+    }
 
     .black{
         background: linear-gradient(#181A20, #1e2027);
@@ -32,7 +53,7 @@ ion-content{
         
         .caixa{
             width: 90vw;
-            padding: 8px;
+            padding: 10px;
             margin: 10px 0px;
             border-radius: 20px;
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
@@ -103,7 +124,7 @@ ion-content{
                 align-items: center;
 
                 ion-icon{
-                    margin-inline:-20px;
+                    margin-inline:-50px;
                     font-size: 25px;
                 }
                 
@@ -319,8 +340,9 @@ ion-content{
 
     .imgbarbeiro{
         border-radius: 18px;
-        width: 95px;
-        height: 95px;
+        width: 90px;
+        height: 90px;
+        margin-right: 5px;
         background-size: cover;
     }
     .info_upedido{
@@ -334,7 +356,7 @@ ion-content{
             justify-content: left;
             align-items: center;
             margin-left: 5px;
-            margin-top: 3px;
+            
             margin-bottom: 3px;
 
             ion-icon{

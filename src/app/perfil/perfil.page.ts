@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthenticationService } from '../shared/authentication-service';
@@ -15,6 +16,7 @@ export class PerfilPage {
   users: any
 
   constructor(
+    private alertController: AlertController,
     private router: Router,
     public firestore: AngularFirestore,
     private authService: AuthenticationService,
@@ -30,6 +32,25 @@ export class PerfilPage {
     })
     
    }
+
+   async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Encessar Sessão?',
+      buttons: [
+        {
+          text: 'Cancelar',
+        },
+        {
+          text: 'Sair',
+          handler: data => {
+              this.logout()
+            }
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
   logout(){
     this.authService.SignOut()
