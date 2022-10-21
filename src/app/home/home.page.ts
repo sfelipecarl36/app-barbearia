@@ -198,8 +198,9 @@ export class HomePage implements OnInit {
   users: any
   tiposervicos: any
   profissionais: any
-  agend: import("@angular/fire/compat/firestore").AngularFirestoreCollection<unknown>;
-  agendamentos: Observable<unknown[]>;
+  agend: any
+  agendamentos: any
+  notificacoes: any
 
   constructor(
     private router: Router,
@@ -219,6 +220,9 @@ export class HomePage implements OnInit {
       this.agend = this.firestore.collection('agendamentos', ref => ref.limit(1).
       where('user', '==', user.uid));
 
+      this.notificacoes = this.firestore.collection('notificacoes', ref => ref.
+      where('user', '==', user.uid)).valueChanges();
+
       this.agendamentos = this.agend.valueChanges()
       this.profissionais =  this.firestore.collection('profissionais').valueChanges();
       this.tiposervicos =  this.firestore.collection('tiposervicos').valueChanges();
@@ -228,6 +232,12 @@ export class HomePage implements OnInit {
       this.router.navigateByUrl('inicio');
     })
 
+  }
+
+  detalhar(servico, profissional, data, hora, pagamento) {
+    this.router.navigate(['detailservico'],{
+    queryParams: [servico, profissional, data, hora, pagamento]
+    })
   }
 
   async showLoading() {

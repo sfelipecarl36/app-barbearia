@@ -1,0 +1,28 @@
+<ion-content scroll-x="false" fullscreen>
+  <div class="black">
+
+<div class="containertop">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="home" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Notificações</h2>
+    </div>
+  </div>    
+
+  <hr>
+  <span *ngIf="(notificacoes | async)?.length ; else nonotificacoes">
+  <div class="caixa" *ngFor="let notif of notificacoes | async">
+    <div class="containertop">
+      <ion-icon id="iconperfil" name="alert-circle-outline"></ion-icon>
+      <div class="info_upedido">
+        <div class="info_upedido-dado"><p>{{notif.texto}}</p></div>
+      </div>
+  </div>
+</div>
+</span>
+
+<ng-template #nonotificacoes>
+  <div class="caixa"><h6>Sem notificações</h6></div>
+  </ng-template>
+
+</div>
+</ion-content>

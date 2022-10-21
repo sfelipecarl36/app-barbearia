@@ -1,12 +1,13 @@
 <ion-content scroll-x="false" fullscreen>
   <div class="black">
 
-<div class="containertop" [routerLink]="['/perfil']">
-    <div class="containertopchildren"> 
+<div class="containertop">
+    <div class="containertopchildren" [routerLink]="['/perfil']"> 
       <ion-icon class="topo" name="person"></ion-icon>
     <h2 class="entrar" id="nome" *ngFor="let user of users | async">Olá, {{user.nome}}</h2>
     </div>
-    <div class="containertopchildren2">
+    <div class="containertopchildren2" [routerLink]="['/notificacoes']">
+      <span *ngIf="(notificacoes | async)?.length"><div id="bolanotify"><p></p></div></span>
       <ion-icon name="notifications"></ion-icon>
     </div>
   </div>    
@@ -48,7 +49,7 @@
   <div class="caixa" *ngIf="(agendamentos | async)?.length ; else noagendamento">
     <div class="containertop" *ngFor="let agendamento of agendamentos | async">
       <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
-      <div class="info_upedido">
+      <div class="info_upedido" (click)="detalhar(agendamento.servico, agendamento.profissional, agendamento.data, agendamento.hora, agendamento.pagamento)">
         <span *ngFor="let serv of servicos | async"><h6 *ngIf="serv.id==agendamento.servico">{{serv.nome}}</h6></span>
         <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><span *ngFor="let prof of profissionais | async"><p *ngIf="prof.id==agendamento.profissional">{{prof.nome}}</p></span></div>
         <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{agendamento.data}} {{agendamento.hora}}</p></div>

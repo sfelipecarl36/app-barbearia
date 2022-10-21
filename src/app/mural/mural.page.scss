@@ -50,6 +50,16 @@ ion-content{
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .logo{
+            background-image: url('/assets/logo.png');
+            background-repeat: no-repeat;
+            min-width: 180px;
+            min-height: 180px;
+            background-size: cover;
+            background-position: center;
+            margin: 5px 0px
+        }
         
         .caixa{
             width: 90vw;
@@ -353,7 +363,7 @@ ion-content{
         .info_upedido-dado{
             display: flex;
             flex-direction: row;
-            justify-content: left;
+            justify-content: center;
             align-items: center;
             margin-left: 5px;
             

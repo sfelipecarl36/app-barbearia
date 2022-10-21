@@ -81,7 +81,6 @@ export class HistoricoPage {
       // console.log('Deu erro!')
     })
 
-
     
   }
 
@@ -93,6 +92,12 @@ export class HistoricoPage {
     });
 
     loading.present();
+  }
+
+  detalhar(servico, profissional, data, hora, pagamento) {
+    this.router.navigate(['detailservico'],{
+    queryParams: [servico, profissional, data, hora, pagamento]
+    })
   }
 
   ionViewDidLoad(){

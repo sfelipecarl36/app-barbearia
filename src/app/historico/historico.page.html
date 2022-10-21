@@ -14,7 +14,7 @@
   <hr>
   <div *ngIf="(agendamentos | async)?.length ; else noagendamento">
   <div class="caixa" *ngFor="let agendamento of agendamentos | async">
-    <div class="containertop"  >
+    <div class="containertop" (click)="detalhar(agendamento.servico, agendamento.profissional, agendamento.data, agendamento.hora, agendamento.pagamento)">
       <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
       <div class="info_upedido">
         <span *ngFor="let serv of servicos | async"><h6 *ngIf="serv.id==agendamento.servico">{{serv.nome}}</h6></span>

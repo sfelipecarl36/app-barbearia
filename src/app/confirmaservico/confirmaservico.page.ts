@@ -30,6 +30,10 @@ export class ConfirmaservicoPage implements OnInit {
   handlerMessage: string;
   roleMessage: string;
   pag_var: any;
+  notificacoes: any;
+  profissionais: any;
+  agendas: import("@angular/fire/compat/firestore").AngularFirestoreCollection<unknown>;
+  nomeprof: any;
 
   constructor(
     private alertController: AlertController,
@@ -43,6 +47,7 @@ export class ConfirmaservicoPage implements OnInit {
 
     this.pagamentos = firestore.collection('pagamentos').valueChanges();
     this.agendamentos = firestore.collection('agendamentos');
+    this.notificacoes = firestore.collection('notificacoes');
 
     this.agendamentos.valueChanges().subscribe( x=> {
       this.idGet = (x.length)+1;
@@ -52,6 +57,10 @@ export class ConfirmaservicoPage implements OnInit {
       console.log('Barbeiro: '+params[0]+' Serviço: '+params[1], params[2], params[3])
       this.profissional = firestore.collection('profissionais', ref => ref.
       where('id', '==', params[0])).valueChanges();
+
+      this.profissionais = firestore.collection('profissionais', ref => ref.
+      where('id', '==', params[0]));
+
 
       this.servico = firestore.collection('servicos', ref => ref.
       where('id', '==', params[1])).valueChanges();
@@ -69,7 +78,6 @@ export class ConfirmaservicoPage implements OnInit {
     }).catch( error => {
       this.router.navigateByUrl('inicio');
     })
-    
    }
 
    async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -110,6 +118,7 @@ export class ConfirmaservicoPage implements OnInit {
     
     this.authService.ngFireAuth.currentUser.then( user => {
     this.agendamentos.add({ status: "Em Andamento", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid});
+    this.notificacoes.add({ texto: "Você agendou "+this.serv+" com "+this.prof+" para "+this.dataehora, user: user.uid});
     this.router.navigateByUrl('historico');
     this.presentToast('middle')
     })

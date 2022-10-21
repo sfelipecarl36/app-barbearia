@@ -1,0 +1,39 @@
+<ion-content scroll-x="false" fullscreen>
+  <div class="black">
+
+<div class="containertop">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="historico" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Detalhes Agendamento</h2>
+    </div>
+  </div>
+
+  <hr><br>
+
+  <div class="caixa">
+      <div class="info_upedido">
+        <div class="info_upedido-dado"><h6>Serviço</h6></div>
+        <div class="info_upedido-dado"><h6>Barbeiro</h6></div>
+        <div class="info_upedido-dado"><h6>Data</h6></div>
+        <div class="info_upedido-dado"><h6>Horário</h6></div>
+        <div class="info_upedido-dado"><h6>Pagamento</h6></div>
+        <div class="info_upedido-dado"><h6>Preço</h6></div>
+      </div>
+      <div class="info_upedido">
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.nome}}</p></div>
+        <div class="info_upedido-dado" *ngFor="let prof of profissional | async"><p>{{prof.nome}}</p></div>
+        <div class="info_upedido-dado"><p>{{dataehora}}</p></div>
+        <div class="info_upedido-dado"><p>{{hora}}</p></div>
+        <div class="info_upedido-dado" *ngFor="let pag of pagamento | async"><p>{{pag.nome}}</p></div>
+        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.preco}}</p></div>
+      </div>
+    </div>
+
+    <hr>
+
+    <ion-button expand="block" shape="round" Strong (click)="presentAlert()">Excluir Agendamento</ion-button>
+
+
+</div>
+
+</ion-content>

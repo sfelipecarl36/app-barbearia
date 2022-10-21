@@ -12,6 +12,11 @@
   </div>    
 
   <hr>
+
+  <div class="logo"></div>
+
+  <hr>
+
   <div *ngIf="(murais | async)?.length ; else nomural">
   <div class="caixa" *ngFor="let mural of murais | async">
     <div class="containertop">

@@ -11,6 +11,17 @@ ion-icon{
 
 ion-content{
 
+    #bolanotify{
+        min-width: 5px;
+        min-height: 5px;
+        background-color: rgb(196, 0, 0);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     .black{
         background: linear-gradient(#181A20, #1e2027);
         background-size: cover;

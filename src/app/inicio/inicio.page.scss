@@ -31,6 +31,7 @@ ion-content{
             position: relative;
             width: 80vw;
         }
+        
         .logo{
             background-image: url('/assets/logo.png');
             background-repeat: no-repeat;
@@ -39,7 +40,6 @@ ion-content{
             background-size: cover;
             background-position: center;
             margin: 30px 0px
-            
         }
         ion-button{
           margin: 10px 0px;
@@ -102,7 +102,7 @@ ion-content{
   
       @media screen and (min-width: 768px) {
         div.form{
-            width: 40vw;
+            width: 30vw;
         }
   
         div.spacebetween{

@@ -34,6 +34,11 @@ const routes: Routes = [
       {
         path: 'mural',
         loadChildren: () => import('../mural/mural.module').then( m => m.MuralPageModule),
+      },
+
+      {
+        path: 'notificacoes',
+        loadChildren: () => import('../notificacoes/notificacoes.module').then( m => m.NotificacoesPageModule),
       }
     ]
 
