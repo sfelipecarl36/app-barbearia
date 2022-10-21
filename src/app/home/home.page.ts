@@ -244,7 +244,7 @@ export class HomePage implements OnInit {
 
   }
 
-  ionViewDidEnter(){
+  ionViewDidLoad(){
     this.showLoading()
   }
   
