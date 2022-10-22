@@ -7,7 +7,7 @@
     <h2 class="entrar" id="nome" *ngFor="let user of users | async">Olá, {{user.nome}}</h2>
     </div>
     <div class="containertopchildren2" [routerLink]="['/notificacoes']">
-      <span *ngIf="(notificacoes | async)?.length"><div id="bolanotify"><p></p></div></span>
+    <div *ngIf="(notificacoes | async)?.length;"><ion-badge color="danger">{{notify}}</ion-badge></div>
       <ion-icon name="notifications"></ion-icon>
     </div>
   </div>    
@@ -15,7 +15,7 @@
     <h3>Recomendados</h3>
     <ion-slides pager="false" [options]="slideOpts" >
         
-      <ion-slide class="sliderecomendado" *ngFor="let servico of servicos | async">
+      <ion-slide class="sliderecomendado" *ngFor="let servico of servicosRecomendado | async">
         <div class="recomendado">
           <div class="imgrecomendado" style="background-image: url('{{servico.img}}');"></div>
             <div class="inforecomendado">
@@ -30,7 +30,7 @@
     <ion-slides pager="false" [options]="slideOpts2" >
         
       <ion-slide class="servico" *ngFor="let tiposervico of tiposervicos | async">
-        <div class="box" style="background-color: #33291C;">
+        <div class="box" style="background-color: #33291C;" [routerLink]="['/servicos']">
           <ion-icon name="{{tiposervico.icon}}"></ion-icon>
         </div>
         <p>{{tiposervico.nome}}</p>

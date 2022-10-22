@@ -12,21 +12,22 @@
   </div>    
 
   <hr>
-  <div *ngIf="(agendamentos | async)?.length ; else noagendamento">
-  <div class="caixa" *ngFor="let agendamento of agendamentos | async">
-    <div class="containertop" (click)="detalhar(agendamento.servico, agendamento.profissional, agendamento.data, agendamento.hora, agendamento.pagamento)">
-      <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
+
+  <div *ngIf="(servicos | async)?.length ; else noservico">
+  <div class="caixa" *ngFor="let serv of servicos | async">
+    <div class="containertop">
+      <div class="imgbarbeiro" style="background-image: url('{{serv.img}}');"></div>
       <div class="info_upedido">
-        <span *ngFor="let serv of servicos | async"><h6 *ngIf="serv.id==agendamento.servico">{{serv.nome}}</h6></span>
-        <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><span *ngFor="let prof of profissionais | async"><p *ngIf="prof.id==agendamento.profissional">{{prof.nome}}</p></span></div>
-        <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{agendamento.data}} {{agendamento.hora}}</p></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{agendamento.status}}</p></div>
+        <h6>{{serv.nome}}</h6>
+        <div *ngFor="let tipo of tiposervicos | async"><div class="info_upedido-dado" *ngIf="tipo.id==serv.tipo"><ion-icon name="{{tipo.icon}}"></ion-icon><p>{{tipo.nome}}</p></div></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Valor: </p><p class="laranja">{{serv.preco}}</p></div>
+        <div class="info_upedido-dado"><p style="margin-left: 6px">{{serv.descricao}}</p></div>
       </div>
   </div>
 </div>
 </div>
 
-<ng-template #noagendamento>
+<ng-template #noservico>
   <div class="caixa"><h6>Não há Serviços</h6></div>
   </ng-template>
 

@@ -226,6 +226,8 @@ ion-content{
           width: 50%;
       }
       ion-button.transp{
+        min-width: 70px;
+        width: 120px;
         color:#FB9400;
         --background: none;
         border: 2px solid #FB9400;
@@ -285,15 +287,8 @@ ion-content{
     }
 
 
-    ion-radio.profissional{
-        border-radius: 50%;
-        width: 80px;
-        height: 80px;
-        margin: 0px 10px;
-        margin-bottom: 10px;
-        background-size: cover;
-        --mark: none;
-        transition-duration:200ms;
+    ion-radio.tiposervico{
+        display: none;
     }
 
     ion-datetime{
@@ -301,7 +296,7 @@ ion-content{
     }
 
     ion-radio.dia{
-        border-radius: 50%;
+        border-radius: 20px;
         width: 30px;
         height: 30px;
         margin: 5px 10px;
@@ -324,8 +319,8 @@ ion-content{
 
     .imgbarbeiro{
         border-radius: 18px;
-        width: 90px;
-        height: 90px;
+        min-width: 90px;
+        min-height: 90px;
         margin-right: 5px;
         background-size: cover;
     }

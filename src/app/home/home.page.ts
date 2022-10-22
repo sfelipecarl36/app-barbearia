@@ -201,6 +201,8 @@ export class HomePage implements OnInit {
   agend: any
   agendamentos: any
   notificacoes: any
+  servicosRecomendado: any
+  notify: any
 
   constructor(
     private router: Router,
@@ -221,12 +223,18 @@ export class HomePage implements OnInit {
       where('user', '==', user.uid));
 
       this.notificacoes = this.firestore.collection('notificacoes', ref => ref.
-      where('user', '==', user.uid)).valueChanges();
+      where('user', '==', user.uid)).valueChanges()
+
+      this.firestore.collection('notificacoes', ref => ref.
+      where('user', '==', user.uid)).valueChanges().subscribe( result => {
+        this.notify = result.length;
+        });
 
       this.agendamentos = this.agend.valueChanges()
       this.profissionais =  this.firestore.collection('profissionais').valueChanges();
       this.tiposervicos =  this.firestore.collection('tiposervicos').valueChanges();
-      this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100).orderBy('id', 'desc')).valueChanges();
+      this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100)).valueChanges();
+      this.servicosRecomendado =  this.firestore.collection('servicos', ref => ref.where("recomendado", "==", true)).valueChanges();
 
     }).catch( error => {
       this.router.navigateByUrl('inicio');

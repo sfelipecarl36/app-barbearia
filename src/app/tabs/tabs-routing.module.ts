@@ -32,6 +32,11 @@ const routes: Routes = [
       },
 
       {
+        path: 'servicos',
+        loadChildren: () => import('../servicos/servicos.module').then( m => m.ServicosPageModule),
+      },
+
+      {
         path: 'novoservico',
         loadChildren: () => import('../novoservico/novoservico.module').then( m => m.NovoservicoPageModule),
       },

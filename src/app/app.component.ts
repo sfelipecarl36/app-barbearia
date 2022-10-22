@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AndroidFullScreen } from '@awesome-cordova-plugins/android-full-screen';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +8,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(public auth: AngularFireAuth) {}
-  login() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  constructor(public auth: AngularFireAuth) {
+
   }
-  logout() {
-    this.auth.signOut();
-  }
+
+  
+  
+  
+
 }
