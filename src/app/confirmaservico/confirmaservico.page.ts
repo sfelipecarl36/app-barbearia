@@ -6,6 +6,7 @@ import { AuthenticationService } from '../shared/authentication-service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-confirmaservico',
@@ -90,7 +91,7 @@ export class ConfirmaservicoPage implements OnInit {
     await toast.present();
   }
 
-   async presentAlert(pagamento) {
+   async presentAlert(pagamento, nomeservico, nomeprof) {
     const alert = await this.alertController.create({
       header: 'Proceder com Agendamento?',
       buttons: [
@@ -100,7 +101,7 @@ export class ConfirmaservicoPage implements OnInit {
         {
           text: 'Sim',
           handler: data => {
-              this.confirmarServico(pagamento)
+              this.confirmarServico(pagamento, nomeservico, nomeprof)
             }
         },
       ],
@@ -114,11 +115,11 @@ export class ConfirmaservicoPage implements OnInit {
 
   }
 
-  confirmarServico(pagamento){
+  confirmarServico(pagamento, nomeservico, nomeprof){
     
     this.authService.ngFireAuth.currentUser.then( user => {
     this.agendamentos.add({ status: "Em Andamento", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid});
-    this.notificacoes.add({ texto: "Você agendou "+this.serv+" com "+this.prof+" para "+this.dataehora, user: user.uid});
+    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid});
     this.router.navigateByUrl('historico');
     this.presentToast('middle')
     })

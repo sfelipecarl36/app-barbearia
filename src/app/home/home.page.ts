@@ -259,13 +259,6 @@ export class HomePage implements OnInit {
   }
   
 
-
-
-  // async getNome(){
-  //   return await this.firestore.collection('users', ref => ref.
-  //   where('uid', '==', this.authService.userData.uid)).get();
-  // }
-
 }
 
 

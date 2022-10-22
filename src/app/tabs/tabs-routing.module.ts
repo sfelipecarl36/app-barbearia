@@ -32,8 +32,18 @@ const routes: Routes = [
       },
 
       {
+        path: 'novoservico',
+        loadChildren: () => import('../novoservico/novoservico.module').then( m => m.NovoservicoPageModule),
+      },
+
+      {
         path: 'mural',
         loadChildren: () => import('../mural/mural.module').then( m => m.MuralPageModule),
+      },
+
+      {
+        path: 'novomural',
+        loadChildren: () => import('../novomural/novomural.module').then( m => m.NovomuralPageModule),
       },
 
       {

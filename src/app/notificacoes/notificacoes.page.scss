@@ -26,7 +26,7 @@ ion-content{
     #iconperfil{
         font-size: 80px;
         color: white;
-        margin: 10px 0px;
+        margin: 10px 8px;
         min-width: 30px;
         max-width: 32px;
     }
@@ -52,8 +52,13 @@ ion-content{
         align-items: center;
         
         .caixa{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             width: 90vw;
             padding: 8px;
+            padding-right: 10px;
             margin: 10px 0px;
             border-radius: 20px;
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
@@ -109,7 +114,7 @@ ion-content{
             display: flex;
             flex-direction: row;
             align-items: center;
-            width: 90%;
+            justify-content: center;
 
             .containertopchildren{
                 display: flex;

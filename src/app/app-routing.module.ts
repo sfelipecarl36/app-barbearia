@@ -50,6 +50,11 @@ const routes: Routes = [
   },
 
   {
+    path: 'servicos',
+    loadChildren: () => import('./servicos/servicos.module').then( m => m.ServicosPageModule),
+  },
+
+  {
     path: 'user-profile',
     loadChildren: () => import('./components/user-profile/user-profile.component').then( m => m.UserProfileComponent),
   },
@@ -61,7 +66,8 @@ const routes: Routes = [
   {
     path: 'confirmaservico',
     loadChildren: () => import('./confirmaservico/confirmaservico.module').then( m => m.ConfirmaservicoPageModule)
-  },  {
+  },
+  {
     path: 'mural',
     loadChildren: () => import('./mural/mural.module').then( m => m.MuralPageModule)
   },
@@ -76,6 +82,10 @@ const routes: Routes = [
   {
     path: 'detailservico',
     loadChildren: () => import('./detailservico/detailservico.module').then( m => m.DetailservicoPageModule)
+  },
+  {
+    path: 'servicos',
+    loadChildren: () => import('./servicos/servicos.module').then( m => m.ServicosPageModule)
   }
 
 
