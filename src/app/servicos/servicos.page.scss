@@ -4,6 +4,12 @@ ion-back-button{
     color: white;
 }
 
+ion-segment-button::after {
+    --max-height: 40px;
+    --background: #FB9400;
+    --border-radius: 30px;
+  }  
+
 ion-icon{
     color: white;
     font-size: 22px;
@@ -35,12 +41,47 @@ ion-content{
         flex-direction: column;
         align-items: center;
         
+        .containerheader{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+
+            .containertopchildren{  
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                
+            }
+
+            .containertopchildren2{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                min-width: 30px;
+
+                ion-icon{
+                    
+                    font-size: 25px;
+                    z-index: 2;
+                }
+                
+            }
+            
+            ion-icon.topo{
+                margin-right: 10px;
+            }
+        }
+
         .caixa{
             width: 90vw;
             padding: 10px;
             margin: 15px 0px;
             border-radius: 20px;
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
+            position: relative;
+            overflow: hidden; 
         }
 
         .laranja {
@@ -95,7 +136,7 @@ ion-content{
             align-items: center;
             width: 90%;
 
-            .containertopchildren{
+            .containertopchildren{  
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -106,18 +147,15 @@ ion-content{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                min-width: 30px;
 
                 ion-icon{
-                    margin-inline:-50px;
+                    
                     font-size: 25px;
+                    z-index: 2;
                 }
                 
             }
-            
-            ion-icon.topo{
-                margin-right: 10px;
-            }
-            
         }
 
         .containerslide{
@@ -209,7 +247,6 @@ ion-content{
 
         .entrar {
             position: relative;
-            width: 80vw;
         }
         .logo{
             background-image: url('/assets/logo.png');
@@ -382,10 +419,6 @@ ion-content{
   
         div.spacebetween{
             width: 40vw;
-        }
-  
-        h2.entrar{
-            width: 40vw !important;
         }
     }
     

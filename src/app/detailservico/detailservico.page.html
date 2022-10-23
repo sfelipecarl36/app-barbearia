@@ -10,7 +10,7 @@
 
   <hr><br>
 
-  <div class="caixa">
+  <div class="caixa ion-activatable">
       <div class="info_upedido">
         <div class="info_upedido-dado"><h6>Serviço</h6></div>
         <div class="info_upedido-dado"><h6>Barbeiro</h6></div>
@@ -26,7 +26,7 @@
         <div class="info_upedido-dado"><p>{{hora}}</p></div>
         <div class="info_upedido-dado" *ngFor="let pag of pagamento | async"><p>{{pag.nome}}</p></div>
         <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.preco}}</p></div>
-      </div>
+      </div><ion-ripple-effect></ion-ripple-effect>
     </div>
 
     <hr>

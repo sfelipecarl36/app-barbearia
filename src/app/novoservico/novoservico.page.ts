@@ -114,7 +114,9 @@ export class NovoservicoPage implements OnInit {
   //   return utcDay !== 0 && utcDay !== 6;
   // };
 
-  logs: string[] = [];
+  logs: any;
+  hourValues: any;
+  minuteValues: any;
 
   pushLog(msg) {
     this.logs.unshift(msg);
@@ -138,7 +140,8 @@ export class NovoservicoPage implements OnInit {
     private authService: AuthenticationService,
     private firestore: AngularFirestore
   ) { 
-
+    this.hourValues ='09,10,11,12,13,14,15,16,17,18,19 #hour';
+    this.minuteValues = ['0'];
     this.servicos = firestore.collection('servicos').valueChanges();
     this.profissionais = firestore.collection('profissionais').valueChanges();
     console.log(this.profissional)
@@ -147,7 +150,7 @@ export class NovoservicoPage implements OnInit {
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Carregando...',
-      duration: 450,
+      duration: 300,
       spinner: 'circles',
     });
 
@@ -165,6 +168,17 @@ export class NovoservicoPage implements OnInit {
     console.log(event.detail.value)
     this.profissional = event.detail.value
   }
+
+  isWeekday = (dateString: string) => {
+    const date = new Date(dateString);
+    const utcDay = date.getUTCDay();
+
+    /**
+     * Date will be enabled if it is not
+     * Sunday or Saturday
+     */
+    return utcDay !== 0 && utcDay !== 6;
+  };
 
   revisarServico(servico, dataehora) {
     const now = new Date(dataehora.value).toLocaleDateString();

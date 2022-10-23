@@ -10,11 +10,11 @@
 
   <hr>
   <span *ngIf="(notificacoes | async)?.length ; else nonotificacoes">
-  <div class="caixa" *ngFor="let notif of notificacoes | async">
+  <div class="caixa ion-activatable" *ngFor="let notif of notificacoes | async">
     <div class="containertop">
       <ion-icon id="iconperfil" name="alert-circle-outline"></ion-icon>
         <div class="info_upedido-dado"><p>{{notif.texto}}</p></div>
-  </div>
+  </div><ion-ripple-effect></ion-ripple-effect>
 </div>
 </span>
 

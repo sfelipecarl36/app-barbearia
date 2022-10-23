@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
+import { NativePageTransitions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { HttpClientModule } from '@angular/common/http';
@@ -35,7 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     AppRoutingModule
   ],
-  providers: [AuthService, AuthGuard, SecureInnerPagesGuard],
+  providers: [AuthService, AuthGuard, SecureInnerPagesGuard, NativePageTransitions],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

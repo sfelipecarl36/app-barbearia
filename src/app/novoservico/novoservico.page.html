@@ -103,11 +103,12 @@
 </ion-radio-group>
 </ion-grid> -->
 
-<ion-datetime #dataehora displayFormat="DD/MM/YYYY HH:mm" required
-value="2022-04-21T00:00"
+<ion-datetime #dataehora [isDateEnabled]="isWeekday" locale="pt-BR" displayFormat="DD/MM/YYYY HH:mm" required
+  minuteValues="{{minuteValues}}"
+  hourValues​="{{hourValues}}"
   min="2022-10-01T00:00:00"
   max="2022-11-31T23:59:59"
-></ion-datetime>
+><span slot="time-label">Data Agendamento</span></ion-datetime>
 
   </div>
 

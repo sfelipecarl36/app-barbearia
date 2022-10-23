@@ -1,7 +1,7 @@
 <ion-content scroll-x="false" fullscreen>
   <div class="black">
 
-<div class="containertop">
+<div class="containerheader">
     <div class="containertopchildren">
       <ion-back-button defaultHref="home" mode="md" text=""></ion-back-button>
     <h2 class="entrar">Histórico</h2>
@@ -12,8 +12,20 @@
   </div>    
 
   <hr>
+  <ion-segment scrollable (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="Em Andamento">
+      <ion-label>Em Andamento</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Concluído">
+      <ion-label>Concluído</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="Cancelado">
+      <ion-label>Cancelado</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
   <div *ngIf="(agendamentos | async)?.length ; else noagendamento">
-  <div class="caixa" *ngFor="let agendamento of agendamentos | async">
+  <div class="caixa ion-activatable" *ngFor="let agendamento of agendamentos | async">
     <div class="containertop" (click)="detalhar(agendamento.servico, agendamento.profissional, agendamento.data, agendamento.hora, agendamento.pagamento)">
       <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
       <div class="info_upedido">
@@ -22,7 +34,7 @@
         <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{agendamento.data}} {{agendamento.hora}}</p></div>
         <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{agendamento.status}}</p></div>
       </div>
-  </div>
+  </div><ion-ripple-effect></ion-ripple-effect>
 </div>
 </div>
 

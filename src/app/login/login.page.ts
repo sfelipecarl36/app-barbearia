@@ -1,8 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { AuthenticationService } from "../shared/authentication-service";
-import { Observable } from 'rxjs';
+import { NativePageTransitions, NativeTransitionOptions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { getAuth, setPersistence ,signInWithEmailAndPassword, browserSessionPersistence   } from "firebase/auth";
@@ -16,11 +16,15 @@ import { getAuth, setPersistence ,signInWithEmailAndPassword, browserSessionPers
 export class LoginPage implements OnInit {
   error: any;
   constructor(
+    private nativePageTransitions: NativePageTransitions,
     public authService: AuthenticationService,
     private loadingCtrl: LoadingController,
     public router: Router,
-    public firestore: AngularFirestore
-  ) {}
+    public firestore: AngularFirestore,
+    public navCtrl: NavController
+  ) {
+
+  }
   ngOnInit() {}
 
   logarEmail(email, password) {
@@ -48,14 +52,33 @@ export class LoginPage implements OnInit {
     loading.present();
   }
 
+  openPage(page) {
+
+    let options: NativeTransitionOptions = {
+       direction: 'up',
+       duration: 600,
+       slowdownfactor: 3,
+       slidePixels: 20,
+       iosdelay: 200,
+       androiddelay: 250,
+       fixedPixelsTop: 0,
+       fixedPixelsBottom: 60
+      }
+   
+    this.nativePageTransitions.slide(options)
+    this.router.navigateByUrl(page)
+    
+   }
+  
+
   logIn(email, password) {
     this.showLoading()
     this.authService.SignIn(email.value, password.value)
       .then( user => {
       this.authService.SetUserData(user.user)
       setPersistence(getAuth(), browserSessionPersistence)
-
-      this.router.navigate(['home']);          
+      this.openPage('home')
+      // this.router.navigate(['home']);          
       }).catch((error) => {
         this.loadingCtrl.dismiss()
         window.alert(error.message)

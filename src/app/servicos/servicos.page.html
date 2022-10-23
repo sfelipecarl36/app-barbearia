@@ -1,7 +1,7 @@
 <ion-content scroll-x="false" fullscreen>
   <div class="black">
 
-<div class="containertop">
+<div class="containerheader">
     <div class="containertopchildren">
       <ion-back-button defaultHref="home" mode="md" text=""></ion-back-button>
     <h2 class="entrar">Serviços</h2>
@@ -13,8 +13,14 @@
 
   <hr>
 
+  <ion-segment scrollable (ionChange)="segmentChanged($event)">
+    <ion-segment-button *ngFor="let tipo of tiposervicos | async" value="{{tipo.id}}">
+      <ion-label>{{tipo.nome}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
   <div *ngIf="(servicos | async)?.length ; else noservico">
-  <div class="caixa" *ngFor="let serv of servicos | async">
+  <div class="caixa ion-activatable" *ngFor="let serv of servicos | async">
     <div class="containertop">
       <div class="imgbarbeiro" style="background-image: url('{{serv.img}}');"></div>
       <div class="info_upedido">
@@ -23,7 +29,7 @@
         <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Valor: </p><p class="laranja">{{serv.preco}}</p></div>
         <div class="info_upedido-dado"><p style="margin-left: 6px">{{serv.descricao}}</p></div>
       </div>
-  </div>
+  </div><ion-ripple-effect></ion-ripple-effect>
 </div>
 </div>
 

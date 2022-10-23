@@ -62,6 +62,8 @@ ion-content{
             margin: 10px 0px;
             border-radius: 20px;
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
+            position: relative;
+            overflow: hidden; 
         }
 
         .laranja {

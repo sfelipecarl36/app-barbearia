@@ -1,14 +1,15 @@
 <ion-content scroll-x="false" fullscreen>
   <div class="black">
 
-<div class="containertop">
-    <div class="containertopchildren" [routerLink]="['/perfil']"> 
+<div class="containerheader">
+    <div class="containertopchildren ion-activatable" [routerLink]="['/perfil']"> 
       <ion-icon class="topo" name="person"></ion-icon>
     <h2 class="entrar" id="nome" *ngFor="let user of users | async">Olá, {{user.nome}}</h2>
+    <ion-ripple-effect></ion-ripple-effect>
     </div>
-    <div class="containertopchildren2" [routerLink]="['/notificacoes']">
+    <div class="containertopchildren2 ion-activatable" [routerLink]="['/notificacoes']">
     <div *ngIf="(notificacoes | async)?.length;"><ion-badge color="danger">{{notify}}</ion-badge></div>
-      <ion-icon name="notifications"></ion-icon>
+      <ion-icon name="notifications"></ion-icon><ion-ripple-effect></ion-ripple-effect>
     </div>
   </div>    
     <div class="containerslide">
@@ -16,12 +17,12 @@
     <ion-slides pager="false" [options]="slideOpts" >
         
       <ion-slide class="sliderecomendado" *ngFor="let servico of servicosRecomendado | async">
-        <div class="recomendado">
+        <div class="recomendado ion-activatable">
           <div class="imgrecomendado" style="background-image: url('{{servico.img}}');"></div>
             <div class="inforecomendado">
               <h2>R${{servico.preco}}</h2>
               <h4>{{servico.nome}}</h4>
-            </div>
+            </div><ion-ripple-effect></ion-ripple-effect>
         </div>
       </ion-slide>
 
@@ -30,8 +31,8 @@
     <ion-slides pager="false" [options]="slideOpts2" >
         
       <ion-slide class="servico" *ngFor="let tiposervico of tiposervicos | async">
-        <div class="box" style="background-color: #33291C;" [routerLink]="['/servicos']">
-          <ion-icon name="{{tiposervico.icon}}"></ion-icon>
+        <div class="box ion-activatable" style="background-color: #33291C;" [routerLink]="['/servicos']">
+          <ion-icon name="{{tiposervico.icon}}"></ion-icon><ion-ripple-effect></ion-ripple-effect>
         </div>
         <p>{{tiposervico.nome}}</p>
       </ion-slide>
@@ -45,8 +46,9 @@
     <h5>Último Agendamento</h5>
     <ion-button expand="block" class="transp" shape="round" [routerLink]="['/novoservico']" Strong>Agendar Serviço</ion-button>
   </div>
+  
 
-  <div class="caixa" *ngIf="(agendamentos | async)?.length ; else noagendamento">
+  <div class="caixa ion-activatable" *ngIf="(agendamentos | async)?.length ; else noagendamento">
     <div class="containertop" *ngFor="let agendamento of agendamentos | async">
       <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
       <div class="info_upedido" (click)="detalhar(agendamento.servico, agendamento.profissional, agendamento.data, agendamento.hora, agendamento.pagamento)">
@@ -56,6 +58,7 @@
         <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{agendamento.status}}</p></div>
       </div>
   </div>
+  <ion-ripple-effect></ion-ripple-effect>
 </div>
 
 <ng-template #noagendamento>

@@ -24,6 +24,10 @@ export class ServicosPage implements OnInit {
     public auth: AngularFireAuth,
     private alertController: AlertController,
   ) { 
+
+    interface SegmentChangeEventDetail {
+      value?: string;
+    }
     this.authService.ngFireAuth.currentUser.then( user => {
 
       this.servic = this.firestore.collection('servicos');
@@ -35,6 +39,8 @@ export class ServicosPage implements OnInit {
     })
 
   }
+
+  
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -65,9 +71,9 @@ export class ServicosPage implements OnInit {
   ngOnInit() {
   }
 
-  filtroServicos(filtro){
-    this.servicos = this.firestore.collection('servicos', ref => ref.where("tipo", "==", filtro.detail.value)).valueChanges()
-    console.log('mudou!')
+  segmentChanged(e){
+    this.servicos = this.firestore.collection('servicos', ref => ref.where("tipo", "==", e.detail.value)).valueChanges()
+    console.log('mudou!', e.detail.value)
   }
 
 }

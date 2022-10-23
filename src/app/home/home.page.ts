@@ -251,7 +251,7 @@ export class HomePage implements OnInit {
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Carregando...',
-      duration: 2000,
+      duration: 2500,
       spinner: 'circles',
     });
 
@@ -261,6 +261,7 @@ export class HomePage implements OnInit {
   ngOnInit(){
 
   }
+  
 
   ionViewDidLoad(){
     this.showLoading()

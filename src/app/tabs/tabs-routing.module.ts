@@ -42,6 +42,11 @@ const routes: Routes = [
       },
 
       {
+        path: 'detailservico',
+        loadChildren: () => import('../detailservico/detailservico.module').then( m => m.DetailservicoPageModule),
+      },
+
+      {
         path: 'mural',
         loadChildren: () => import('../mural/mural.module').then( m => m.MuralPageModule),
       },

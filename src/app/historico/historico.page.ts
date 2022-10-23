@@ -20,6 +20,7 @@ export class HistoricoPage {
   nomeprof: any
   servicos: any;
   barbeiro: any;
+  useruid: any;
   
 
   constructor(
@@ -34,6 +35,7 @@ export class HistoricoPage {
 
     this.authService.ngFireAuth.currentUser.then( user => {
 
+      this.useruid = user.uid
       this.agend = this.firestore.collection('agendamentos', ref => ref.limit(15).
       where('user', '==', user.uid));
 
@@ -102,6 +104,16 @@ export class HistoricoPage {
 
   ionViewDidLoad(){
     this.showLoading()
+  }
+
+  segmentChanged(e){
+    this.authService.ngFireAuth.currentUser.then( user => {
+    this.agend = this.firestore.collection('agendamentos', ref => ref.limit(15).
+    where('status', '==',e.detail.value).where('user', '==',user.uid));
+
+    this.agendamentos = this.agend.valueChanges()
+    
+    })
   }
 
 }
