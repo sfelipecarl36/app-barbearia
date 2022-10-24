@@ -33,7 +33,8 @@
 
     <hr>
 
-    <ion-button expand="block" color="danger" shape="round" Strong *ngIf="statusPa!='3'" (click)="presentAlert()">Cancelar Agendamento</ion-button>
+    <ion-button expand="block" color="danger" shape="round" Strong *ngIf="statusPa=='1'" (click)="presentAlert()">Cancelar Agendamento</ion-button>
+    <ion-button expand="block" shape="round" Strong *ngIf="statusPa=='3'" (click)="presentAlert2()">Excluir Agendamento</ion-button>
 
 
 </div>

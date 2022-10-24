@@ -4,10 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import { AuthenticationService } from "../shared/authentication-service";
 import { getAuth, UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
-// import { AngularFireModule } from 'angularfire2';
-// import { AngularFirestoreModule } from 'angularfire2/firestore';
-// import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +25,8 @@ export class RegisterPage implements OnInit {
     public authService: AuthenticationService,
     public router: Router,
     private loadingCtrl: LoadingController,
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    private alertController: AlertController,
   ) { }
   ngOnInit(){}
 
@@ -49,6 +47,19 @@ export class RegisterPage implements OnInit {
     loading.present();
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Bem-vindo a Barbearia Los Ursos!',
+      buttons: [
+        {
+          text: 'Obrigado!',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
     registrarEmail(){
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, this.email, this.senha).then( newUser => {
@@ -56,6 +67,7 @@ export class RegisterPage implements OnInit {
       // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
       this.showLoading()
       this.router.navigateByUrl('home');
+      this.presentAlert()
     })
     }
     

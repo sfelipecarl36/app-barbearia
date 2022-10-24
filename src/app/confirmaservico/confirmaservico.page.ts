@@ -131,7 +131,7 @@ export class ConfirmaservicoPage implements OnInit {
     this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
     this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
     });
-    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot}).then( newNotif => {  
+    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
     this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
     });
     this.router.navigateByUrl('historico');

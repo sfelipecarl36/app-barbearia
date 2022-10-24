@@ -4,6 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication-service";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-novoservico',
@@ -119,6 +120,8 @@ export class NovoservicoPage implements OnInit {
   dataMax: string;
   dataVal: any;
   horaSelecionada: any;
+  agendaCheck: any;
+  agendaQuant: any
 
   pushLog(msg) {
     this.logs.unshift(msg);
@@ -140,7 +143,8 @@ export class NovoservicoPage implements OnInit {
     private loadingCtrl: LoadingController,
     public auth: AngularFireAuth,
     private authService: AuthenticationService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private alertController: AlertController,
   ) { 
     this.minuteValues = '0';
     this.diaSel = new Date().getDate();
@@ -158,6 +162,35 @@ export class NovoservicoPage implements OnInit {
     this.servicos = firestore.collection('servicos').valueChanges();
     this.profissionais = firestore.collection('profissionais').valueChanges();
     this.horasDisp = '';
+    this.agendaQuant = 0;
+
+    authService.ngFireAuth.currentUser.then( user => {
+      this.agendaCheck = firestore.collection('agendamento', ref => ref.
+      where('uid', '==', user.uid).
+      where('status', '==', '1')).valueChanges()
+      this.agendaQuant = this.agendaCheck.length
+    }).catch( error => {
+      this.router.navigateByUrl('inicio');
+    })
+
+    console.log('agendaQuant:',this.agendaQuant)
+    if(this.agendaQuant>1){
+      this.router.navigateByUrl('home');
+      this.presentAlert()
+    }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Você possui mais um agendamento em aberto!',
+      buttons: [
+        {
+          text: 'Ok',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async showLoading() {
@@ -184,7 +217,7 @@ export class NovoservicoPage implements OnInit {
 
     this.agendamentos = this.firestore.collection('agendamentos',ref => ref.
     where('profissional', '==', this.profissional).
-    where('status', '==', 'Em Andamento').
+    where('status', '==', '1').
     where('data', '==', dataSelect)).valueChanges();
 
     interface agenda {
@@ -205,7 +238,7 @@ export class NovoservicoPage implements OnInit {
     let horaNow = this.horaSel
 
     if(this.diaSel == dataSelect.substring(0,2)) {
-      for(let i = 0; i<10; i++){
+      for(let i = 0; i<9; i++){
         horaNow = ('0'+horaNow).slice(-2)
         this.hourValues = this.hourValues.replace(String(horaNow)+',', '')
         this.hourValues = this.hourValues.replace(String(horaNow), '')
@@ -227,7 +260,7 @@ checkValue2(event) {
 
   this.agendamentos = this.firestore.collection('agendamentos',ref => ref.
   where('profissional', '==', this.profissional).
-  where('status', '==', 'Em Andamento').
+  where('status', '==', '1').
   where('data', '==', dataSelect)).valueChanges();
 
   interface agenda {

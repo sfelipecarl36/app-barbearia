@@ -31,7 +31,8 @@ export class NotificacoesPage implements OnInit {
     this.authService.ngFireAuth.currentUser.then( user => {
 
     this.notificacoes = firestore.collection('notificacoes', ref => ref.limit(25).
-    where('user', '==', user.uid)).valueChanges();
+    where('user', '==', user.uid).
+    orderBy('idOrder', 'desc')).valueChanges();
 
     this.notificacoesGet = firestore.collection('notificacoes', ref => ref.
     where('user', '==', user.uid));

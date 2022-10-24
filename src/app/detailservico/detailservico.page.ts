@@ -76,6 +76,16 @@ export class DetailservicoPage implements OnInit {
     await toast.present();
   }
 
+  async presentToast2(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: 'Agendamento Excluído!',
+      duration: 1500,
+      position: position
+    });
+
+    await toast.present();
+  }
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Cancelar Agendamento do Registro?',
@@ -95,10 +105,35 @@ export class DetailservicoPage implements OnInit {
     await alert.present();
   }
 
+  async presentAlert2() {
+    const alert = await this.alertController.create({
+      header: 'Excluir Agendamento do Histórico?',
+      buttons: [
+        {
+          text: 'Não',
+        },
+        {
+          text: 'Sim, Excluir',
+          handler: data => {
+              this.deletarAgend()
+            }
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   cancelarAgend(){
     this.agendamento.doc(this.docID).update({status: "3"})
     this.router.navigateByUrl('historico')  
     this.presentToast('middle')
+  }
+
+  deletarAgend(){
+    this.agendamento.doc(this.docID).delete()
+    this.router.navigateByUrl('historico')  
+    this.presentToast2('middle')
   }
 
   ngOnInit() {
