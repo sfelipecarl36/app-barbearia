@@ -10,8 +10,14 @@ ion-icon{
 }
 
 ion-segmennt {
-    max-width: 95%;
+    margin: 0px 10px;
 }
+
+ion-segment-button {
+    width: 115px;
+    min-width: 115px;
+    padding: 0px;
+  }
 
 ion-radio-group{
     display: flex;

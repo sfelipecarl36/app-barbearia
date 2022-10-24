@@ -26,7 +26,7 @@
 
       <ion-radio-group *ngFor="let prof of profissionais | async" required
       [(ngModel)]="profissional"
-      (ionChange)="checkValue($event)">
+      (ionChange)="checkValue($event, dataehora)">
       
       <ion-item color="none" lines="none">
       <ion-slide class="profissional">
@@ -46,7 +46,7 @@
   <div class="container">
   <ion-list color="transparent" lines="none">
     <ion-item class="item item-trns text-center">
-      <ion-select interface="popover" placeholder="Serviço" required #servico>
+      <ion-select interface="popover" placeholder="Serviço" required #servico [(ngModel)]="servicoSel">
 
         <ion-select-option *ngFor="let serv of servicos | async" value="{{serv.id}}">{{serv.nome}}</ion-select-option>
       </ion-select>
@@ -104,15 +104,17 @@
 </ion-grid> -->
 
 <ion-datetime #dataehora [isDateEnabled]="isWeekday" locale="pt-BR" displayFormat="DD/MM/YYYY HH:mm" required
-  minuteValues="{{minuteValues}}"
-  hourValues​="{{hourValues}}"
-  min="2022-10-01T00:00:00"
-  max="2022-11-31T23:59:59"
+hourCycle="h23"
+hourValues="{{hourValues}}"
+minuteValues="{{minuteValues}}"
+(ionChange)="checkValue2(dataehora)"
+min="{{dataSel}}"
+max="{{dataMax}}"
 ><span slot="time-label">Data Agendamento</span></ion-datetime>
 
   </div>
 
-<ion-button expand="block" shape="round" (click)="revisarServico(servico, dataehora)" Strong>Confirmar</ion-button>
+<ion-button expand="block" shape="round" [disabled]="!canSave()" (click)="revisarServico(servico, dataehora)" Strong>Confirmar</ion-button>
 
 
 </div>

@@ -40,34 +40,6 @@ export class ServicosPage implements OnInit {
 
   }
 
-  
-
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Selecione a Categoria',
-      buttons: ['OK'],
-      inputs: [
-        {
-          label: 'Red',
-          type: 'radio',
-          value: 'red',
-        },
-        {
-          label: 'Blue',
-          type: 'radio',
-          value: 'blue',
-        },
-        {
-          label: 'Green',
-          type: 'radio',
-          value: 'green',
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
   ngOnInit() {
   }
 

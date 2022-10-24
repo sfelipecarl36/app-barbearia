@@ -35,6 +35,7 @@ export class ConfirmaservicoPage implements OnInit {
   profissionais: any;
   agendas: import("@angular/fire/compat/firestore").AngularFirestoreCollection<unknown>;
   nomeprof: any;
+  pagamentoModel: any;
 
   constructor(
     private alertController: AlertController,
@@ -113,6 +114,10 @@ export class ConfirmaservicoPage implements OnInit {
 
   ngOnInit(){
 
+  }
+
+  canSave(): boolean{
+    return this.pagamentoModel != null
   }
 
   confirmarServico(pagamento, nomeservico, nomeprof){

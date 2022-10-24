@@ -20,8 +20,8 @@
       <div class="info_upedido">
         <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.nome}}</p></div>
         <div class="info_upedido-dado" *ngFor="let prof of profissional | async"><p>{{prof.nome}}</p></div>
-        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{dataehora}}</p></div>
-        <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{hora}}</p></div>
+        <div class="info_upedido-dado"><p>{{dataehora}}</p></div>
+        <div class="info_upedido-dado"><p>{{hora}}</p></div>
       </div>
     </div>
 
@@ -48,7 +48,7 @@
         <div class="caixa">
           <div class="info_upedido2">
           <h6>Pagamento</h6>
-          <ion-select interface="popover" placeholder="Escolha" #pagamento>
+          <ion-select interface="popover" placeholder="Escolha" [(ngModel)]="pagamentoModel" #pagamento>
             <ion-icon *ngFor="let pag of pagamentos | async" value="{{pag.nome}}" name="{{pag.icon}}"></ion-icon>
             <ion-select-option *ngFor="let pag of pagamentos | async" value="{{pag.id}}"><ion-icon name="{{pag.icon}}"></ion-icon>{{pag.nome}}</ion-select-option>
           </ion-select>
@@ -58,7 +58,7 @@
     <hr>
     <div *ngFor="let serv of servico | async">
       <div *ngFor="let prof of profissional | async">
-    <ion-button expand="full" shape="round" Strong (click)="presentAlert(pagamento, serv.nome, prof.nome)">Agendar Serviço</ion-button>
+    <ion-button expand="full" shape="round" [disabled]="!canSave()" Strong (click)="presentAlert(pagamento, serv.nome, prof.nome)">Agendar Serviço</ion-button>
       </div>
     </div>
 

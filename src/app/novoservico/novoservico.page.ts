@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { LoadingController } from '@ionic/angular';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/authentication-service";
-import { getAuth, UserCredential, createUserWithEmailAndPassword } from "firebase/auth";
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
@@ -103,20 +102,21 @@ export class NovoservicoPage implements OnInit {
     }
   }
 
-  // isWeekday = (dateString: string) => {
-  //   const date = new Date(dateString);
-  //   const utcDay = date.getUTCDay();
-
-  //   /**
-  //    * Date will be enabled if it is not
-  //    * Sunday or Saturday
-  //    */
-  //   return utcDay !== 0 && utcDay !== 6;
-  // };
-
   logs: any;
-  hourValues: any;
+  hourValues: String;
   minuteValues: any;
+  agendamentos: any;
+  horasDisp: any;
+  servicoSel: any;
+  dataSel: any;
+  startDate: any;
+  minDate: any;
+  diaSel: any;
+  mesSel: any;
+  anoSel: any;
+  horaSel: any;
+  minutoSel: any;
+  dataMax: string;
 
   pushLog(msg) {
     this.logs.unshift(msg);
@@ -140,17 +140,27 @@ export class NovoservicoPage implements OnInit {
     private authService: AuthenticationService,
     private firestore: AngularFirestore
   ) { 
-    this.hourValues ='09,10,11,12,13,14,15,16,17,18,19 #hour';
-    this.minuteValues = ['0'];
+    this.minuteValues = '0';
+    this.diaSel = new Date().getDate();
+    this.mesSel = new Date().getMonth();
+    this.anoSel = new Date().getFullYear();
+    this.horaSel = String(new Date().getHours());
+    this.horaSel = ('0'+this.horaSel).slice(-2)
+    this.minutoSel = String(new Date().getMinutes());
+    this.minutoSel = ('0'+this.minutoSel).slice(-2)
+    this.dataSel = this.anoSel+'-'+(this.mesSel+1)+'-'+this.diaSel+'T'+this.horaSel+':'+this.minutoSel+':00'
+    this.dataMax = this.anoSel+'-'+(this.mesSel+2)+'-'+this.diaSel+'T'+this.horaSel+':'+this.minutoSel+':00'
+    console.log(this.dataSel)
+    // this.minDate = new Date();
     this.servicos = firestore.collection('servicos').valueChanges();
     this.profissionais = firestore.collection('profissionais').valueChanges();
-    console.log(this.profissional)
+    this.horasDisp = '';
   }
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Carregando...',
-      duration: 300,
+      duration: 200,
       spinner: 'circles',
     });
 
@@ -164,19 +174,66 @@ export class NovoservicoPage implements OnInit {
   ngOnInit() {
   }
 
-  checkValue(event) { 
-    console.log(event.detail.value)
+  checkValue(event, data) { 
+    this.hourValues ='';
     this.profissional = event.detail.value
+    const dataSelect = new Date(data.value).toLocaleDateString();
+
+    this.agendamentos = this.firestore.collection('agendamentos',ref => ref.
+    where('profissional', '==', this.profissional).
+    where('status', '==', 'Em Andamento').
+    where('data', '==', dataSelect)).valueChanges();
+
+    interface agenda {
+      hora: any
+    }
+
+    this.hourValues ='09,10,11,13,14,15,16,17,18';
+
+    this.agendamentos.subscribe((res: agenda[]) => {
+
+        res.forEach((item) => {
+          this.horasDisp = item.hora.substring(0,2)
+          this.hourValues = this.hourValues.replace(this.horasDisp+',', '')
+        });
+    })
+}
+
+canSave(): boolean{
+  return this.profissional != null && 
+  this.servicoSel != null &&
+  this.dataSel != null
+}
+
+checkValue2(event) { 
+  this.hourValues ='';
+  const dataSelect = new Date(event.value).toLocaleDateString();
+
+  this.agendamentos = this.firestore.collection('agendamentos',ref => ref.
+  where('profissional', '==', this.profissional).
+  where('status', '==', 'Em Andamento').
+  where('data', '==', dataSelect)).valueChanges();
+
+  interface agenda {
+    hora: any
   }
+
+  this.hourValues ='09,10,11,13,14,15,16,17,18';
+
+  this.agendamentos.subscribe((res: agenda[]) => {
+
+      res.forEach((item) => {
+        this.horasDisp = item.hora.substring(0,2)
+        this.hourValues = this.hourValues.replace(this.horasDisp+',', '')
+        this.hourValues = this.hourValues.replace(this.horasDisp, '')
+      });
+  })
+}
 
   isWeekday = (dateString: string) => {
     const date = new Date(dateString);
     const utcDay = date.getUTCDay();
 
-    /**
-     * Date will be enabled if it is not
-     * Sunday or Saturday
-     */
     return utcDay !== 0 && utcDay !== 6;
   };
 
@@ -189,6 +246,5 @@ export class NovoservicoPage implements OnInit {
       queryParams: [this.profissional,servico.value, datetime, time]
     })
   }
-
 
 }

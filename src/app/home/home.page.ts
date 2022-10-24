@@ -219,16 +219,18 @@ export class HomePage implements OnInit {
       this.users = firestore.collection('users', ref => ref.
       where('uid', '==', user.uid)).valueChanges();
 
-      this.agend = this.firestore.collection('agendamentos', ref => ref.limit(1).
-      where('user', '==', user.uid));
-
       this.notificacoes = this.firestore.collection('notificacoes', ref => ref.
-      where('user', '==', user.uid)).valueChanges()
+      where('user', '==', user.uid).
+      where('lido', '==', false)).valueChanges()
 
       this.firestore.collection('notificacoes', ref => ref.
       where('user', '==', user.uid)).valueChanges().subscribe( result => {
         this.notify = result.length;
         });
+
+      this.agend = this.firestore.collection('agendamentos', ref => ref.limit(1).
+      // orderBy('id', 'desc').
+      where('user', '==', user.uid));
 
       this.agendamentos = this.agend.valueChanges()
       this.profissionais =  this.firestore.collection('profissionais').valueChanges();

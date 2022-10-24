@@ -36,8 +36,9 @@ export class HistoricoPage {
     this.authService.ngFireAuth.currentUser.then( user => {
 
       this.useruid = user.uid
-      this.agend = this.firestore.collection('agendamentos', ref => ref.limit(15).
-      where('user', '==', user.uid));
+      this.agend = this.firestore.collection('agendamentos', ref => ref.limit(15)
+      // .orderBy('id', 'desc')
+      .where('user', '==', user.uid));
 
       this.agendamentos = this.agend.valueChanges()
       this.profissionais =  this.firestore.collection('profissionais').valueChanges();
@@ -109,7 +110,7 @@ export class HistoricoPage {
   segmentChanged(e){
     this.authService.ngFireAuth.currentUser.then( user => {
     this.agend = this.firestore.collection('agendamentos', ref => ref.limit(15).
-    where('status', '==',e.detail.value).where('user', '==',user.uid));
+    orderBy('id', 'desc').where('status', '==',e.detail.value).where('user', '==',user.uid));
 
     this.agendamentos = this.agend.valueChanges()
     

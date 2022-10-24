@@ -13,6 +13,7 @@ export class NotificacoesPage implements OnInit {
   notificacoes: any;
   servicos: any;
   profissionais: any;
+  notifica: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -24,12 +25,17 @@ export class NotificacoesPage implements OnInit {
     this.servicos =  this.firestore.collection('servicos').valueChanges();
     
     this.authService.ngFireAuth.currentUser.then( user => {
+
     this.notificacoes = firestore.collection('notificacoes', ref => ref.limit(25).
-    where('user', '==', user.uid)).valueChanges()
+    where('user', '==', user.uid)).valueChanges();
+
+    this.notifica = firestore.collection('notificacoes', ref => ref.
+    where('user', '==', user.uid));
     })
 
   }
 
   ngOnInit() {
+    
   }
 }
