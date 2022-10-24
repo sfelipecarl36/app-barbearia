@@ -45,7 +45,6 @@ export class ServicosPage implements OnInit {
 
   segmentChanged(e){
     this.servicos = this.firestore.collection('servicos', ref => ref.where("tipo", "==", e.detail.value)).valueChanges()
-    console.log('mudou!', e.detail.value)
   }
 
 }

@@ -63,11 +63,15 @@
 
 <ng-template #noagendamento>
   <div class="caixa"><h2>Não há Agendamentos</h2></div>
-  </ng-template>
+</ng-template>
 
 
 
   <hr><br>
+
+  <div *ngFor="let banner of banners | async" class="banner ion-activatable" style="background-image: url('{{banner.img}}');">
+    <ion-ripple-effect></ion-ripple-effect>
+  </div>
 
   <div class="container"><h5>Nossos Barbeiros</h5></div>
   <div class="containerbarbeiros" *ngFor="let prof of profissionais | async">

@@ -11,7 +11,7 @@
     </div> -->
   </div>    
 
-  <hr><br><br>
+  <hr><br>
 
   <div class="container">
     <h4>Escolha seu Barbeiro</h4>
@@ -110,6 +110,7 @@ minuteValues="{{minuteValues}}"
 (ionChange)="checkValue2(dataehora)"
 min="{{dataSel}}"
 max="{{dataMax}}"
+[(ngModel)]="dataVal"
 ><span slot="time-label">Data Agendamento</span></ion-datetime>
 
   </div>

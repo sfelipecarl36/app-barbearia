@@ -36,6 +36,7 @@ export class ConfirmaservicoPage implements OnInit {
   agendas: import("@angular/fire/compat/firestore").AngularFirestoreCollection<unknown>;
   nomeprof: any;
   pagamentoModel: any;
+  idGetNot: any;
 
   constructor(
     private alertController: AlertController,
@@ -53,6 +54,10 @@ export class ConfirmaservicoPage implements OnInit {
 
     this.agendamentos.valueChanges().subscribe( x=> {
       this.idGet = (x.length)+1;
+    })
+
+    this.notificacoes.valueChanges().subscribe( x=> {
+      this.idGetNot = (x.length)+1;
     })
 
     this.activatedRoute.queryParams.subscribe(params => {
@@ -124,7 +129,9 @@ export class ConfirmaservicoPage implements OnInit {
     
     this.authService.ngFireAuth.currentUser.then( user => {
     this.agendamentos.add({ status: "Em Andamento", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid});
-    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid});
+    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot}).then( newNotif => {
+    this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
+    });
     this.router.navigateByUrl('historico');
     this.presentToast('middle')
     })

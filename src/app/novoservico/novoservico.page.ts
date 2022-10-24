@@ -117,6 +117,8 @@ export class NovoservicoPage implements OnInit {
   horaSel: any;
   minutoSel: any;
   dataMax: string;
+  dataVal: any;
+  horaSelecionada: any;
 
   pushLog(msg) {
     this.logs.unshift(msg);
@@ -148,7 +150,8 @@ export class NovoservicoPage implements OnInit {
     this.horaSel = ('0'+this.horaSel).slice(-2)
     this.minutoSel = String(new Date().getMinutes());
     this.minutoSel = ('0'+this.minutoSel).slice(-2)
-    this.dataSel = this.anoSel+'-'+(this.mesSel+1)+'-'+this.diaSel+'T'+this.horaSel+':'+this.minutoSel+':00'
+    this.dataSel = this.anoSel+'-'+(this.mesSel+1)+'-'+this.diaSel+'T'+'09'+':'+'00'+':00'
+    this.dataVal = this.dataSel
     this.dataMax = this.anoSel+'-'+(this.mesSel+2)+'-'+this.diaSel+'T'+this.horaSel+':'+this.minutoSel+':00'
     console.log(this.dataSel)
     // this.minDate = new Date();
@@ -195,19 +198,32 @@ export class NovoservicoPage implements OnInit {
         res.forEach((item) => {
           this.horasDisp = item.hora.substring(0,2)
           this.hourValues = this.hourValues.replace(this.horasDisp+',', '')
+          this.hourValues = this.hourValues.replace(this.horasDisp, '')
         });
     })
+
+    let horaNow = this.horaSel
+
+    if(this.diaSel == dataSelect.substring(0,2)) {
+      for(let i = 0; i<10; i++){
+        horaNow = ('0'+horaNow).slice(-2)
+        this.hourValues = this.hourValues.replace(String(horaNow)+',', '')
+        this.hourValues = this.hourValues.replace(String(horaNow), '')
+        horaNow-=1
+      }
+    }
 }
 
-canSave(): boolean{
+canSave(): boolean{ 
   return this.profissional != null && 
   this.servicoSel != null &&
-  this.dataSel != null
+  this.hourValues.indexOf(this.horaSelecionada) > -1
 }
 
 checkValue2(event) { 
   this.hourValues ='';
   const dataSelect = new Date(event.value).toLocaleDateString();
+  const horaSelect = new Date(event.value).toLocaleTimeString();
 
   this.agendamentos = this.firestore.collection('agendamentos',ref => ref.
   where('profissional', '==', this.profissional).
@@ -228,6 +244,19 @@ checkValue2(event) {
         this.hourValues = this.hourValues.replace(this.horasDisp, '')
       });
   })
+
+  let horaNow = this.horaSel
+  
+  if(this.diaSel == dataSelect.substring(0,2)) {
+    for(let i = 0; i<10; i++){
+      horaNow = ('0'+horaNow).slice(-2)
+      this.hourValues = this.hourValues.replace(String(horaNow)+',', '')
+      this.hourValues = this.hourValues.replace(String(horaNow), '')
+      horaNow-=1
+    }
+  }
+
+  this.horaSelecionada = ('0'+horaSelect.substring(0,2)).slice(-2)
 }
 
   isWeekday = (dateString: string) => {

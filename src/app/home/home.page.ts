@@ -203,6 +203,7 @@ export class HomePage implements OnInit {
   notificacoes: any
   servicosRecomendado: any
   notify: any
+  banners: any;
 
   constructor(
     private router: Router,
@@ -233,6 +234,7 @@ export class HomePage implements OnInit {
       where('user', '==', user.uid));
 
       this.agendamentos = this.agend.valueChanges()
+      this.banners =  this.firestore.collection('banners', ref => ref.limit(1)).valueChanges();
       this.profissionais =  this.firestore.collection('profissionais').valueChanges();
       this.tiposervicos =  this.firestore.collection('tiposervicos').valueChanges();
       this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100)).valueChanges();

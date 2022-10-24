@@ -10,7 +10,7 @@
 
   <hr>
   <span *ngIf="(notificacoes | async)?.length ; else nonotificacoes">
-  <div class="caixa ion-activatable" *ngFor="let notif of notificacoes | async">
+  <div class="caixa ion-activatable" *ngFor="let notif of notificacoes | async" (click)="updateLido(notif.id)">
     <div class="containertop">
       <ion-icon id="iconperfil" name="alert-circle-outline"></ion-icon>
         <div class="info_upedido-dado"><p>{{notif.texto}}</p></div>
