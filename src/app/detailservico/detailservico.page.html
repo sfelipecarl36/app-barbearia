@@ -18,6 +18,7 @@
         <div class="info_upedido-dado"><h6>Horário</h6></div>
         <div class="info_upedido-dado"><h6>Pagamento</h6></div>
         <div class="info_upedido-dado"><h6>Preço</h6></div>
+        <div class="info_upedido-dado"><h6>Status</h6></div>
       </div>
       <div class="info_upedido">
         <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.nome}}</p></div>
@@ -26,12 +27,13 @@
         <div class="info_upedido-dado"><p>{{hora}}</p></div>
         <div class="info_upedido-dado" *ngFor="let pag of pagamento | async"><p>{{pag.nome}}</p></div>
         <div class="info_upedido-dado" *ngFor="let serv of servico | async"><p>{{serv.preco}}</p></div>
+        <div class="info_upedido-dado" *ngFor="let stat of status | async"><p>{{stat.nome}}</p></div>
       </div><ion-ripple-effect></ion-ripple-effect>
     </div>
 
     <hr>
 
-    <ion-button expand="block" shape="round" Strong (click)="presentAlert()">Excluir Agendamento</ion-button>
+    <ion-button expand="block" color="danger" shape="round" Strong *ngIf="statusPa!='3'" (click)="presentAlert()">Cancelar Agendamento</ion-button>
 
 
 </div>

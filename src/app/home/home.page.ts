@@ -204,6 +204,7 @@ export class HomePage implements OnInit {
   servicosRecomendado: any
   notify: any
   banners: any;
+  status: Observable<unknown[]>;
 
   constructor(
     private router: Router,
@@ -225,7 +226,8 @@ export class HomePage implements OnInit {
       where('lido', '==', false)).valueChanges()
 
       this.firestore.collection('notificacoes', ref => ref.
-      where('user', '==', user.uid)).valueChanges().subscribe( result => {
+      where('user', '==', user.uid).
+      where('lido', '==', false)).valueChanges().subscribe( result => {
         this.notify = result.length;
         });
 
@@ -236,6 +238,7 @@ export class HomePage implements OnInit {
       this.agendamentos = this.agend.valueChanges()
       this.banners =  this.firestore.collection('banners', ref => ref.limit(1)).valueChanges();
       this.profissionais =  this.firestore.collection('profissionais').valueChanges();
+      this.status = this.firestore.collection('status', ref => ref.orderBy('id', 'asc')).valueChanges();
       this.tiposervicos =  this.firestore.collection('tiposervicos').valueChanges();
       this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100)).valueChanges();
       this.servicosRecomendado =  this.firestore.collection('servicos', ref => ref.where("recomendado", "==", true)).valueChanges();
@@ -246,9 +249,9 @@ export class HomePage implements OnInit {
 
   }
 
-  detalhar(servico, profissional, data, hora, pagamento) {
+  detalhar(servico, profissional, data, hora, pagamento, docId, status) {
     this.router.navigate(['detailservico'],{
-    queryParams: [servico, profissional, data, hora, pagamento]
+    queryParams: [servico, profissional, data, hora, pagamento, docId, status]
     })
   }
 

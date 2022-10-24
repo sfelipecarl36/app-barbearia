@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../shared/authentication-service';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { Console } from 'console';
 
 
 @Component({
@@ -22,7 +23,10 @@ export class DetailservicoPage implements OnInit {
   pag: any;
   pagamento: any;
   agend: any;
-  agendamento: import("@angular/fire/compat/firestore").AngularFirestoreCollection<unknown>;
+  agendamento: any;
+  docID: any;
+  status: any;
+  statusPa: any;
 
   constructor(
     private router: Router,
@@ -36,7 +40,7 @@ export class DetailservicoPage implements OnInit {
   ) { 
 
     this.activatedRoute.queryParams.subscribe(params => {
-      console.log(params[0], params[1], params[2], params[3], params[4])
+      console.log(params[0], params[1], params[2], params[3], params[4], params[5], params[6])
       this.profissional = firestore.collection('profissionais', ref => ref.
       where('id', '==', params[1])).valueChanges();
 
@@ -46,19 +50,25 @@ export class DetailservicoPage implements OnInit {
       this.pagamento = firestore.collection('pagamentos', ref => ref.
       where('id', '==', params[4])).valueChanges();
       
+      this.status = firestore.collection('status', ref => ref.
+      where('id', '==', String(params[6]))).valueChanges();
+
       this.prof = params[0]
       this.serv = params[1]
       this.dataehora = params[2]
       this.hora = params[3]
       this.pag = params[4]
+      this.docID = params[5]
+      this.statusPa = params[6]
+      
       });
 
-      // this.agendamento = this.firestore.collection("agendamentos")
+      this.agendamento = this.firestore.collection("agendamentos")
   }
   
   async presentToast(position: 'top' | 'middle' | 'bottom') {
     const toast = await this.toastController.create({
-      message: 'Não foi possível excluir!',
+      message: 'Agendamento Cancelado!',
       duration: 1500,
       position: position
     });
@@ -68,15 +78,15 @@ export class DetailservicoPage implements OnInit {
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Excluir do registro seu Agendamento?',
+      header: 'Cancelar Agendamento do Registro?',
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Não',
         },
         {
-          text: 'Excluir',
+          text: 'Sim, Cancelar',
           handler: data => {
-              this.deletarAgend()
+              this.cancelarAgend()
             }
         },
       ],
@@ -85,9 +95,10 @@ export class DetailservicoPage implements OnInit {
     await alert.present();
   }
 
-  deletarAgend(){
-    this.presentToast('middle')
+  cancelarAgend(){
+    this.agendamento.doc(this.docID).update({status: "3"})
     this.router.navigateByUrl('historico')  
+    this.presentToast('middle')
   }
 
   ngOnInit() {

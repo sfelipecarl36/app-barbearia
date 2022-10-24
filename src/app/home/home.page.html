@@ -51,11 +51,11 @@
   <div class="caixa ion-activatable" *ngIf="(agendamentos | async)?.length ; else noagendamento">
     <div class="containertop" *ngFor="let agendamento of agendamentos | async">
       <span *ngFor="let prof of profissionais | async"><div *ngIf="prof.id==agendamento.profissional" class="imgbarbeiro" style="background-image: url('{{prof.img}}');"></div></span>
-      <div class="info_upedido" (click)="detalhar(agendamento.servico, agendamento.profissional, agendamento.data, agendamento.hora, agendamento.pagamento)">
+      <div class="info_upedido" (click)="detalhar(agendamento.servico, agendamento.profissional, agendamento.data, agendamento.hora, agendamento.pagamento, agendamento.docId, agendamento.status)">
         <span *ngFor="let serv of servicos | async"><h6 *ngIf="serv.id==agendamento.servico">{{serv.nome}}</h6></span>
         <div class="info_upedido-dado"><ion-icon name="cut"></ion-icon><span *ngFor="let prof of profissionais | async"><p *ngIf="prof.id==agendamento.profissional">{{prof.nome}}</p></span></div>
         <div class="info_upedido-dado"><ion-icon name="calendar"></ion-icon><p>{{agendamento.data}} {{agendamento.hora}}</p></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><p class="verde">{{agendamento.status}}</p></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Status:</p><span *ngFor="let stat of status | async"><p *ngIf="stat.id==agendamento.status" class="{{stat.cor}}">{{stat.nome}}</p></span></div>
       </div>
   </div>
   <ion-ripple-effect></ion-ripple-effect>

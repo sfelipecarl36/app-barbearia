@@ -128,8 +128,10 @@ export class ConfirmaservicoPage implements OnInit {
   confirmarServico(pagamento, nomeservico, nomeprof){
     
     this.authService.ngFireAuth.currentUser.then( user => {
-    this.agendamentos.add({ status: "Em Andamento", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid});
-    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot}).then( newNotif => {
+    this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
+    this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
+    });
+    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot}).then( newNotif => {  
     this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
     });
     this.router.navigateByUrl('historico');

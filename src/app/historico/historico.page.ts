@@ -21,6 +21,7 @@ export class HistoricoPage {
   servicos: any;
   barbeiro: any;
   useruid: any;
+  status: any;
   
 
   constructor(
@@ -41,7 +42,8 @@ export class HistoricoPage {
       .where('user', '==', user.uid));
 
       this.agendamentos = this.agend.valueChanges()
-      this.profissionais =  this.firestore.collection('profissionais').valueChanges();
+      this.profissionais = this.firestore.collection('profissionais').valueChanges();
+      this.status = this.firestore.collection('status', ref => ref.orderBy('id', 'asc')).valueChanges();
       this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100).orderBy('id', 'desc')).valueChanges();
 
     //   interface agenda {
@@ -97,9 +99,9 @@ export class HistoricoPage {
     loading.present();
   }
 
-  detalhar(servico, profissional, data, hora, pagamento) {
+  detalhar(servico, profissional, data, hora, pagamento, docId, status) {
     this.router.navigate(['detailservico'],{
-    queryParams: [servico, profissional, data, hora, pagamento]
+    queryParams: [servico, profissional, data, hora, pagamento, docId, status]
     })
   }
 
@@ -110,7 +112,7 @@ export class HistoricoPage {
   segmentChanged(e){
     this.authService.ngFireAuth.currentUser.then( user => {
     this.agend = this.firestore.collection('agendamentos', ref => ref.limit(15).
-    orderBy('id', 'desc').where('status', '==',e.detail.value).where('user', '==',user.uid));
+    orderBy('id', 'desc').where('status', '==',String(e.detail.value)).where('user', '==',user.uid));
 
     this.agendamentos = this.agend.valueChanges()
     
