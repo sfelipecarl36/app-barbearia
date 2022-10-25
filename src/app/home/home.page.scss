@@ -205,10 +205,10 @@ ion-content{
                 position: relative;
                 overflow: hidden; 
 
-                ion-icon{
-                    color: #FB9400;
-                    font-size: 32px;
-                    transform: rotate(-90deg) !important;
+                img{
+                    max-width: 30px;
+                    max-height: 30px;
+                    fill: #FB9400 !important;
                 }
             }
 

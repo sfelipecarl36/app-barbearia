@@ -58,6 +58,22 @@ export class NotificacoesPage implements OnInit {
       this.presentToast('bottom')
   }
 
+  updateTodasLido(){
+    interface notif {
+      id: any
+      lido: any
+    }
+
+    this.notificacoes.subscribe((res: notif[]) => {
+
+        res.forEach((item) => {
+          this.notificacoesGet.doc(item.id).update({lido: true})
+        });
+    })
+  
+    this.presentToast('middle')
+  }
+
   ngOnInit() {
     
   }

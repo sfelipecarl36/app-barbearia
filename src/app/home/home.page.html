@@ -32,7 +32,7 @@
         
       <ion-slide class="servico" *ngFor="let tiposervico of tiposervicos | async">
         <div class="box ion-activatable" style="background-color: #33291C;" [routerLink]="['/servicos']">
-          <ion-icon name="{{tiposervico.icon}}"></ion-icon><ion-ripple-effect></ion-ripple-effect>
+          <img src="./assets/{{tiposervico.icon}}"><ion-ripple-effect></ion-ripple-effect>
         </div>
         <p>{{tiposervico.nome}}</p>
       </ion-slide>

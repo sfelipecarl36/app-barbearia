@@ -26,9 +26,9 @@ ion-content{
     #iconperfil{
         font-size: 80px;
         color: white;
-        margin: 10px 8px;
-        min-width: 30px;
-        max-width: 32px;
+        margin: 10px 0px;
+        min-width: 50px;
+        max-width: 52px;
     }
 
     #icontexto{
@@ -50,20 +50,56 @@ ion-content{
         display: flex;
         flex-direction: column;
         align-items: center;
+
+        .logo{
+            background-image: url('/assets/logo.png');
+            background-repeat: no-repeat;
+            min-width: 180px;
+            min-height: 180px;
+            background-size: cover;
+            background-position: center;
+            margin: 5px 0px
+        }
+
+        .containerheader{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+
+            .containertopchildren{  
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                
+            }
+
+            .containertopchildren2{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                min-width: 30px;
+
+                ion-icon{
+                    
+                    font-size: 25px;
+                    z-index: 2;
+                }
+                
+            }
+            
+            ion-icon.topo{
+                margin-right: 10px;
+            }
+        }
         
         .caixa{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             width: 90vw;
-            padding: 8px;
-            padding-right: 10px;
+            padding: 10px;
             margin: 10px 0px;
             border-radius: 20px;
             background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
-            position: relative;
-            overflow: hidden; 
         }
 
         .laranja {
@@ -116,9 +152,9 @@ ion-content{
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
+            width: 90%;
 
-            .containertopchildren{
+            .containertopchildren{  
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -129,10 +165,12 @@ ion-content{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                min-width: 30px;
 
                 ion-icon{
-                    margin-inline:-50px;
+                    
                     font-size: 25px;
+                    z-index: 2;
                 }
                 
             }
@@ -232,7 +270,6 @@ ion-content{
 
         .entrar {
             position: relative;
-            width: 80vw;
         }
         .logo{
             background-image: url('/assets/logo.png');
@@ -411,10 +448,7 @@ ion-content{
         div.spacebetween{
             width: 40vw;
         }
-  
-        h2.entrar{
-            width: 40vw !important;
-        }
+
     }
     
    

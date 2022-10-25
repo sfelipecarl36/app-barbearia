@@ -120,8 +120,9 @@ export class NovoservicoPage implements OnInit {
   dataMax: string;
   dataVal: any;
   horaSelecionada: any;
-  agendaCheck: any;
-  agendaQuant: any
+  agendaQuant: any;
+  agendaCheck: number;
+  agendaAberta: any;
 
   pushLog(msg) {
     this.logs.unshift(msg);
@@ -135,7 +136,6 @@ export class NovoservicoPage implements OnInit {
   profissionais: any
   now: any
   datetime: any
-
   profissional: any
 
   constructor(
@@ -161,28 +161,13 @@ export class NovoservicoPage implements OnInit {
     // this.minDate = new Date();
     this.servicos = firestore.collection('servicos').valueChanges();
     this.profissionais = firestore.collection('profissionais').valueChanges();
-    this.horasDisp = '';
-    this.agendaQuant = 0;
-
-    authService.ngFireAuth.currentUser.then( user => {
-      this.agendaCheck = firestore.collection('agendamento', ref => ref.
-      where('uid', '==', user.uid).
-      where('status', '==', '1')).valueChanges()
-      this.agendaQuant = this.agendaCheck.length
-    }).catch( error => {
-      this.router.navigateByUrl('inicio');
-    })
-
-    console.log('agendaQuant:',this.agendaQuant)
-    if(this.agendaQuant>1){
-      this.router.navigateByUrl('home');
-      this.presentAlert()
-    }
+    this.horasDisp = ''; 
+    this.agendaCheck = 0;
   }
 
   async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Você possui mais um agendamento em aberto!',
+      header: 'Você possui mais de um agendamento em aberto!',
       buttons: [
         {
           text: 'Ok',
@@ -204,8 +189,24 @@ export class NovoservicoPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    this.showLoading()
+
+    this.agendaCheck = 0
+
+    this.authService.ngFireAuth.currentUser.then( user => {
+      this.firestore.collection('agendamentos', ref => ref.
+        where('user', '==', user.uid).
+        where('status', '==', '1')).stateChanges().subscribe( c=> {
+          this.agendaCheck = (c.length);
+
+          if(this.agendaCheck>1){
+            this.presentAlert();
+            this.router.navigateByUrl('historico');
+          }
+
+        })
+      })
   }
+
 
   ngOnInit() {
   }
