@@ -148,6 +148,19 @@ export class ConfirmaservicoPage implements OnInit {
     return this.pagamentoModel != null
   }
 
+  agendar(pagamento, nomeservico, nomeprof){
+    this.authService.ngFireAuth.currentUser.then( user => {
+      this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
+      this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
+      });
+      this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
+      this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
+      });
+      this.router.navigateByUrl('historico');
+      this.presentToast('middle')
+      })
+  }
+
   confirmarServico(pagamento, nomeservico, nomeprof){
 
     this.agendaCheck = 0
@@ -164,16 +177,7 @@ export class ConfirmaservicoPage implements OnInit {
           this.agendaCheck = (c.length);
           if(this.diaSel==this.dataehora.substring(0,2)){            
             if(Number(this.horaSel)<Number(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
-              this.authService.ngFireAuth.currentUser.then( user => {
-                this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
-                this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
-                });
-                this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
-                this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
-                });
-                this.router.navigateByUrl('historico');
-                this.presentToast('middle')
-                })
+              this.agendar(pagamento, nomeservico, nomeprof)
             }
             else if(Number(this.horaSel)>=Number(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
               this.presentAlert2('Horário Não Permitido!');
@@ -186,16 +190,7 @@ export class ConfirmaservicoPage implements OnInit {
           }
           else{
             if(this.agendaCheck==0 && i==1){
-              this.authService.ngFireAuth.currentUser.then( user => {
-                this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
-                this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
-                });
-                this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
-                this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
-                });
-                this.router.navigateByUrl('historico');
-                this.presentToast('middle')
-                })
+                this.agendar(pagamento, nomeservico, nomeprof) 
             }
             else if(this.agendaCheck>0 && i==1){
               this.presentAlert2('Agenda Ocupada!');

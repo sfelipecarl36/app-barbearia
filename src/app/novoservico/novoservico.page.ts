@@ -123,13 +123,16 @@ export class NovoservicoPage implements OnInit {
   agendaQuant: any;
   agendaCheck: number;
   agendaAberta: any;
+  valorAtual: any;
+  precoservicos: any;
 
   pushLog(msg) {
     this.logs.unshift(msg);
   }
 
-  handleChange(e) {
-    this.pushLog('Valor: R$' + e.detail.value);
+  handleChange(ev) {
+    this.valorAtual = String(ev.target.value)
+    this.precoservicos = this.firestore.collection('servicos', ref => ref.where('id', '==', this.valorAtual)).valueChanges();
   }
 
   servicos: any
@@ -165,6 +168,8 @@ export class NovoservicoPage implements OnInit {
     this.agendaCheck = 0;
   }
 
+  
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Você possui mais de um agendamento em aberto!',
@@ -188,6 +193,7 @@ export class NovoservicoPage implements OnInit {
     loading.present();
   }
 
+  
   ionViewWillEnter(){
 
     this.agendaCheck = 0

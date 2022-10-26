@@ -25,8 +25,8 @@
       <div class="imgbarbeiro" style="background-image: url('{{serv.img}}');"></div>
       <div class="info_upedido">
         <h6>{{serv.nome}}</h6>
-        <div *ngFor="let tipo of tiposervicos | async"><div class="info_upedido-dado" *ngIf="tipo.id==serv.tipo"><ion-icon name="{{tipo.icon}}"></ion-icon><p>{{tipo.nome}}</p></div></div>
-        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Valor: </p><p class="laranja">{{serv.preco}}</p></div>
+        <div *ngFor="let tipo of tiposervicos | async"><div class="info_upedido-dado" *ngIf="tipo.id==serv.tipo"><img src="./assets/{{tipo.icon}}" class="iconsvg"><p>{{tipo.nome}}</p></div></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Valor:</p><p class="laranja">{{serv.preco}}</p></div>
         <div class="info_upedido-dado"><p style="margin-left: 6px">{{serv.descricao}}</p></div>
       </div>
   </div><ion-ripple-effect></ion-ripple-effect>

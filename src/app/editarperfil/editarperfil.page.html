@@ -1,0 +1,30 @@
+<ion-content scroll-x="false" fullscreen *ngFor="let user of users | async">
+  <div class="black">
+
+<div class="containerheader">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="perfil" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Editar Perfil</h2>
+    </div>
+  </div>
+  <img referrerpolicy=“no-referrer” id="fotoperfil" [src]="user.photoURL"/>
+
+  <div class="caixa ion-activatable">
+    <div class="form">
+      <ion-item lines="none" color="none">
+        <ion-label position="stacked">Seu Nome</ion-label>
+        <ion-input type="text" placeholder="Nome" value="{{user.displayName}}" required #nome></ion-input>
+      </ion-item>
+      <ion-item lines="none" color="none">
+        <ion-label position="stacked">Celular</ion-label>
+        <ion-input type="text" placeholder="Celular" value="{{user.celular}}" required #celular></ion-input>
+      </ion-item>
+    </div>
+      <ion-ripple-effect></ion-ripple-effect>
+    </div>
+
+    <ion-button expand="block" [disabled]="!canSave(nome, celular)" type="submit" shape="round" (click)="updateUser(nome, celular)" Strong>Confirmar Mudanças</ion-button>
+
+</div>
+
+</ion-content>

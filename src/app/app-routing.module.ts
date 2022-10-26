@@ -86,7 +86,11 @@ const routes: Routes = [
   {
     path: 'servicos',
     loadChildren: () => import('./servicos/servicos.module').then( m => m.ServicosPageModule)
+  },  {
+    path: 'editarperfil',
+    loadChildren: () => import('./editarperfil/editarperfil.module').then( m => m.EditarperfilPageModule)
   }
+
 
 
 

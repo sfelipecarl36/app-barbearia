@@ -52,6 +52,12 @@ export class PerfilPage {
     await alert.present();
   }
 
+  editar(docID) {
+    this.router.navigate(['editarperfil'],{
+    queryParams: [docID]
+    })
+  }
+
   logout(){
     this.authService.SignOut()
   }

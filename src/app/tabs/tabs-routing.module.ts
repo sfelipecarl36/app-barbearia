@@ -32,6 +32,11 @@ const routes: Routes = [
       },
 
       {
+        path: 'editarperfil',
+        loadChildren: () => import('../editarperfil/editarperfil.module').then( m => m.EditarperfilPageModule),
+      },
+
+      {
         path: 'servicos',
         loadChildren: () => import('../servicos/servicos.module').then( m => m.ServicosPageModule),
       },

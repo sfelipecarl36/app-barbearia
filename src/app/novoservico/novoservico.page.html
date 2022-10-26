@@ -46,16 +46,14 @@
   <div class="container">
   <ion-list color="transparent" lines="none">
     <ion-item class="item item-trns text-center">
-      <ion-select interface="popover" placeholder="Serviço" required #servico [(ngModel)]="servicoSel">
-
+      <ion-select interface="popover" placeholder="Serviço" required #servico [(ngModel)]="servicoSel" (ionChange)="handleChange($event)">
         <ion-select-option *ngFor="let serv of servicos | async" value="{{serv.id}}">{{serv.nome}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 </div>
 <div class="container">
-  
-  <h4 *ngFor="let log of logs" style="margin-left: 3px;">{{ log }}</h4>
+  <h4 *ngFor="let precoservico of precoservicos | async" style="margin-left: 3px;">Valor: {{precoservico.preco}}</h4>
 </div>
 
 <div class="container">
