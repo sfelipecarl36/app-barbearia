@@ -196,16 +196,16 @@ export class NovoservicoPage implements OnInit {
   
   ionViewWillEnter(){
 
+    let o = 0
     this.agendaCheck = 0
 
     this.authService.ngFireAuth.currentUser.then( user => {
       this.firestore.collection('agendamentos', ref => ref.
         where('user', '==', user.uid).
         where('status', '==', '1')).stateChanges().subscribe( c=> {
-          
+          o+=1
           this.agendaCheck = (c.length);
-          
-          if(this.agendaCheck==2){
+          if(this.agendaCheck==2 && o==1){
             this.presentAlert();
             this.router.navigateByUrl('historico');
           }
@@ -245,8 +245,7 @@ ngOnInit() {
     let horaNow = this.horaSel
 
     if(this.diaSel == dataSelect.substring(0,2)) {
-      for(let i = 0; i<9; i++){
-        horaNow = ('0'+horaNow).slice(-2)
+      for(let i = 0; i<24; i++){
         this.hourValues = this.hourValues.replace(String(horaNow)+',', '')
         this.hourValues = this.hourValues.replace(String(horaNow), '')
         horaNow-=1
@@ -288,8 +287,7 @@ checkValue2(event) {
   let horaNow = this.horaSel
   
   if(this.diaSel == dataSelect.substring(0,2)) {
-    for(let i = 0; i<10; i++){
-      horaNow = ('0'+horaNow).slice(-2)
+    for(let i = 0; i<24; i++){
       this.hourValues = this.hourValues.replace(String(horaNow)+',', '')
       this.hourValues = this.hourValues.replace(String(horaNow), '')
       horaNow-=1
