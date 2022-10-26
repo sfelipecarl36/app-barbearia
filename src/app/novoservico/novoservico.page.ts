@@ -197,15 +197,15 @@ export class NovoservicoPage implements OnInit {
   ionViewWillEnter(){
 
     this.agendaCheck = 0
-    let i = 0
 
     this.authService.ngFireAuth.currentUser.then( user => {
       this.firestore.collection('agendamentos', ref => ref.
         where('user', '==', user.uid).
         where('status', '==', '1')).stateChanges().subscribe( c=> {
-          i+=1
+          
           this.agendaCheck = (c.length);
-          if(this.agendaCheck>1 && i==1){
+          
+          if(this.agendaCheck==2){
             this.presentAlert();
             this.router.navigateByUrl('historico');
           }
@@ -214,7 +214,7 @@ export class NovoservicoPage implements OnInit {
       })
 }
 
-  ngOnInit() {
+ngOnInit() {
   }
 
   checkValue(event, data) { 
