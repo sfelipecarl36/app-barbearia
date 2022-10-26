@@ -4,7 +4,7 @@
 <div class="containerheader">
     <div class="containertopchildren ion-activatable" [routerLink]="['/perfil']"> 
       <ion-icon class="topo" name="person"></ion-icon>
-    <h2 class="entrar" id="nome" *ngFor="let user of users | async">Olá, {{user.nome}}</h2>
+    <h2 class="entrar" id="nome" *ngFor="let user of users | async">Olá, {{user.displayName}}</h2>
     <ion-ripple-effect></ion-ripple-effect>
     </div>
     <div class="containertopchildren2 ion-activatable" [routerLink]="['/notificacoes']">

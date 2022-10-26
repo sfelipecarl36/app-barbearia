@@ -63,7 +63,7 @@ export class RegisterPage implements OnInit {
     registrarEmail(){
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, this.email, this.senha).then( newUser => {
-      this.afs.collection('users').doc(newUser.user.uid).set({ nome: this.nome, celular: this.celular, foto: 'url',ativo: true, uid: newUser.user.uid});
+      this.afs.collection('users').doc(newUser.user.uid).set({ displayName: this.nome, celular: this.celular, photoURL: '../assets/perfil.png',ativo: true, uid: newUser.user.uid});
       // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
       this.showLoading()
       this.router.navigateByUrl('home');
@@ -71,12 +71,13 @@ export class RegisterPage implements OnInit {
     })
     }
     
-    signUp(email, password){
-      this.authService.RegisterUser(email.value, password.value)
+    signUp(nome, celular, email, senha){
+      console.log('nome: '+nome.value+' celular: '+celular.value+' email: '+email.value+' senha: '+senha.value)
+      this.authService.RegisterUser(nome.value, celular.value, email.value, senha.value)
       .then((res) => {
-        // Do something here
-        this.authService.SendVerificationMail()
-        this.router.navigate(['verify-email']);
+        this.showLoading()
+        this.router.navigateByUrl('home');
+        this.presentAlert()
       }).catch((error) => {
         window.alert(error.message)
       })

@@ -6,7 +6,7 @@ import { AuthenticationService } from '../shared/authentication-service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Console } from 'console';
+
 
 @Component({
   selector: 'app-confirmaservico',
@@ -37,6 +37,10 @@ export class ConfirmaservicoPage implements OnInit {
   nomeprof: any;
   pagamentoModel: any;
   idGetNot: any;
+  agendaCheck: number;
+  horaCheck: number;
+  horaSel: any;
+  diaSel: any;
 
   constructor(
     private alertController: AlertController,
@@ -51,6 +55,9 @@ export class ConfirmaservicoPage implements OnInit {
     this.pagamentos = firestore.collection('pagamentos').valueChanges();
     this.agendamentos = firestore.collection('agendamentos');
     this.notificacoes = firestore.collection('notificacoes');
+    this.diaSel = new Date().getDate();
+    this.horaSel = String(new Date().getHours());
+    this.horaSel = ('0'+this.horaSel).slice(-2)
 
     this.agendamentos.valueChanges().subscribe( x=> {
       this.idGet = (x.length)+1;
@@ -76,6 +83,7 @@ export class ConfirmaservicoPage implements OnInit {
       this.serv = params[1]
       this.dataehora = params[2]
       this.hora = params[3].substring(0,5)
+      console.log(this.hora.substring(0,2))
       });
 
 
@@ -85,6 +93,8 @@ export class ConfirmaservicoPage implements OnInit {
     }).catch( error => {
       this.router.navigateByUrl('inicio');
     })
+    console.log(this.horaSel)
+    
    }
 
    async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -95,6 +105,19 @@ export class ConfirmaservicoPage implements OnInit {
     });
 
     await toast.present();
+  }
+
+  async presentAlert2(texto) {
+    const alert = await this.alertController.create({
+      header: texto,
+      buttons: [
+        {
+          text: 'Ok',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
    async presentAlert(pagamento, nomeservico, nomeprof) {
@@ -126,17 +149,63 @@ export class ConfirmaservicoPage implements OnInit {
   }
 
   confirmarServico(pagamento, nomeservico, nomeprof){
+
+    this.agendaCheck = 0
+    let i = 0
+    this.horaCheck = 0
+
     
-    this.authService.ngFireAuth.currentUser.then( user => {
-    this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
-    this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
-    });
-    this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
-    this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
-    });
-    this.router.navigateByUrl('historico');
-    this.presentToast('middle')
-    })
+      this.firestore.collection('agendamentos', ref => ref.
+        where('status', '==', '1').
+        where('data', '==', this.dataehora).
+        where('hora', '==', this.hora).
+        where('profissional', '==', this.prof)).stateChanges().subscribe( c=> {
+          i+=1
+          this.agendaCheck = (c.length);
+          if(this.diaSel==this.dataehora.substring(0,2)){            
+            if(Number(this.horaSel)<Number(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
+              this.authService.ngFireAuth.currentUser.then( user => {
+                this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
+                this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
+                });
+                this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
+                this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
+                });
+                this.router.navigateByUrl('historico');
+                this.presentToast('middle')
+                })
+            }
+            else if(Number(this.horaSel)>=Number(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
+              this.presentAlert2('Horário Não Permitido!');
+              this.router.navigateByUrl('novoservico');
+            }
+            else if(Number(this.horaSel)<Number(this.hora.substring(0,2)) && this.agendaCheck>0 && i==1){
+              this.presentAlert2('Agenda Ocupada!');
+              this.router.navigateByUrl('novoservico');
+            }
+          }
+          else{
+            if(this.agendaCheck==0 && i==1){
+              this.authService.ngFireAuth.currentUser.then( user => {
+                this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
+                this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
+                });
+                this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
+                this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
+                });
+                this.router.navigateByUrl('historico');
+                this.presentToast('middle')
+                })
+            }
+            else if(this.agendaCheck>0 && i==1){
+              this.presentAlert2('Agenda Ocupada!');
+              this.router.navigateByUrl('novoservico');
+            } 
+          }
+
+          
+
+        })
     }
     
 

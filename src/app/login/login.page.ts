@@ -4,7 +4,7 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { AuthenticationService } from "../shared/authentication-service";
 import { NativePageTransitions, NativeTransitionOptions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { AlertController } from '@ionic/angular';
 import { getAuth, setPersistence ,signInWithEmailAndPassword, browserSessionPersistence   } from "firebase/auth";
 
 
@@ -21,7 +21,8 @@ export class LoginPage implements OnInit {
     private loadingCtrl: LoadingController,
     public router: Router,
     public firestore: AngularFirestore,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private alertController: AlertController
   ) {
 
   }
@@ -52,6 +53,19 @@ export class LoginPage implements OnInit {
     loading.present();
   }
 
+  async presentAlert(texto) {
+    const alert = await this.alertController.create({
+      header: texto,
+      buttons: [
+        {
+          text: 'Ok',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   openPage(page) {
 
     let options: NativeTransitionOptions = {
@@ -71,16 +85,17 @@ export class LoginPage implements OnInit {
    }
   
 
-  logIn(email, password) {
+   logIn(email, senha) {
     this.showLoading()
-    this.authService.SignIn(email.value, password.value)
-      .then( user => {
-      this.authService.SetUserData(user.user)
-      setPersistence(getAuth(), browserSessionPersistence)
-      this.openPage('home')
-      // this.router.navigate(['home']);          
+    this.authService.SignIn(email.value, senha.value)
+      .then((res) => {
+        // if(this.authService.isEmailVerified) {
+          this.router.navigate(['home']);          
+        // } else {
+        //   this.presentAlert('Email não verificado!')
+        //   return false;
+        // }
       }).catch((error) => {
-        this.loadingCtrl.dismiss()
         window.alert(error.message)
       })
   }

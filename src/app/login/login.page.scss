@@ -4,6 +4,10 @@ ion-toolbar{
     --border-style: none !important;
 }
 
+ion-back-button{
+    --color: white;
+}
+
 .native-input {
 	border-color: rgba(0, 0, 0, 0) !important;
 	background-color: rgba(0, 0, 0, 0) !important;

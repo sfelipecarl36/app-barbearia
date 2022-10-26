@@ -10,23 +10,25 @@
     <div class="form">
       <ion-item expand="full" lines="none" color="transparent">
         <!--<ion-label position="stacked">Nome Completo</ion-label>-->
-        <ion-input type="text" placeholder="Nome Completo" required [(ngModel)]="nome"></ion-input>
-      </ion-item>
-      <ion-item expand="full" lines="none" color="transparent">
-        <!--<ion-label position="stacked">E-mail</ion-label>-->
-        <ion-input type="email" placeholder="E-mail" required [(ngModel)]="email"></ion-input>
+        <ion-input type="text" placeholder="Nome Completo" required #nome></ion-input>
       </ion-item>
       <ion-item expand="full" lines="none" color="transparent">
         <!--<ion-label position="stacked">Celular</ion-label>-->
-        <ion-input type="tel" placeholder="Celular" required [(ngModel)]="celular"></ion-input>
+        <ion-input type="tel" placeholder="Celular" required #celular></ion-input>
       </ion-item>
+
+      <ion-item expand="full" lines="none" color="transparent">
+        <!--<ion-label position="stacked">E-mail</ion-label>-->
+        <ion-input type="email" placeholder="E-mail" required #email></ion-input>
+      </ion-item>
+      
       <ion-item lines="none" color="transparent">
         <!--<ion-label position="stacked">Senha</ion-label>-->
-        <ion-input type="password" placeholder="Senha" required [(ngModel)]="senha"></ion-input>
+        <ion-input type="password" placeholder="Senha" required #senha></ion-input>
       </ion-item>
       
       <br>
-      <ion-button expand="block"  shape="round" (click)="registrarEmail()" Strong>Cadastrar</ion-button>
+      <ion-button expand="block"  shape="round" (click)="signUp(nome, celular, email, senha)" Strong>Cadastrar</ion-button>
     </div>
 
     <hr>

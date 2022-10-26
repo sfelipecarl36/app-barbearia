@@ -1,4 +1,4 @@
-<ion-content scroll-x="false" *ngFor="let user of users | async" fullscreen>
+<ion-content scroll-x="false" fullscreen *ngFor="let user of users | async">
   <div class="black">
 
 <div class="containerheader">
@@ -10,20 +10,17 @@
       <ion-button expand="block" shape="round" color="danger" (click)="presentAlert()" Strong>Sair</ion-button>
     </div>
   </div>
-  <!-- <div id="fotoperfil"  *ngIf="auth.user | async as user" name="person-circle-outline" style="background-image: url('{{user.photoURL}}');"></div> -->
-  <ion-icon id="iconperfil"  *ngIf="auth.user | async as user" name="person-circle-outline"></ion-icon>
-  <h3>{{user.nome}}</h3>
+  <img referrerpolicy=“no-referrer” id="fotoperfil" [src]="user.photoURL"/>
+  <h3>{{user.displayName}}</h3>
 
   <div class="caixa ion-activatable">
       <div class="info_upedido">
-        <div class="info_upedido-dado"><ion-icon class="laranja" name="phone-portrait-outline"></ion-icon><p>Celular:</p></div>
-        <div class="info_upedido-dado"><ion-icon class="laranja" name="cut"></ion-icon><p>Serviço Favorito:</p></div>
-        <div class="info_upedido-dado"><ion-icon class="laranja" name="person"></ion-icon><p>Barbeiro Favorito:</p></div>
+        <div class="info_upedido-dado"><ion-icon class="laranja" name="mail"></ion-icon><p>E-mail:</p></div>
+        <div class="info_upedido-dado"><ion-icon class="laranja" name="phone-portrait"></ion-icon><p>Celular:</p></div>
       </div>
       <div class="info_upedido">
+        <div class="info_upedido-dado"><p>{{user.email}}</p></div>
         <div class="info_upedido-dado"><p>{{user.celular}}</p></div>
-        <div class="info_upedido-dado"><p>Corte Simples</p></div>
-        <div class="info_upedido-dado"><p>Kassio Chagas</p></div>
       </div><ion-ripple-effect></ion-ripple-effect>
     </div>
 

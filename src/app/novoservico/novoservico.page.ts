@@ -206,7 +206,6 @@ export class NovoservicoPage implements OnInit {
 
         })
       })
-
 }
 
   ngOnInit() {

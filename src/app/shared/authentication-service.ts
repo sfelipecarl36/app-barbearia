@@ -16,7 +16,8 @@ export class AuthenticationService {
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    public afs: AngularFirestore,
   ) {
     this.ngFireAuth.authState.subscribe((user) => {
       if (user) {
@@ -30,20 +31,25 @@ export class AuthenticationService {
     });
   }
   // Login in with email/password
-  async SignIn(email, password) {
-    const user = await this.ngFireAuth.signInWithEmailAndPassword(email, password);
+  async SignIn(email, senha) {
+    const user = await this.ngFireAuth.signInWithEmailAndPassword(email, senha);
     console.log(user.user.uid);
     return user;
   }
   // Register user with email/password
-  RegisterUser(email, password) {
-    return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
+  RegisterUser(nome, celular, email, senha) {
+    return this.ngFireAuth.createUserWithEmailAndPassword(email, senha).then( newUser => {
+      this.afs.collection('users').doc(newUser.user.uid).set({ email: email,emailVerified: false,displayName: nome, celular: celular, photoURL: '../assets/perfil.png', uid: newUser.user.uid});
+      // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
+      
+    })
+    
   }
   // Email verification when new user register
   SendVerificationMail() {
     return this.ngFireAuth.currentUser.then((user) => {
       return user.sendEmailVerification().then(() => {
-        this.router.navigate(['login']);
+        this.router.navigate(['verify-email']);
       });
     });
   }
@@ -98,7 +104,9 @@ export class AuthenticationService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
+      celular: user.phoneNumber,
       emailVerified: user.emailVerified,
+      
     };
     return userRef.set(userData, {
       merge: true,
