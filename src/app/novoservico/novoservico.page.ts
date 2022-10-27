@@ -245,12 +245,16 @@ ngOnInit() {
     let horaNow = this.horaSel
 
     if(this.diaSel == dataSelect.substring(0,2)) {
-      for(let i = 0; i<24; i++){
-        this.hourValues = this.hourValues.replace(String(horaNow)+',', '')
-        this.hourValues = this.hourValues.replace(String(horaNow), '')
+      for(let i = horaNow; i>0; i--){
+        this.hourValues = this.hourValues.replace(String(('0'+horaNow).slice(-2))+',', '')
+        this.hourValues = this.hourValues.replace(String(('0'+horaNow).slice(-2)), '')
         horaNow-=1
+        if(horaNow==1){
+          break
+        }
       }
     }
+
 }
 
 canSave(): boolean{ 
@@ -287,10 +291,13 @@ checkValue2(event) {
   let horaNow = this.horaSel
   
   if(this.diaSel == dataSelect.substring(0,2)) {
-    for(let i = 0; i<24; i++){
-      this.hourValues = this.hourValues.replace(String(horaNow)+',', '')
-      this.hourValues = this.hourValues.replace(String(horaNow), '')
+    for(let i = horaNow; i>0; i--){
+      this.hourValues = this.hourValues.replace(String(('0'+horaNow).slice(-2))+',', '')
+      this.hourValues = this.hourValues.replace(String(('0'+horaNow).slice(-2)), '')
       horaNow-=1
+      if(horaNow==1){
+        break
+      }
     }
   }
 

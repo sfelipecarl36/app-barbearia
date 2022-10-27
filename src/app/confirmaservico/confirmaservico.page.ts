@@ -68,13 +68,13 @@ export class ConfirmaservicoPage implements OnInit {
     })
 
     this.activatedRoute.queryParams.subscribe(params => {
+
       console.log('Barbeiro: '+params[0]+' Serviço: '+params[1], params[2], params[3])
       this.profissional = firestore.collection('profissionais', ref => ref.
       where('id', '==', params[0])).valueChanges();
 
       this.profissionais = firestore.collection('profissionais', ref => ref.
       where('id', '==', params[0]));
-
 
       this.servico = firestore.collection('servicos', ref => ref.
       where('id', '==', params[1])).valueChanges();
@@ -166,6 +166,8 @@ export class ConfirmaservicoPage implements OnInit {
     this.agendaCheck = 0
     let i = 0
     this.horaCheck = 0
+    this.horaSel = String(new Date().getHours());
+    this.horaSel = ('0'+this.horaSel).slice(-2)
 
     
       this.firestore.collection('agendamentos', ref => ref.
@@ -175,15 +177,16 @@ export class ConfirmaservicoPage implements OnInit {
         where('profissional', '==', this.prof)).stateChanges().subscribe( c=> {
           i+=1
           this.agendaCheck = (c.length);
-          if(this.diaSel==this.dataehora.substring(0,2)){            
-            if(Number(this.horaSel)<Number(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
+          if(this.diaSel==this.dataehora.substring(0,2)){      
+
+            if((this.horaSel)<(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
               this.agendar(pagamento, nomeservico, nomeprof)
             }
-            else if(Number(this.horaSel)>=Number(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
+            else if((this.horaSel)>=(this.hora.substring(0,2)) && this.agendaCheck==0 && i==1){
               this.presentAlert2('Horário Não Permitido!');
               this.router.navigateByUrl('novoservico');
             }
-            else if(Number(this.horaSel)<Number(this.hora.substring(0,2)) && this.agendaCheck>0 && i==1){
+            else if((this.horaSel)<(this.hora.substring(0,2)) && this.agendaCheck>0 && i==1){
               this.presentAlert2('Agenda Ocupada!');
               this.router.navigateByUrl('novoservico');
             }
@@ -203,5 +206,4 @@ export class ConfirmaservicoPage implements OnInit {
         })
     }
     
-
 }
