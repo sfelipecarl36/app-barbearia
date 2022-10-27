@@ -69,7 +69,7 @@
 
   <hr><br>
 
-  <div *ngFor="let banner of banners | async" class="banner ion-activatable" style="background-image: url('{{banner.img}}');">
+  <div *ngFor="let banner of banners | async" class="banner ion-activatable" [routerLink]="['/loja']" style="background-image: url('{{banner.img}}');">
     <ion-ripple-effect></ion-ripple-effect>
   </div>
 

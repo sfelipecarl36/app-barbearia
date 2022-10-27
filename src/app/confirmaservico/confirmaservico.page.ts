@@ -86,13 +86,9 @@ export class ConfirmaservicoPage implements OnInit {
       console.log(this.hora.substring(0,2))
       });
 
-
-    authService.ngFireAuth.currentUser.then( user => {
       this.users = firestore.collection('users', ref => ref.
-      where('uid', '==', user.uid)).valueChanges();
-    }).catch( error => {
-      this.router.navigateByUrl('inicio');
-    })
+      where('uid', '==', authService.userUid)).valueChanges();
+    
     console.log(this.horaSel)
     
    }
@@ -149,16 +145,16 @@ export class ConfirmaservicoPage implements OnInit {
   }
 
   agendar(pagamento, nomeservico, nomeprof){
-    this.authService.ngFireAuth.currentUser.then( user => {
-      this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: user.uid, docId: this.idGet}).then( newAgend => {
+    
+      this.agendamentos.add({ status: "1", data: this.dataehora, hora: this.hora, pagamento: pagamento.value, profissional: this.prof, id: this.idGet, servico: this.serv, user: this.authService.userUid, docId: this.idGet}).then( newAgend => {
       this.agendamentos.doc(newAgend.id).update({docId: newAgend.id})
       });
-      this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: user.uid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
+      this.notificacoes.add({ texto: "Você agendou "+nomeservico+" com "+nomeprof+" para "+this.dataehora, user: this.authService.userUid, lido: false, id: this.idGetNot, idOrder: this.idGetNot}).then( newNotif => {  
       this.notificacoes.doc(newNotif.id).update({id: newNotif.id})
       });
       this.router.navigateByUrl('historico');
       this.presentToast('middle')
-      })
+      
   }
 
   confirmarServico(pagamento, nomeservico, nomeprof){

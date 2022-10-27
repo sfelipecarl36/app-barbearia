@@ -216,24 +216,28 @@ export class HomePage implements OnInit {
   
   {
     
-    
-    this.authService.ngFireAuth.currentUser.then( user => {
+
+    if(authService.userUid.length<1){
+      this.router.navigateByUrl('inicio')
+    }
+    else{
+
       this.users = firestore.collection('users', ref => ref.
-      where('uid', '==', user.uid)).valueChanges();
+      where('uid', '==', authService.userUid)).valueChanges();
 
       this.notificacoes = this.firestore.collection('notificacoes', ref => ref.
-      where('user', '==', user.uid).
+      where('user', '==', authService.userUid).
       where('lido', '==', false)).valueChanges()
 
       this.firestore.collection('notificacoes', ref => ref.
-      where('user', '==', user.uid).
+      where('user', '==', authService.userUid).
       where('lido', '==', false)).valueChanges().subscribe( result => {
         this.notify = result.length;
         });
 
       this.agend = this.firestore.collection('agendamentos', ref => ref.limit(1).
       // orderBy('id', 'desc').
-      where('user', '==', user.uid));
+      where('user', '==', authService.userUid));
 
       this.agendamentos = this.agend.valueChanges()
       this.banners =  this.firestore.collection('banners', ref => ref.limit(1)).valueChanges();
@@ -242,11 +246,7 @@ export class HomePage implements OnInit {
       this.tiposervicos =  this.firestore.collection('tiposervicos').valueChanges();
       this.servicos =  this.firestore.collection('servicos', ref => ref.limit(100)).valueChanges();
       this.servicosRecomendado =  this.firestore.collection('servicos', ref => ref.where("recomendado", "==", true)).valueChanges();
-
-    }).catch( error => {
-      this.router.navigateByUrl('inicio');
-    })
-
+      }
   }
 
   detalhar(servico, profissional, data, hora, pagamento, docId, status) {

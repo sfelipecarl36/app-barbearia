@@ -28,15 +28,9 @@ export class ServicosPage implements OnInit {
     interface SegmentChangeEventDetail {
       value?: string;
     }
-    this.authService.ngFireAuth.currentUser.then( user => {
-
       this.servic = this.firestore.collection('servicos');
       this.tiposervicos = this.firestore.collection('tiposervicos').valueChanges();
       this.servicos = this.servic.valueChanges()
-
-    }).catch( error => {
-      this.router.navigateByUrl('inicio');
-    })
 
   }
 

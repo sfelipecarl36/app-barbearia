@@ -8,11 +8,11 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { AuthGuard } from './shared/auth.guard';
+
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthService } from './shared/auth.service';
-import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
+
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
@@ -36,7 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     AppRoutingModule
   ],
-  providers: [AuthService, AuthGuard, SecureInnerPagesGuard, NativePageTransitions],
+  providers: [AuthService,NativePageTransitions],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

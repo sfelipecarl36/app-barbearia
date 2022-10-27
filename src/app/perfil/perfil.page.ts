@@ -24,12 +24,13 @@ export class PerfilPage {
   )
   {
 
-    authService.ngFireAuth.currentUser.then( user => {
+    if(this.authService.userUid.length<1){
+      this.router.navigateByUrl('inicio')
+    }
+    else{
       this.users = firestore.collection('users', ref => ref.
-      where('uid', '==', user.uid)).valueChanges();
-    }).catch( error => {
-      this.router.navigateByUrl('inicio');
-    })
+      where('uid', '==', authService.userUid)).valueChanges();
+    }
     
    }
 
@@ -52,10 +53,8 @@ export class PerfilPage {
     await alert.present();
   }
 
-  editar(docID) {
-    this.router.navigate(['editarperfil'],{
-    queryParams: [docID]
-    })
+  editar() {
+    this.router.navigate(['editarperfil'])
   }
 
   logout(){

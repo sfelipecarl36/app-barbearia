@@ -1,0 +1,41 @@
+<ion-content scroll-x="false" fullscreen>
+  <div class="black">
+
+<div class="containerheader">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="home" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Planeta Saturno</h2>
+    </div>
+    <div class="containertopchildren2">
+      <div class="logo"></div>
+    </div>
+  </div>    
+
+  <hr>
+
+  <ion-segment scrollable (ionChange)="segmentChanged($event)">
+    <ion-segment-button *ngFor="let tipo of tiposervicos | async" value="{{tipo.id}}">
+      <ion-label>{{tipo.nome}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="(produtos | async)?.length ; else noproduto">
+  <div class="caixa ion-activatable" *ngFor="let produto of produtos | async">
+    <div class="containertop">
+      <div class="imgbarbeiro" style="background-image: url('{{serv.img}}');"></div>
+      <div class="info_upedido">
+        <h6>{{produto.nome}}</h6>
+        <div *ngFor="let tipo of tipoprodutos | async"><div class="info_upedido-dado" *ngIf="tipo.id==produto.tipo"><img src="./assets/{{tipo.icon}}" class="iconsvg"><p>{{tipo.nome}}</p></div></div>
+        <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Valor:</p><p class="laranja">{{produto.preco}}</p></div>
+        <div class="info_upedido-dado"><p style="margin-left: 6px">{{produto.descricao}}</p></div>
+      </div>
+  </div><ion-ripple-effect></ion-ripple-effect>
+</div>
+</div>
+
+<ng-template #noproduto>
+  <div class="caixa"><h6>Não há Produtos Aqui</h6></div>
+  </ng-template>
+
+</div>
+</ion-content>

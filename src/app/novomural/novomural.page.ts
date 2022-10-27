@@ -20,12 +20,9 @@ export class NovomuralPage implements OnInit {
     private toastController: ToastController,
   ) { 
 
-    authService.ngFireAuth.currentUser.then( user => {
-      this.murais_collection = firestore.collection('murais')
-      this.murais = this.murais_collection.valueChanges();
-    }).catch( error => {
-      this.router.navigateByUrl('inicio');
-    })
+    if(this.authService.userUid.length<1){
+      this.router.navigateByUrl('inicio')
+    }
 
   }
 
@@ -43,11 +40,14 @@ export class NovomuralPage implements OnInit {
   }
 
   registerMural(texto){
-    this.authService.ngFireAuth.currentUser.then( user => {
-    this.murais_collection.add({texto: texto.value, user: user.uid});
+    if(this.authService.userUid.length<1){
+      this.router.navigateByUrl('inicio')
+    }
+    else{
+    this.murais_collection.add({texto: texto.value, user: this.authService.userUid});
     this.router.navigateByUrl('mural');
     this.presentToast('middle')
-    })
+    }
   }
 
 }

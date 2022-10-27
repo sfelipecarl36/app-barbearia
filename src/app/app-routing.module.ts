@@ -3,10 +3,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 // Required components for which route services to be activated
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-// Import canActivate guards
-import { AuthGuard } from './shared/auth.guard';
-import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
-// Include route guard in routes array
+
 
 const routes: Routes = [
   {
@@ -86,9 +83,14 @@ const routes: Routes = [
   {
     path: 'servicos',
     loadChildren: () => import('./servicos/servicos.module').then( m => m.ServicosPageModule)
-  },  {
+  },
+  {
     path: 'editarperfil',
     loadChildren: () => import('./editarperfil/editarperfil.module').then( m => m.EditarperfilPageModule)
+  },
+  {
+    path: 'loja',
+    loadChildren: () => import('./loja/loja.module').then( m => m.LojaPageModule)
   }
 
 

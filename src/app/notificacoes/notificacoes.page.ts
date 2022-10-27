@@ -28,19 +28,24 @@ export class NotificacoesPage implements OnInit {
     this.profissionais =  this.firestore.collection('profissionais').valueChanges();
     this.servicos =  this.firestore.collection('servicos').valueChanges();
     
-    this.authService.ngFireAuth.currentUser.then( user => {
+    if(this.authService.userUid.length<1){
+      this.router.navigateByUrl('inicio')
+    }
 
+    else{
+
+    
     this.notificacoes = firestore.collection('notificacoes', ref => ref.limit(25).
-    where('user', '==', user.uid).
+    where('user', '==', authService.userUid).
     orderBy('idOrder', 'desc')).valueChanges();
 
     this.notificacoesGet = firestore.collection('notificacoes', ref => ref.
-    where('user', '==', user.uid));
+    where('user', '==', authService.userUid));
 
     this.notifica = firestore.collection('notificacoes', ref => ref.
-    where('user', '==', user.uid));
-    })
-
+    where('user', '==', authService.userUid));
+    
+    }
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {

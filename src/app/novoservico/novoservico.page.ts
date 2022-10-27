@@ -199,9 +199,13 @@ export class NovoservicoPage implements OnInit {
     let o = 0
     this.agendaCheck = 0
 
-    this.authService.ngFireAuth.currentUser.then( user => {
+    
+    if(this.authService.userUid.length<1){
+      this.router.navigateByUrl('inicio')
+    }
+    else{
       this.firestore.collection('agendamentos', ref => ref.
-        where('user', '==', user.uid).
+        where('user', '==', this.authService.userUid).
         where('status', '==', '1')).stateChanges().subscribe( c=> {
           o+=1
           this.agendaCheck = (c.length);
@@ -211,7 +215,8 @@ export class NovoservicoPage implements OnInit {
           }
 
         })
-      })
+
+      }
 }
 
 ngOnInit() {

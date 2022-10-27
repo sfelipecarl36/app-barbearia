@@ -12,6 +12,7 @@ import {
 })
 export class AuthenticationService {
   userData: any;
+  public userUid: string = '';
   constructor(
     public afStore: AngularFirestore,
     public ngFireAuth: AngularFireAuth,
@@ -19,8 +20,12 @@ export class AuthenticationService {
     public ngZone: NgZone,
     public afs: AngularFirestore,
   ) {
+
+
+
     this.ngFireAuth.authState.subscribe((user) => {
-      if (user) {
+      if (user) { 
+        this.userUid = user.uid
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
@@ -34,12 +39,14 @@ export class AuthenticationService {
   async SignIn(email, senha) {
     const user = await this.ngFireAuth.signInWithEmailAndPassword(email, senha);
     console.log(user.user.uid);
+    this.userUid = user.user.uid
     return user;
   }
   // Register user with email/password
   RegisterUser(nome, celular, email, senha) {
     return this.ngFireAuth.createUserWithEmailAndPassword(email, senha).then( newUser => {
       this.afs.collection('users').doc(newUser.user.uid).set({ email: email,emailVerified: false,displayName: nome, celular: celular, photoURL: '../assets/perfil.png', uid: newUser.user.uid});
+      this.userUid = newUser.user.uid
       // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
       
     })

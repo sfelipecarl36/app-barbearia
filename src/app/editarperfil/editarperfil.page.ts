@@ -25,16 +25,13 @@ export class EditarperfilPage {
     private loadingCtrl: LoadingController,
   ) {
 
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.docID = params[0]
-    })
-
-    this.authService.ngFireAuth.currentUser.then( user => {
-
+    if(this.authService.userUid.length<1){
+      this.router.navigateByUrl('inicio')
+    }
+    else{
       this.users = this.firestore.collection('users', ref => ref
-      .where('uid', '==', this.docID)).valueChanges();
-   })
-
+      .where('uid', '==', this.authService.userUid)).valueChanges();
+    }
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -64,7 +61,7 @@ export class EditarperfilPage {
 
   updateUser(nome, celular){
     this.showLoading()
-    this.firestore.collection('users').doc(this.docID).update({displayName: nome.value, celular: celular.value}).then( res => {
+    this.firestore.collection('users').doc(this.authService.userUid).update({displayName: nome.value, celular: celular.value}).then( res => {
       this.router.navigateByUrl('perfil')
       this.presentToast('middle')
     })

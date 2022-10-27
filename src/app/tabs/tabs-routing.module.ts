@@ -8,8 +8,6 @@ import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
 import { HomePageModule } from '../home/home.module';
 import { AuthenticationService } from '../shared/authentication-service';
-import { AuthGuard } from '../shared/auth.guard';
-import { SecureInnerPagesGuard } from '../shared/secure-inner-pages.guard';
 
 const routes: Routes = [
   {
@@ -59,6 +57,11 @@ const routes: Routes = [
       {
         path: 'mural',
         loadChildren: () => import('../mural/mural.module').then( m => m.MuralPageModule),
+      },
+
+      {
+        path: 'loja',
+        loadChildren: () => import('../loja/loja.module').then( m => m.LojaPageModule),
       },
 
       {
