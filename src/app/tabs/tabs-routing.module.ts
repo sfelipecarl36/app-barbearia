@@ -47,6 +47,11 @@ const routes: Routes = [
       },
 
       {
+        path: 'confirmaservico',
+        loadChildren: () => import('../confirmaservico/confirmaservico.module').then( m => m.ConfirmaservicoPageModule),
+      },
+
+      {
         path: 'detailservico',
         loadChildren: () => import('../detailservico/detailservico.module').then( m => m.DetailservicoPageModule),
       },
