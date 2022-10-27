@@ -32,7 +32,7 @@ ion-content{
     }
 
     .black{
-        background: linear-gradient(#181A20, #1e2027);
+        background: black;
         background-size: cover;
         width: 100vw;
         min-height: 100vh;
@@ -52,7 +52,7 @@ ion-content{
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
+            background-color: rgb(13,13,17);
             position: relative;
             overflow: hidden; 
         }

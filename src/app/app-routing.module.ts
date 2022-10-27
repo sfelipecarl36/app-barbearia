@@ -91,7 +91,11 @@ const routes: Routes = [
   {
     path: 'loja',
     loadChildren: () => import('./loja/loja.module').then( m => m.LojaPageModule)
+  },  {
+    path: 'pageservico',
+    loadChildren: () => import('./pageservico/pageservico.module').then( m => m.PageservicoPageModule)
   }
+
 
 
 

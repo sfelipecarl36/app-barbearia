@@ -24,8 +24,8 @@ ion-radio-group{
 ion-content{
 
     .black{
-        background: linear-gradient(#181A20, #1e2027);
-        background-size: cover;
+        background-color:black;
+        
         width: 100vw;
         min-height: 100vh;
         padding-top: 30px;
@@ -39,7 +39,7 @@ ion-content{
             padding: 8px;
             margin: 10px 0px;
             border-radius: 20px;
-            background: linear-gradient(164deg, rgba(33,37,45,1) 35%, rgba(33,36,45,1) 80%); 
+            background: rgb(13,13,16); 
         }
 
         .laranja {
@@ -276,7 +276,7 @@ ion-content{
     }
 
     ion-select{
-        background-color: #262933;
+        background: rgb(13,13,16);
         width: 150px;
         height: 100%;
         padding: 0px 10px; 

@@ -1,6 +1,6 @@
 ion-toolbar{
-    --background: #181A20 !important;
-    --ion-color-base: #181A20 !important;
+    --background: black !important;
+    --ion-color-base: black !important;
     --border-style: none !important;
 }
 
@@ -23,7 +23,7 @@ ion-item {
 ion-content{
     
     .black{
-        background-color: #181A20;
+        background-color: black;
         background-size: cover;
         background-repeat: repeat-y;
         width: 100vw;
@@ -89,7 +89,7 @@ ion-content{
     ion-input{
         border-radius: 12px;
         color:#9E9E9E;
-        background-color: #242731;
+        background: rgb(12, 12, 16);
         --padding-start: 15px;
         max-height: 50px;
         min-height: 50px;
