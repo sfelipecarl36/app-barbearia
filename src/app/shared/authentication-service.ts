@@ -96,6 +96,7 @@ export class AuthenticationService {
           this.router.navigate(['home']);
         });
         this.SetUserData(result.user);
+        this.userUid = result.user.uid
       })
       .catch((error) => {
         window.alert(error);
