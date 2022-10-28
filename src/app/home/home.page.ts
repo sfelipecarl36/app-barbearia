@@ -248,6 +248,11 @@ export class HomePage implements OnInit {
       this.servicosRecomendado =  this.firestore.collection('servicos', ref => ref.where("recomendado", "==", true)).valueChanges();
       }
   }
+  detalharServ(servicoId) {
+    this.router.navigate(['pageservico'],{
+    queryParams: [servicoId]
+    })
+  }
 
   detalhar(servico, profissional, data, hora, pagamento, docId, status) {
     this.router.navigate(['detailservico'],{

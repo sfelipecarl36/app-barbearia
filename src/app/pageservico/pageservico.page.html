@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>pageservico</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content scroll-x="false" fullscreen *ngFor="let serv of servico | async">
+  <div class="black">
 
-<ion-content>
+<div class="containerheader">
+    <div class="containertopchildren">
+      <ion-back-button defaultHref="servicos" mode="md" text=""></ion-back-button>
+    <h2 class="entrar">Serviço: {{serv.nome}}</h2>
+    </div>
+  </div>
+
+  <hr>
+  <img referrerpolicy=“no-referrer” id="foto" [src]="serv.img"/>
+  <h3>{{serv.nome}}</h3>
+
+  <div class="caixa ion-activatable">
+      <div class="info_upedido">
+        <div class="info_upedido-dado" *ngFor="let tiposerv of tiposervicos | async"><h3 *ngIf="serv.tipo==tiposerv.id">Serviço Tipo: {{tiposerv.nome}}</h3></div>
+        <div class="info_upedido-dado"><p>{{serv.descricao}}</p></div>
+        <div class="info_upedido-dado"><h5>R${{serv.preco}}</h5></div>
+      </div>
+    </div> 
+
+    <ion-button expand="block" shape="round" Strong>Favoritar Serviço</ion-button>
+
+
+</div>
 
 </ion-content>

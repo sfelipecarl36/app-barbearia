@@ -41,4 +41,10 @@ export class ServicosPage implements OnInit {
     this.servicos = this.firestore.collection('servicos', ref => ref.where("tipo", "==", e.detail.value)).valueChanges()
   }
 
+  detalhar(servicoId) {
+    this.router.navigate(['pageservico'],{
+    queryParams: [servicoId]
+    })
+  }
+
 }

@@ -31,4 +31,14 @@ export class LojaPage implements OnInit {
   ngOnInit() {
   }
 
+  segmentChanged(e){
+    this.produtos = this.firestore.collection('produtos', ref => ref.where("tipo", "==", e.detail.value)).valueChanges()
+  }
+
+  detalhar(produtoId) {
+    this.router.navigate(['pageproduto'],{
+    queryParams: [produtoId]
+    })
+  }
+
 }

@@ -7,14 +7,13 @@ import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-pageservico',
-  templateUrl: './pageservico.page.html',
-  styleUrls: ['./pageservico.page.scss'],
+  selector: 'app-pageproduto',
+  templateUrl: './pageproduto.page.html',
+  styleUrls: ['./pageproduto.page.scss'],
 })
-export class PageservicoPage implements OnInit {
-  servico: any;
-  tiposervicos: any;
-
+export class PageprodutoPage implements OnInit {
+  produto: any;
+  tipoprodutos: any;
   constructor(
     private router: Router,
     public firestore: AngularFirestore,
@@ -26,10 +25,10 @@ export class PageservicoPage implements OnInit {
   ) { 
 
     this.activatedRoute.queryParams.subscribe(params => {
-      this.servico = firestore.collection('servicos', ref => ref.
+      this.produto = firestore.collection('produtos', ref => ref.
       where('id', '==', params[0])).valueChanges();
 
-      this.tiposervicos = firestore.collection('tiposervicos').valueChanges();      
+      this.tipoprodutos = firestore.collection('tipoprodutos').valueChanges();      
     })
   }
 
@@ -37,3 +36,7 @@ export class PageservicoPage implements OnInit {
   }
 
 }
+
+
+
+

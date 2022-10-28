@@ -94,6 +94,10 @@ const routes: Routes = [
   },  {
     path: 'pageservico',
     loadChildren: () => import('./pageservico/pageservico.module').then( m => m.PageservicoPageModule)
+  },
+  {
+    path: 'pageproduto',
+    loadChildren: () => import('./pageproduto/pageproduto.module').then( m => m.PageprodutoPageModule)
   }
 
 

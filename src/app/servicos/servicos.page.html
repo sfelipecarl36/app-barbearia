@@ -20,7 +20,7 @@
   </ion-segment>
 
   <div *ngIf="(servicos | async)?.length ; else noservico">
-  <div class="caixa ion-activatable" *ngFor="let serv of servicos | async">
+  <div class="caixa ion-activatable" *ngFor="let serv of servicos | async" (click)="detalhar(serv.id)">
     <div class="containertop">
       <div class="imgbarbeiro" style="background-image: url('{{serv.img}}');"></div>
       <div class="info_upedido">

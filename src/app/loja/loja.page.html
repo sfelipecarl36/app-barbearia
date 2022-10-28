@@ -14,18 +14,18 @@
   <hr>
 
   <ion-segment scrollable (ionChange)="segmentChanged($event)">
-    <ion-segment-button *ngFor="let tipo of tiposervicos | async" value="{{tipo.id}}">
+    <ion-segment-button *ngFor="let tipo of tipoprodutos| async" value="{{tipo.id}}">
       <ion-label>{{tipo.nome}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <div *ngIf="(produtos | async)?.length ; else noproduto">
-  <div class="caixa ion-activatable" *ngFor="let produto of produtos | async">
+  <div class="caixa ion-activatable" *ngFor="let produto of produtos | async" (click)="detalhar(produto.id)">
     <div class="containertop">
-      <div class="imgbarbeiro" style="background-image: url('{{serv.img}}');"></div>
+      <div class="imgproduto" style="background-image: url('/assets/{{produto.img}}');"></div>
       <div class="info_upedido">
         <h6>{{produto.nome}}</h6>
-        <div *ngFor="let tipo of tipoprodutos | async"><div class="info_upedido-dado" *ngIf="tipo.id==produto.tipo"><img src="./assets/{{tipo.icon}}" class="iconsvg"><p>{{tipo.nome}}</p></div></div>
+        <div *ngFor="let tipo of tipoprodutos | async"><div class="info_upedido-dado" *ngIf="tipo.id==produto.tipo"><ion-icon name="{{tipo.icon}}"></ion-icon><p>{{tipo.nome}}</p></div></div>
         <div class="info_upedido-dado"><ion-icon name="pricetag"></ion-icon><p>Valor:</p><p class="laranja">{{produto.preco}}</p></div>
         <div class="info_upedido-dado"><p style="margin-left: 6px">{{produto.descricao}}</p></div>
       </div>

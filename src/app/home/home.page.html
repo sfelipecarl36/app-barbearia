@@ -17,7 +17,7 @@
     <ion-slides pager="false" [options]="slideOpts" >
         
       <ion-slide class="sliderecomendado" *ngFor="let servico of servicosRecomendado | async">
-        <div class="recomendado ion-activatable">
+        <div class="recomendado ion-activatable" (click)="detalharServ(servico.id)">
           <div class="imgrecomendado" style="background-image: url('{{servico.img}}');"></div>
             <div class="inforecomendado">
               <h2>R${{servico.preco}}</h2>
