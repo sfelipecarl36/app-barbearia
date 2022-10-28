@@ -24,6 +24,10 @@ export class NovomuralPage implements OnInit {
       this.router.navigateByUrl('inicio')
     }
 
+    else{
+      this.murais = firestore.collection('murais')
+    }
+
   }
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {
@@ -44,7 +48,7 @@ export class NovomuralPage implements OnInit {
       this.router.navigateByUrl('inicio')
     }
     else{
-    this.murais_collection.add({texto: texto.value, user: this.authService.userUid});
+    this.murais.add({texto: texto.value, user: this.authService.userUid});
     this.router.navigateByUrl('mural');
     this.presentToast('middle')
     }
