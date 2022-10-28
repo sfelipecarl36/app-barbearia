@@ -15,7 +15,7 @@
 
   <div class="caixa ion-activatable">
       <div class="info_upedido">
-        <div class="info_upedido-dado" *ngFor="let tipoprod of tipoprodutos | async"><h3 *ngIf="prod.tipo==tipoprod.id">Serviço Tipo: {{tipoprod.nome}}</h3></div>
+        <div class="info_upedido-dado" *ngFor="let tipoprod of tipoprodutos | async"><h3 *ngIf="prod.tipo==tipoprod.id">Produto Tipo: {{tipoprod.nome}}</h3></div>
         <div class="info_upedido-dado"><p>{{prod.descricao}}</p></div>
         <div class="info_upedido-dado"><h5>R${{prod.preco}}</h5></div>
         <div class="info_upedido-dado"><h5>Estoque: {{prod.quant}}</h5></div>
