@@ -41,8 +41,10 @@ ion-content{
     }
 
     #fotoperfil{
-        max-width: 25px;
-        max-height: 25px;
+        max-width: 30px;
+        min-width: 30px;
+        max-height: 30px;
+        min-height: 30px;
         margin-left: 2px;
         margin-right: 8px;
         border-radius: 50%;

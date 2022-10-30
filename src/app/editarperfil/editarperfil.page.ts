@@ -6,7 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { File, FileEntry } from '@awesome-cordova-plugins/file/ngx';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators'
 import { decode } from 'base64-arraybuffer'
@@ -94,12 +94,9 @@ catch(error){
   });
 
   ref.getDownloadURL().subscribe((url) => {
-    this.downloadUrl = url;
-    this.firestore.collection('users').doc(this.authService.userUid).update({photoURL: this.downloadUrl})
+    this.firestore.collection('users').doc(this.authService.userUid).update({photoURL: url})
   });
   
-  
-  this.uploudPercent = 0
 }
 
   async presentToast(position: 'top' | 'middle' | 'bottom') {

@@ -4,11 +4,15 @@ ion-back-button{
     color: white;
 }
 
-ion-segment-button::after {
-    --max-height: 40px;
-    --background: #FB9400;
-    --border-radius: 30px;
-  }  
+ion-segment-button {
+    width: 120px;
+    min-width: 120px;
+    padding: 5px;
+}
+
+ion-segment{
+    max-width: 90%;
+}
 
 ion-icon{
     color: white;
