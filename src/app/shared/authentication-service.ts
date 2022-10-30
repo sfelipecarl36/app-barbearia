@@ -3,6 +3,7 @@ import * as auth from 'firebase/auth';
 import { User } from './user';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -15,6 +16,7 @@ export class AuthenticationService {
   public userUid: string = '';
   constructor(
     public afStore: AngularFirestore,
+    private afStorage: AngularFireStorage,
     public ngFireAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone,
@@ -44,10 +46,14 @@ export class AuthenticationService {
   }
   // Register user with email/password
   RegisterUser(nome, celular, email, senha) {
+    
     return this.ngFireAuth.createUserWithEmailAndPassword(email, senha).then( newUser => {
       this.afs.collection('users').doc(newUser.user.uid).set({ email: email,emailVerified: false,displayName: nome, celular: celular, photoURL: '../assets/perfil.png', uid: newUser.user.uid});
+      const ref = this.afStorage.ref('perfil.png')
+      ref.getDownloadURL().subscribe((url) => {
+        this.afs.collection('users').doc(newUser.user.uid).update({photoURL: url})
+      });
       this.userUid = newUser.user.uid
-      // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
       
     })
     

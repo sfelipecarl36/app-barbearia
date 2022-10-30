@@ -13,9 +13,13 @@
 
   <hr>
   <ion-segment scrollable (ionChange)="segmentChanged($event)">
-    <ion-segment-button *ngFor="let stat of status | async" value="{{stat.id}}">
+    
+    
+      <ion-segment-button *ngFor="let stat of status | async" value="{{stat.id}}">
       <ion-label>{{stat.nome}}</ion-label>
     </ion-segment-button>
+  
+
   </ion-segment>
 
   <div *ngIf="(agendamentos | async)?.length ; else noagendamento">

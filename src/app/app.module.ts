@@ -8,7 +8,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { File } from '@awesome-cordova-plugins/file/ngx';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthService } from './shared/auth.service';
@@ -36,7 +37,7 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     AppRoutingModule
   ],
-  providers: [AuthService,NativePageTransitions],
+  providers: [AuthService,NativePageTransitions, Camera, File],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

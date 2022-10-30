@@ -40,6 +40,14 @@ ion-content{
         justify-content: center;
     }
 
+    #fotoperfil{
+        max-width: 25px;
+        max-height: 25px;
+        margin-left: 2px;
+        margin-right: 8px;
+        border-radius: 50%;
+    }
+
     .black{
         // background: linear-gradient(#181A20, #1e2027);
         background-color: black;

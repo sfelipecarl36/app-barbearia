@@ -9,15 +9,19 @@ ion-icon{
     font-size: 22px;
 }
 
-ion-segmennt {
-    margin: 0px 10px;
+ion-slides{
+    min-width: max-content;
 }
 
 ion-segment-button {
-    width: 115px;
-    min-width: 115px;
-    padding: 0px;
-  }
+    width: 120px;
+    min-width: 120px;
+    padding: 5px;
+}
+
+ion-segment{
+    max-width: 90%;
+}
 
 ion-radio-group{
     display: flex;
