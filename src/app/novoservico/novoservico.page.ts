@@ -125,6 +125,7 @@ export class NovoservicoPage implements OnInit {
   agendaAberta: any;
   valorAtual: any;
   precoservicos: any;
+  utcDay: any;
 
   pushLog(msg) {
     this.logs.unshift(msg);
@@ -150,6 +151,7 @@ export class NovoservicoPage implements OnInit {
     private alertController: AlertController,
   ) { 
     this.minuteValues = '0';
+    this.utcDay = new Date().getUTCDay();
     this.diaSel = new Date().getDate();
     this.mesSel = new Date().getMonth();
     this.anoSel = new Date().getFullYear();
@@ -166,6 +168,7 @@ export class NovoservicoPage implements OnInit {
     this.profissionais = firestore.collection('profissionais').valueChanges();
     this.horasDisp = ''; 
     this.agendaCheck = 0;
+    console.log('UTCDay: ',this.utcDay)
   }
 
   
@@ -224,6 +227,7 @@ ngOnInit() {
 
   checkValue(event, data) { 
     this.hourValues ='';
+    this.utcDay = new Date(data.value).getUTCDay();
     this.profissional = event.detail.value
     const dataSelect = new Date(data.value).toLocaleDateString();
 
@@ -236,7 +240,7 @@ ngOnInit() {
       hora: any
     }
 
-    this.hourValues ='09,10,11,13,14,15,16,17,18';
+    this.hourValues ='09,10,11,13,14,15,16,17,18,19';
 
     this.agendamentos.subscribe((res: agenda[]) => {
 
@@ -265,11 +269,13 @@ ngOnInit() {
 canSave(): boolean{ 
   return this.profissional != null && 
   this.servicoSel != null &&
-  this.hourValues.indexOf(this.horaSelecionada) > -1
+  this.hourValues.indexOf(this.horaSelecionada) > -1 &&
+  this.utcDay != 0 && this.utcDay != 6;
 }
 
 checkValue2(event) { 
   this.hourValues ='';
+  this.utcDay = new Date(event.value).getUTCDay();
   const dataSelect = new Date(event.value).toLocaleDateString();
   const horaSelect = new Date(event.value).toLocaleTimeString();
 
@@ -282,7 +288,7 @@ checkValue2(event) {
     hora: any
   }
 
-  this.hourValues ='09,10,11,13,14,15,16,17,18';
+  this.hourValues ='09,10,11,13,14,15,16,17,18,19';
 
   this.agendamentos.subscribe((res: agenda[]) => {
 

@@ -20,7 +20,7 @@
   <div *ngIf="(murais | async)?.length ; else nomural">
   <div class="caixa ion-activatable" *ngFor="let mural of murais | async">
     <div class="containertop">
-      <ion-icon id="iconperfil" name="person-circle-outline"></ion-icon>
+      <span *ngFor="let user of users | async"><img *ngIf="user.uid==mural.user" referrerpolicy=“no-referrer” id="fotoperfil" [src]="user.photoURL"/></span>
       <div class="info_upedido">
         <span *ngFor="let user of users | async"><h6 *ngIf="user.uid==mural.user">{{user.displayName}}</h6></span>
         <div class="info_upedido-dado"><ion-icon id="icontexto" name="chatbubble-outline"></ion-icon><p>{{mural.texto}}</p></div>

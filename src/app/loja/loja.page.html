@@ -22,7 +22,7 @@
   <div *ngIf="(produtos | async)?.length ; else noproduto">
   <div class="caixa ion-activatable" *ngFor="let produto of produtos | async" (click)="detalhar(produto.id)">
     <div class="containertop">
-      <div class="imgproduto" style="background-image: url('/assets/{{produto.img}}');"></div>
+      <div class="imgproduto" style="background-image: url('{{produto.img}}');"></div>
       <div class="info_upedido">
         <h6>{{produto.nome}}</h6>
         <div *ngFor="let tipo of tipoprodutos | async"><div class="info_upedido-dado" *ngIf="tipo.id==produto.tipo"><ion-icon name="{{tipo.icon}}"></ion-icon><p>{{tipo.nome}}</p></div></div>
