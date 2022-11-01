@@ -30,13 +30,6 @@ export class RegisterPage implements OnInit {
   ) { }
   ngOnInit(){}
 
-  SendVerificationMail() {
-    return this.ngFireAuth.auth.currentUser.sendEmailVerification()
-    .then(() => {
-      this.router.navigate(['verify-email']);
-    })
-  }
-
   async showLoading() {
     const loading = await this.loadingCtrl.create({
       message: 'Cadastrando...',
@@ -60,22 +53,21 @@ export class RegisterPage implements OnInit {
     await alert.present();
   }
 
-    registrarEmail(){
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, this.email, this.senha).then( newUser => {
-      this.afs.collection('users').doc(newUser.user.uid).set({ displayName: this.nome, celular: this.celular, photoURL: '../assets/perfil.png',ativo: true, uid: newUser.user.uid});
-      // this.dadosUsers = this.afs.collection('dadosUsers').doc(newUser.user.uid).valueChanges();
-      this.showLoading()
-      this.router.navigateByUrl('home');
-      this.presentAlert()
-    })
+
+  ionViewWillEnter(){
+    if(this.authService.userUid?.length<1){
+      console.log('Não logado')
     }
+    else{
+      this.router.navigateByUrl('home')
+    }
+   }
     
     signUp(nome, celular, email, senha){
+      this.showLoading()
       console.log('nome: '+nome.value+' celular: '+celular.value+' email: '+email.value+' senha: '+senha.value)
       this.authService.RegisterUser(nome.value, celular.value, email.value, senha.value)
       .then((res) => {
-        this.showLoading()
         this.router.navigateByUrl('home');
         this.presentAlert()
       }).catch((error) => {

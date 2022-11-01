@@ -17,12 +17,11 @@ export class InicioPage implements OnInit {
     public authService: AuthenticationService,
     private nativePageTransitions: NativePageTransitions,
     public router: Router,
-    ) {}
+    ) {
+      
+    }
   login() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-  }
-  logout() {
-    this.auth.signOut();
   }
 
   ngOnInit() {
@@ -44,6 +43,17 @@ export class InicioPage implements OnInit {
     this.nativePageTransitions.slide(options)
     this.router.navigateByUrl(page)
     
+   }
+
+   ionViewDidLoad(){
+    if(this.authService.userUid?.length<1){
+      console.log('Não logado')
+      console.log(this.authService.userUid)
+    }
+    else{ 
+      this.router.navigateByUrl('home')
+      console.log(this.authService.userUid)
+    }
    }
 
   

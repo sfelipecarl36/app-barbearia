@@ -5,7 +5,6 @@ import { AuthenticationService } from "../shared/authentication-service";
 import { NativePageTransitions, NativeTransitionOptions } from '@awesome-cordova-plugins/native-page-transitions/ngx';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AlertController } from '@ionic/angular';
-import { getAuth, setPersistence ,signInWithEmailAndPassword, browserSessionPersistence   } from "firebase/auth";
 
 
 @Component({
@@ -27,21 +26,6 @@ export class LoginPage implements OnInit {
 
   }
   ngOnInit() {}
-
-  logarEmail(email, password) {
-    this.authService.SignIn(email.value, password.value)
-      .then((res) => {
-        if(this.authService.isEmailVerified) {
-          this.router.navigate(['home']);          
-        } else {
-          this.router.navigate(['home']);          
-          window.alert('Email is not verified');
-          return false;
-        }
-      }).catch((error) => {
-        window.alert(error.message)
-      })
-  }
 
   async showLoading() {
     const loading = await this.loadingCtrl.create({
@@ -83,10 +67,21 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl(page)
     
    }
+
+   ionViewWillEnter(){
+    if(this.authService.userUid?.length<1){
+      console.log('Não logado')
+      console.log(this.authService.userUid)
+    }
+    else{
+      this.router.navigateByUrl('home')
+    }
+   }
   
 
    logIn(email, senha) {
     this.showLoading()
+    
     this.authService.SignIn(email.value, senha.value)
       .then((res) => {
         // if(this.authService.isEmailVerified) {

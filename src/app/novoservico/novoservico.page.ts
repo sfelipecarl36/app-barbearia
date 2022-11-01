@@ -153,7 +153,13 @@ export class NovoservicoPage implements OnInit {
     this.minuteValues = '0';
     this.utcDay = new Date().getUTCDay();
     this.diaSel = new Date().getDate();
+    if (String(this.diaSel).length==1){
+    this.diaSel = ('0'+this.diaSel).slice(-2)
+    }
     this.mesSel = new Date().getMonth();
+    if (String(this.mesSel).length==1){
+    this.mesSel = ('0'+this.mesSel).slice(-2)
+    }
     this.anoSel = new Date().getFullYear();
     this.horaSel = String(new Date().getHours());
     this.horaSel = ('0'+this.horaSel).slice(-2)
