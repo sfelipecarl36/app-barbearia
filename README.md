@@ -1,7 +1,6 @@
 # Aplicativo de Barbearia com Agendamento - Los Ursos
 
-### Com este app é possível o cliente (usuário do app) cadastrar sua conta no app, autenticar e acessar
-### os recursos disponíveis, tais como:
+### Com este app é possível o cliente (usuário do app) cadastrar sua conta no app, autenticar e acessar os recursos disponíveis, tais como:
 
 ![screenshot](screenshot.png "Home")
 
